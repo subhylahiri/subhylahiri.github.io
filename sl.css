@@ -1,0 +1,207 @@
+﻿/* Subhaneil Lahiri CSS */
+
+body
+{
+	margin: 0px;
+	padding: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 100%;
+	background-color: #DAE6FE; 
+/*	background-image: url('images/#000000board.jpg'); */
+/*	background-repeat: repeat; */
+	color: #000000;
+}
+
+/* General  formatting */
+
+
+img 
+{
+/*	display: block; */
+ 	border: 0;
+}
+
+em 
+{
+	font-style: italic
+}
+
+tt 
+{
+	font-family: "Courier New", "Lucida Console", Monospace;
+}
+
+strong 
+{
+	font-weight: bold
+}
+
+a {
+	font-weight: normal;
+}
+
+hr 
+{
+	height: 7px;
+/*	color: #586695; */
+	background-color: #586695;
+}
+
+/* titles */
+
+h1 {
+	text-align: center;
+	font-size: 3.5em;
+	font-weight: bold;
+	color: inherit;
+	margin: 0px;
+	padding: 10px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+	text-align: center;
+	font-size: 2.5em;
+	font-weight: bold;
+	color: inherit;
+	margin: 0px;
+	padding: 10px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h3 {
+	text-align: left;
+	font-size: 1.6em;
+	font-weight: bold;
+	color: inherit;
+	margin: 0px;
+	padding: 15px 15px 15px 30px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h4 {
+	text-align: left;
+	display: inline;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0px;
+	padding: 10px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h5 {
+	text-align: left;
+	font-size: 1em;
+	font-weight: bold;
+	color: #000000;
+	margin: 0px;
+	padding: 12px 5px 12px 30px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h6 {
+	text-align: left;
+	font-size: 1em;
+	font-weight: bold;
+	color: #000000;
+	margin: 0px;
+	padding: 10px 5px 10px 30px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+/* text */
+
+p {
+	font-size: 1em;
+/*	color: #000000; */
+	margin: 0px;
+	padding: 5px 15px 15px 30px;
+	font-family: Helvetica, Arial, sans-serif;
+	line-height: 1.4;
+}
+
+/* After a float*/
+.text_line
+{
+clear:both;
+}
+
+/* Before list */
+p.listhead 
+{
+	padding: 5px 15px 0px 20px;
+}
+
+/*Lists */
+ul 
+{
+	list-style-position: outside;
+	padding: 0px 15px 15px 40px;
+	margin: 0;
+}
+
+
+/* Basic links */
+
+a:link { color: #0000CC; text-decoration: none; }
+a:visited { color: #000099; text-decoration: none; }
+/*a:hover { color: #0000EE; text-decoration: underline; }
+a:active { color: #0000EE; text-decoration: underline; }*/
+
+/* special image styles */
+
+img.frontright 
+{
+	float: right;
+	margin: 10px 20px 10px 10px;
+	border: none;
+}
+
+img.intext 
+{
+	display: inline;
+	margin: 0;
+	border: none;
+	vertical-align: middle;
+}
+
+img.dibox 
+{
+	display: block;
+	margin: 10px 40px;
+	border: none;
+}
+
+/* Sections */
+
+div.header 
+{
+	clear: both;
+	margin: 0 0 0 0;
+	padding: 10px 10px 10px 10px;
+/*	border-style: solid;
+	border-width: 10px; */
+	background-color: #757D88;
+	color: #FFFFFF;
+}
+
+div.footer 
+{
+	clear: both;
+	text-align: center;
+	margin: 0 0 0 0;
+	padding: 10px 10px 10px 10px;
+/*	border-style: solid;
+	border-width: 10px; */
+	background-color: #586695;
+	color: #FFFFFF;
+}
+
+div.main 
+{
+	margin: 0 5% 0 5%;
+	padding: 10px 10px 10px 10px;
+/*	border-style: none solid;
+	border-width: 0 7px; */
+	background-color: #FFFFFF;
+}
