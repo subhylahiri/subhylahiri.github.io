@@ -1,7 +1,6 @@
 ﻿/* Subhaneil Lahiri CSS */
 
-body
-{
+body {
 	margin: 0px;
 	padding: 0;
 	font-family: Helvetica, Arial, sans-serif;
@@ -15,24 +14,20 @@ body
 /* General  formatting */
 
 
-img
-{
+img {
 /*	display: block; */
  	border: 0;
 }
 
-em
-{
+em {
 	font-style: italic
 }
 
-tt
-{
+tt {
 	font-family: "Courier New", "Lucida Console", Monospace;
 }
 
-strong
-{
+strong {
 	font-weight: bold
 }
 
@@ -40,8 +35,7 @@ a {
 	font-weight: normal;
 }
 
-hr
-{
+hr {
 	height: 7px;
 /*	color: #586695; */
 	background-color: #586695;
@@ -120,21 +114,26 @@ p {
 	line-height: 1.4;
 }
 
+span.note {
+	font-size: 0.8em;
+
+}
+
 /* After a float*/
-.text_line
-{
-clear:both;
+
+.text_line {
+	clear:both;
 }
 
 /* Before list */
-p.listhead
-{
+
+p.listhead {
 	padding: 5px 15px 0px 20px;
 }
 
 /*Lists */
-ul
-{
+
+ul {
 	list-style-position: outside;
 	padding: 0px 15px 15px 40px;
 	margin: 0;
@@ -150,27 +149,24 @@ a:active { color: #0000EE; text-decoration: underline; }*/
 
 /* special image styles */
 
-img.frontright
-{
+img.frontright {
 	float: right;
 	margin: 10px 20px 10px 10px;
 	border: none;
-    border-radius: 10%;
+	border-radius: 10%;
 }
 
-img.intext
-{
+img.intext {
 	display: inline;
 	margin: 0;
 	border: none;
 	vertical-align: baseline;
-    margin-left: 0.25em;
-    margin-right: 0.25em;
-    width: 1em;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+	width: 1em;
 }
 
-img.dibox
-{
+img.dibox {
 	display: block;
 	margin: 10px 40px;
 	border: none;
@@ -178,8 +174,7 @@ img.dibox
 
 /* Sections */
 
-div.header
-{
+div.header {
 	clear: both;
 	margin: 0 0 0 0;
 	padding: 10px 10px 10px 10px;
@@ -189,20 +184,20 @@ div.header
 	color: #FFFFFF;
 }
 
-div.footer
-{
+div.footer {
 	clear: both;
 	text-align: center;
 	margin: 0 0 0 0;
 	padding: 10px 10px 10px 10px;
 /*	border-style: solid;
-	border-width: 10px; */
+	border-width: 10px;
 	background-color: #586695;
-	color: #FFFFFF;
+	color: #FFFFFF; */
+	background-color: #DAE6FE;
+	color: #999999;
 }
 
-div.main
-{
+div.main {
 	margin: 0 5% 0 5%;
 	padding: 10px 10px 10px 10px;
 /*	border-style: none solid;
