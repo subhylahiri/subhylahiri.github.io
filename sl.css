@@ -121,16 +121,7 @@ p {
     margin: 0px;
     padding: 5px 15px 15px 30px;
     font-family: Helvetica, Arial, sans-serif;
-    line-height: 1.4;
-}
-
-p {
-    font-size: 1em;
-    /*	color: #000000; */
-    margin: 0px;
-    padding: 5px 15px 15px 30px;
-    font-family: Helvetica, Arial, sans-serif;
-    line-height: 1.4;
+    line-height: 1.4em;
 }
 
 p.project {
@@ -179,7 +170,7 @@ img.intext {
 	vertical-align: baseline;
 	margin-left: 0.25em;
 	margin-right: 0.25em;
-	width: 0.8em;
+	height: 1em;
 }
 
 img.dibox {
