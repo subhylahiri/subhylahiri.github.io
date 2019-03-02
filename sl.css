@@ -147,7 +147,6 @@ ul {
 .project_links {
     list-style-position: inside;
     list-style-type: none;
-    padding-top: 0px;
     padding-left: 30px;
 }
 
@@ -158,6 +157,21 @@ ul {
 }
 
 .project_links a {
+    display: block;
+    text-align: center;
+}
+
+.profile_links {
+    list-style-position: inside;
+    list-style-type: none;
+    padding-left: 30px;
+}
+
+.profile_links li {
+    display: inline-block;
+}
+
+.profile_links a {
     display: block;
     text-align: center;
 }
