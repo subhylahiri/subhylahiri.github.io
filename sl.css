@@ -122,8 +122,8 @@ h6 {
 
 a:link { color: #0000CC; text-decoration: none; }
 a:visited { color: #0000CC; text-decoration: none; }
-/*a:hover { color: #0000EE; text-decoration: underline; }
-a:active { color: #0000EE; text-decoration: underline; }*/
+/*a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; }
+/*a:active { color: #0000EE; text-decoration: underline; }*/
 
 /* text */
 
@@ -200,15 +200,21 @@ ul {
 }
 
 .nav a {
+    background-color: inherit;
     color: inherit;
 }
 
 .nav li:hover {
-    color: #757D88;
-    background-color: #FFFFFF;
+    background-color: #8C96A3;
+    color: #FFFFFF;
 }
 
 .nav .active {
+    color: #757D88;
+    background-color: #DAE6FE;
+}
+
+.nav .active:hover {
     color: #757D88;
     background-color: #DAE6FE;
 }

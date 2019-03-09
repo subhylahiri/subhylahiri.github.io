@@ -1,4 +1,4 @@
-function buildNav(active, baseURL) {
+function buildNav(activeID, baseURL) {
     if (baseURL === undefined) {
         baseURL = '';
     }
@@ -25,22 +25,17 @@ function buildNav(active, baseURL) {
         '      <li><a href="https://github.com/subhylahiri">' +
             '<img src="' + baseURL + 'logos/GitHub-Mark-32px.png" class="intext" alt="GitHub"></a></li>' +*/
         '    </ul>';
-    // var navObj = document.getElementsByClassName("nav");
     navDiv.innerHTML = navString;
     body[0].insertBefore(navDiv, headDiv[0])
     headDiv[0].style.paddingTop = "0em";
-    var activeObj = document.getElementById(active);
+    var activeObj = document.getElementById(activeID);
     activeObj.className = "active";
 }
 
 function buildFoot() {
     var body = document.getElementsByTagName("body");
-    var footString =
-        '    <address>' +
-        '      Subhaneil Lahiri: <tt>sulahiri at stanford dot edu</tt>' +
-        '    </address>';
     var footDiv = document.createElement("div");
     footDiv.className = "footer";
-    footDiv.innerHTML = footString;
+    footDiv.innerHTML = '    <address>Subhaneil Lahiri: <tt>sulahiri at stanford dot edu</tt></address>';
     body[0].appendChild(footDiv);
 }
