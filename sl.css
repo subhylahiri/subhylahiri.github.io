@@ -10,7 +10,7 @@ body {
 
 /* Sections */
 
-div.header {
+div.header, div.nav {
 	clear: both;
 	margin: 0;
 	padding: 0.625em;
@@ -19,11 +19,7 @@ div.header {
 }
 
 div.nav {
-	clear: both;
-	margin: 0;
 	padding: 0em;
-	background-color: #757D88;
-	color: #FFFFFF;
 }
 
 div.footer {
@@ -93,8 +89,8 @@ h2 {
 
 h3 {
 	text-align: left;
+    padding: 1em 1em 1em 1.875rem;
 	font-size: 1.6em;
-	padding: 1em 1em 1em 1.875em;
 }
 
 h4 {
@@ -191,32 +187,29 @@ ul {
 
 .nav ul {
     padding: 0;
+    border-style: hidden;
 }
 
 .nav li {
     padding: 0.5em;
+    margin: 0;
+    background-color: #8C96A3;
+    color: inherit;
+}
+
+.nav li:hover {
     background-color: inherit;
     color: inherit;
+}
+
+.nav .active, .nav .active:hover {
+    color: inherit;
+    background-color: inherit;
 }
 
 .nav a {
     background-color: inherit;
     color: inherit;
-}
-
-.nav li:hover {
-    background-color: #8C96A3;
-    color: #FFFFFF;
-}
-
-.nav .active {
-    color: #757D88;
-    background-color: #DAE6FE;
-}
-
-.nav .active:hover {
-    color: #757D88;
-    background-color: #DAE6FE;
 }
 
 .project_links li {
