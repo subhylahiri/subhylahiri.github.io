@@ -9,7 +9,7 @@ function buildNav(activeID, baseURL) {
     var navString =
         '<ul>' +
         '<li id="home"><a href="' + baseURL + 'index.html">Home</a></li>' +
-        '<li><a href="https://scholar.google.com/citations?user=2nEwLGcAAAAJ">Publications</a></li>' +
+        '<li id="pubs"><a href="https://scholar.google.com/citations?user=2nEwLGcAAAAJ">Publications</a></li>' +
         '<li id="subj"><a href="' + baseURL + 'research.html">Research</a></li>' +
         '<li id="pres"><a href="' + baseURL + 'presentations/index.html">Presentations</a></li>' +
 /*        '<li><a href="https://scholar.google.com/citations?user=2nEwLGcAAAAJ">' +
