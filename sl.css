@@ -8,6 +8,7 @@
     --major-fg-color: #000000;
     --minor-fg-color: #757D88;
     --links-fg-color: #0000CC;
+    /* --footer-fg-color: #999999; */
 }
 
 body {
@@ -39,7 +40,6 @@ div.footer {
     padding: 0.625em;
     background-color: var(--minor-bg-color);
     color: var(--minor-fg-color);
-    /* color: #999999; */
 }
 
 div.main {
@@ -69,6 +69,8 @@ strong {
 
 a {
     font-weight: normal;
+    color: var(--links-fg-color);
+    text-decoration: none;
 }
 
 hr {
@@ -127,26 +129,16 @@ h6 {
 
 /* Basic links */
 
-a:link, a:visited {
-    color: var(--links-fg-color);
-    text-decoration: none;
-}
+/* a:link, a:visited { color: var(--links-fg-color); text-decoration: none;} */
 /* a:visited { color: var(--links-fg-color); text-decoration: none; } */
-/*a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; }
-/*a:active { color: #0000EE; text-decoration: underline; }*/
+/* a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; } */
+/* a:active { color: #0000EE; text-decoration: underline; } */
 
 /* text */
 
 span.note {
     font-size: 0.8em;
 }
-
-/* After a float*/
-/*
-.text_line {
-	clear:both;
-}
-*/
 
 p {
     font-size: 1em;
@@ -187,22 +179,17 @@ ul {
     list-style-type: none;
 }
 
+.nav ul {
+    padding: 0;
+    border-style: hidden;
+}
+
 .profile_links, .project_links {
     padding-left: 1.875em;
 }
 
 .nav li, .profile_links li, .project_links li {
     display: inline-block;
-}
-
-.nav a, .profile_links a, .project_links a {
-    display: block;
-    text-align: center;
-}
-
-.nav ul {
-    padding: 0;
-    border-style: hidden;
 }
 
 .nav li {
@@ -212,33 +199,28 @@ ul {
     color: inherit;
 }
 
-.nav li:hover {
+.nav li:hover, .nav .active {
     background-color: inherit;
-    color: inherit;
-}
-
-.nav .active, .nav .active:hover {
-    color: inherit;
-    background-color: inherit;
-}
-
-.nav a {
-    background-color: inherit;
-    color: inherit;
 }
 
 .project_links li {
     border-radius: 10%;
     padding: 3px;
     background-color: var(--minor-bg-color);
+    color: var(--minor-fg-color);
 }
 
 .project_links li:hover {
     background-color: var(--major-bg-color);
 }
 
-.project_links a {
-    color: var(--minor-fg-color);
+.nav a, .profile_links a, .project_links a {
+    display: block;
+    text-align: center;
+}
+
+.nav a, .project_links a {
+    color: inherit;
 }
 
 /* special image styles */
@@ -272,7 +254,6 @@ img.intext {
     width: 1em;
     height: auto;
 }
-
 
 img.dibox {
     display: block;
