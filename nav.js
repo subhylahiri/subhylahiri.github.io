@@ -36,7 +36,8 @@ function buildFoot() {
     var body = document.getElementsByTagName("body");
     var footDiv = document.createElement("div");
     footDiv.className = "footer";
-    footDiv.innerHTML = '<address>Subhaneil Lahiri: <tt>sulahiri at stanford dot edu</tt></address>';
+    footDiv.innerHTML = '<address>Subhaneil Lahiri: <tt>sulahiri at stanford dot edu</tt>. ' +
+        '<a href="https://github.com/subhylahiri/subhylahiri.github.io">[Source]</a>.</address>';
     body[0].appendChild(footDiv);
 }
 

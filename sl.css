@@ -133,6 +133,9 @@ h6 {
 /* a:visited { color: var(--links-fg-color); text-decoration: none; } */
 /* a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; } */
 /* a:active { color: #0000EE; text-decoration: underline; } */
+.footer a {
+    color: inherit;
+}
 
 /* text */
 
