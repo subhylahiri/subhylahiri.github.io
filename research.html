@@ -15,7 +15,7 @@
   </div>
 
   <div class="main">
-    <p>
+    <p id="overview">
       I perform research in the fields of theoretical neuroscience and
       biophysics, with a focus on learning and memory. I study the relation
       between the structure of biological processes and their performance in
@@ -23,7 +23,7 @@
       synaptic plasticity.
     </p>
 
-    <p>
+    <p id="philosophy">
       Rather than focusing on specific models, my preferred approach is to
       analyse a broad space of models. In this way, we can find trade-offs
       between different aspects of performance and the properties of models that
@@ -36,7 +36,7 @@
 
   <h3>Complex synaptic plasticity</h3>
 
-    <p>
+    <p id="complex">
       Computational neuroscientists often describe synapses by a single number:
       the synaptic weight. Learning is then implemented by shifting this number. In
       contrast, biological synapses are complex systems with their own internal
@@ -46,7 +46,7 @@
       <a href="https://dx.doi.org/10.1162/neco.1994.6.5.957">1994</a>).
     </p>
 
-    <p class="project">
+    <p id="frontier" class="project">
       In one project, we analyse the memory timescales of an entire space of
       models of synaptic plasticity, including the cascade model
       (<a href="https://dx.doi.org/10.1088/10.1016/j.neuron.2005.02.001">2005</a>)
@@ -63,7 +63,7 @@
       <li><a href="presentations/SynapsePoster_maths.pdf">Poster</a></li>
     </ul>
 
-    <p class="project">
+    <p id="mhc" class="project">
       In another project, we investigate genetic/pharmacological interventions
       intended to speed up learning. Experiments with enhanced plasticity have
       shown mixed results &ndash; in some cases learning is enhanced, in others
@@ -78,7 +78,7 @@
 
   <h3>Energy efficiency of biological processes</h3>
 
-    <p>
+    <p id="energy">
       The brain shows amazing energy efficiency, consuming only 20 Watts compared
       to the megawatts consumed by supercomputers. This suggests that minimizing
       energy use may have been an important factor in the evolution of brains.
@@ -87,7 +87,7 @@
       theory. For energy consumption, we need to know what these limits are.
     </p>
 
-    <p class="project">
+    <p id="energy" class="project">
       I have been studying the limits on energy efficiency in communication,
       using non-equilibrium thermodynamics. We found a trade-off between the
       energy consumption required to send a signal, the precision with which the
@@ -105,13 +105,16 @@
       <li><a href="presentations/pps_poster.pdf">Poster</a></li>
     </ul>
 
-    <p class="project">
+    <p id="cellsense" class="project">
       The project above concerned the energy costs of <em>sending</em> a signal.
       In ongoing work we are studying the energy costs of <em>receiving</em> a
       signal. Building on studies of bacterial chemoreception, starting with Berg
       and Purcell (<a href="https://dx.doi.org/10.1016/S0006-3495(77)85544-6">1977</a>),
       we have found a trade-off between energy, accuracy and time required to estimate
-      chemical concentration.
+      chemical concentration using a physical receptor. We understood how the
+      uncertainty of this estimate is affected by energy cosumption depends on the
+      different levels of detail with which downstream processes can observe the
+      receptor.
     </p>
     <ul class="project_links">
       <li><a href="https://arxiv.org/abs/2002.10567">Preprint</a></li>
@@ -119,7 +122,7 @@
 
   <h3>High dimensional statistics</h3>
 
-    <p class="project">
+    <p id="hid-stats" class="project">
       One of the perils of high-dimensional data analysis is creating illusions
       of structure in noise. The methods of statistical physics can be used to
       analyse these effects, especially the behaviour of null models.
@@ -129,7 +132,7 @@
       <li><a href="https://arxiv.org/abs/1301.7115">Preprint</a></li>
     </ul>
 
-    <p class="project">
+    <p id="randproj" class="project">
       One way of alleviating the “curse of dimensionality” is dimensionality
       reduction. As  demonstrated in the field of compressed sensing, random
       dimensionality reduction can be equally effective, without the risk of
@@ -144,7 +147,7 @@
       <li><a href="https://arxiv.org/abs/1607.04331">Preprint</a></li>
     </ul>
 
-    <p class="project">
+    <p id="sortfree" class="project">
       In another project we applied this line of reasoning to neural recordings.
       Because we usually record a tiny fraction of the neurons of interest
       (typically in the hundreds out of millions/billions), they can be thought

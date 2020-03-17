@@ -182,6 +182,18 @@ ul {
     list-style-type: none;
 }
 
+.materials {
+    list-style-position: outside;
+}
+
+.slides {
+    list-style-type: disc;
+}
+
+.poster {
+    list-style-type: circle;
+}
+
 .nav ul {
     padding: 0;
     border-style: hidden;
