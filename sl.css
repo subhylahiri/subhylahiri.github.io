@@ -166,6 +166,7 @@ p.presentation {
     padding-left: 1.25em;
     padding-bottom: 0em;
     font-style: italic;
+    font-weight: bolder;
 }
 
 /*Lists */
@@ -182,16 +183,33 @@ ul {
     list-style-type: none;
 }
 
-.materials {
+ul.materials {
     list-style-position: outside;
+    /* margin: 1em; */
 }
 
-.slides {
+li.slides {
+    /* list-style-type: "Slides: "; */
+    /* list-style-image: url(icons/slides.svg); */
     list-style-type: disc;
 }
 
-.poster {
+li.poster {
+    /* list-style-type: "Poster: "; */
+    /* list-style-image: url(icons/poster.svg); */
     list-style-type: circle;
+}
+
+li.slides, li.poster {
+    display: list-item;
+}
+
+li.slides::marker {
+    content: "Slides:";
+}
+
+li.poster::marker {
+    content: "Poster:";
 }
 
 .nav ul {
