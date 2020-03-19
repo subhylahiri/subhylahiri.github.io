@@ -7,7 +7,7 @@
     --title-fg-color: #FFFFFF;
     --major-fg-color: #000000;
     --minor-fg-color: #757D88;
-    --links-fg-color: #0000CC;
+    --links-fg-color: #0000A0;
     /* --footer-fg-color: #999999; */
 }
 
@@ -207,52 +207,100 @@ ul {
     background-color: inherit;
 }
 
+.nav a, .profile_links a, .project_links a {
+    display: block;
+    text-align: center;
+}
+
+.nav a {
+    color: inherit;
+}
+
+ul.materials {
+    list-style-position: outside;
+    list-style-type: none;
+    /* margin: 1em; */
+}
+
 .project_links li {
     border-radius: 10%;
     padding: 3px;
     background-color: var(--minor-bg-color);
     color: var(--minor-fg-color);
 }
+/* .project_links li:hover {
+    background-color: var(--minor-bg-color);
+} */
 
-.project_links li:hover {
-    background-color: var(--major-bg-color);
-}
-
-.nav a, .profile_links a, .project_links a {
-    display: block;
+.icon {
+    width: 3.5em;
+    height: 3em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     text-align: center;
+    line-height: 3em;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.icon:hover {
+    text-indent: 0%;
 }
 
-.nav a, .project_links a {
-    color: inherit;
+.article {
+    background-image: url(icons/article.svg);
+    content: 'Article';
+}
+.preprint {
+    background-image: url(icons/preprint.svg);
+}
+.slides {
+    background-image: url(icons/slides.svg);
+}
+.poster {
+    background-image: url(icons/poster.svg);
+}
+.article:hover, .preprint:hover, .slides:hover, .poster:hover {
+    background-image: none;
+    color: var(--minor-fg-color);
 }
 
-ul.materials {
-    list-style-position: outside;
-    /* margin: 1em; */
+.materials li {
+    background-image: none;
+    line-height: 1.5em;
+}
+.materials li::before {
+    display: inline-block;
+    line-height: 1em;
+    height: 1em;
+    width: 4em;
+    text-indent: 1.2em;
+    background-position: left;
+    /* background-position: 70%; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-right: 0.5em;
+    color: var(--minor-fg-color);
 }
 
-li.slides {
-    /* list-style-type: "Slides: "; */
-    /* list-style-image: url(icons/slides.svg); */
-    list-style-type: disc;
-    display: list-item;
+.materials li.slides::before {
+    background-image: url(icons/slides.svg);
+    content: 'Slides:';
+}
+.materials li.poster::before {
+    background-image: url(icons/poster.svg);
+    content: 'Poster:';
 }
 
-li.poster {
-    /* list-style-type: "Poster: "; */
-    /* list-style-image: url(icons/poster.svg); */
-    list-style-type: circle;
-    display: list-item;
+/* .materials li.slides:hover::before {
+    background-image: none;
+    content: 'Slides: ';
 }
-
-li.slides::marker {
-    content: "Slides:";
-}
-
-li.poster::marker {
-    content: "Poster:";
-}
+.materials li.poster:hover::before {
+    background-image: none;
+    content: 'Poster: ';
+} */
 
 /**
  * Visually hide an element, but leave it available for screen readers
