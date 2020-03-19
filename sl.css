@@ -243,9 +243,11 @@ ul.materials {
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+    background-color: var(--major-bg-color);
 }
 .icon:hover {
     text-indent: 0%;
+    background-color: var(--minor-bg-color);
 }
 
 .article {
