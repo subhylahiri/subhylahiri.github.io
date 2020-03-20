@@ -1,0 +1,160 @@
+{
+    "memory-frontier": {
+        "title": "Learning and memory with complex synaptic plasticity",
+        "articles": [
+            {
+                "id": "Lahiri2013frontier",
+                "description": "‘A memory frontier for complex synapses’, Adv. Neural Inf. Process. Syst. 26 (2013) 1034–1042",
+                "url": "https://papers.nips.cc/paper/4872-a-memory-frontier-for-complex-synapses"
+            }
+        ],
+        "preprints": [],
+        "slides": [
+            {
+                "id": "Lahiri2016timescales",
+                "description": "Cosyne 2016",
+                "url": "presentations/SynapseTalk_10min.pdf"
+            },
+            {
+                "id": "synapse_all",
+                "description": "Complete slide deck",
+                "url": "presentations/SynapseTalk.pdf"
+            }
+        ],
+        "posters": [
+            {
+                "id": "Lahiri2013frontier_bio",
+                "description": "SNI symposium 2015",
+                "url": "presentations/SynapsePoster_bio.pdf"
+            },
+            {
+                "id": "Lahiri2013frontier_maths",
+                "description": "NeurIPS 2013",
+                "url": "presentations/SynapsePoster_maths.pdf"
+            }
+        ]
+    },
+    "mhc-learn": {
+        "title": "Modelling impaired and enhanced learning with enhanced plasticity",
+        "articles":[
+            {
+                "id": "Nguyen-Vu2017mhc",
+                "description": "‘A saturation hypothesis to explain both enhanced and impaired learning with enhanced plasticity’, eLife 6 (2017), e20147",
+                "url": "https://dx.doi.org/10.7554/eLife.20147"
+            }
+        ],
+        "preprints": [],
+        "slides": [
+            {
+                "id": "Ganguli2014mhc",
+                "description": "Ganguli lab evening, 2014",
+                "url": "presentations/MHCslides_20min.pdf"
+            },
+            {
+                "id": "Lahiri2014mhc",
+                "description": "Cosyne 2014",
+                "url": "presentations/MHCslides_10min.pdf"
+            }
+        ],
+        "posters": []
+    },
+    "pps": {
+        "title": "A universal trade-off between power, precision and speed in physical communication",
+        "articles": [],
+        "preprints": [
+            {
+                "id": "lahiri2016power",
+                "description": "‘A universal tradeoff between power, precision and speed in physical communication’, (2016) arXiv:1603.07758 [cond-mat.stat-mech]",
+                "url": "https://arxiv.org/abs/1603.07758"
+            }
+
+        ],
+        "slides": [
+            {
+                "id": "lahiri2016lineq",
+                "description": "Lineq meeting, 2016",
+                "url": "presentations/pps_slides.pdf"
+            }
+
+        ],
+        "posters": [
+            {
+                "id": "Lahiri2016pps",
+                "description": "Cosyne 2016",
+                "url": "presentations/pps_poster.pdf"
+            }
+        ]
+    },
+    "cell-sense": {
+        "title": "A universal energy accuracy tradeoff in nonequilibrium cellular sensing",
+        "articles": [],
+        "preprints": [
+            {
+                "id": "Harvey2020cellsense",
+                "description": "‘A universal energy accuracy tradeoff in nonequilibrium cellular sensing’, (2020) arXiv:2002.10567 [physics.bio-ph]",
+                "url": "https://arxiv.org/abs/2002.10567"
+            }
+
+        ],
+        "slides": [],
+        "posters": []
+    },
+    "illusions": {
+        "title": "Statistical mechanics of complex neural systems and high dimensional data",
+        "articles": [
+            {
+                "id": "advani2013statistical",
+                "description": "‘Statistical mechanics of complex neural systems and high dimensional data’, J. Stat. Mech. 2013.03 (2013) P03014",
+                "url": "https://dx.doi.org/10.1088/1742-5468/2013/03/P03014"
+            }
+        ],
+        "preprints": [
+            {
+                "id": "advani2013review",
+                "description": "‘Statistical mechanics of complex neural systems and high dimensional data’, (2013) arXiv:1301.7115 [q-bio.NC]",
+                "url": "https://arxiv.org/abs/1301.7115"
+            }
+
+        ],
+        "slides": [],
+        "posters": []
+    },
+    "rand-proj": {
+        "title": "Random projections of random manifolds",
+        "articles": [],
+        "preprints": [
+            {
+                "id": "lahiri2016randproj",
+                "description": "‘Random projections of random manifolds’, (2016) arXiv:1607.04331 [stat.ML]",
+                "url": "https://arxiv.org/abs/1607.04331"
+            }
+        ],
+        "slides": [],
+        "posters": []
+    },
+    "sort-free": {
+        "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+        "articles": [
+            {
+                "id": "Trautmann2019sortfree",
+                "description": "‘Accurate Estimation of Neural Population Dynamics without Spike Sorting’, Neuron 103.2 (2019), 292–308.e4",
+                "url": "https://dx.doi.org/10.1016/j.neuron.2019.05.003"
+            }
+        ],
+        "preprints": [
+            {
+                "id": "Trautmann2017sortfree",
+                "description": "‘Accurate Estimation of Neural Population Dynamics without Spike Sorting’, (2017) bioRxiv:229252.",
+                "url": "https://dx.doi.org/10.1101/229252"
+            }
+        ],
+        "slides": [],
+        "posters": [
+            {
+                "id": "Lahiri2019sortfree",
+                "description": "Cosyne 2019",
+                "url": "presentations/sortfree_poster.pdf"
+            }
+        ]
+    }
+}
