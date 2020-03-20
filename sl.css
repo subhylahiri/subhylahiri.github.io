@@ -216,12 +216,6 @@ ul {
     color: inherit;
 }
 
-ul.materials {
-    list-style-position: outside;
-    list-style-type: none;
-    /* margin: 1em; */
-}
-
 .project_links li {
     border-radius: 10%;
     padding: 3px;
@@ -229,17 +223,18 @@ ul.materials {
     color: var(--minor-fg-color);
 }
 /* .project_links li:hover {
-    background-color: var(--minor-bg-color);
+    background-color: var(--major-bg-color);
 } */
 
 .icon {
+    border-radius: 10%;
     width: 3.5em;
     height: 3em;
+    line-height: 3em;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     text-align: center;
-    line-height: 3em;
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -252,7 +247,6 @@ ul.materials {
 
 .article {
     background-image: url(icons/article.svg);
-    content: 'Article';
 }
 .preprint {
     background-image: url(icons/preprint.svg);
@@ -266,6 +260,11 @@ ul.materials {
 .article:hover, .preprint:hover, .slides:hover, .poster:hover {
     background-image: none;
     color: var(--minor-fg-color);
+}
+
+ul.materials {
+    list-style-position: outside;
+    list-style-type: none;
 }
 
 .materials li {
@@ -303,38 +302,6 @@ ul.materials {
     background-image: none;
     content: 'Poster: ';
 } */
-
-/**
- * Visually hide an element, but leave it available for screen readers
- * @link https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css
- * @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- */
- .screen-reader {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	white-space: nowrap;
-	width: 1px;
-}
-/**
- * Extends the .screen-reader class to allow the element to be focusable when navigated to via the keyboard
- * @link https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css
- * @link https://www.drupal.org/node/897638
- */
-.screen-reader-focusable:active,
-.screen-reader-focusable:focus {
-	clip: auto;
-	height: auto;
-	margin: 0;
-	overflow: visible;
-	position: static;
-	white-space: normal;
-	width: auto;
-}
 
 /* special image styles */
 
