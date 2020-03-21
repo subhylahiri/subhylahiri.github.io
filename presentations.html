@@ -19,45 +19,20 @@
   <div class="main">
     <p>The slides and posters for some of my presentations can be found here.</p>
 
-    <p id="sort-free" class="presentation">
-      Accurate estimation of neural population dynamics without spike sorting,
-    </p>
-    <ul class="materials">
-      <li class="poster"><a href="presentations/sortfree_poster.pdf">Cosyne 2019</a>.</li>
-    </ul>
+    <p id="sort-free"></p>
 
-    <p id="pps" class="presentation">
-      A universal trade-off between power, precision and speed in physical communication,
-    </p>
-    <ul class="materials">
-      <li class="slides"><a href="presentations/pps_slides.pdf">Lineq meeting, UC Berkeley, 2016</a>,</li>
-      <li class="poster"><a href="presentations/pps_poster.pdf">Cosyne 2016</a>.</li>
-    </ul>
+    <p id="pps"></p>
 
-    <p id="memory-frontier" class="presentation">
-      Learning and memory with complex synaptic plasticity,
-    </p>
-    <ul class="materials">
-      <li class="slides"><a href="presentations/SynapseTalk_10min.pdf">Cosyne 2016</a>,</li>
-      <li class="slides"><a href="presentations/SynapseTalk.pdf">Complete slide deck</a>,</li>
-      <li class="poster"><a href="presentations/SynapsePoster_bio.pdf">SNI symposium 2015</a>,</li>
-      <li class="poster"><a href="presentations/SynapsePoster_maths.pdf">NeurIPS 2013</a>.</li>
-    </ul>
+    <p id="memory-frontier"></p>
 
-    <p id="mhc-learn" class="presentation">
-      Modelling impaired and enhanced learning with enhanced plasticity,
-    </p>
-    <ul class="materials">
-      <li class="slides"><a href="presentations/MHCslides_20min.pdf">Ganguli lab evening, 2014</a>,</li>
-      <li class="slides"><a href="presentations/MHCslides_10min.pdf">Cosyne 2014</a>.</li>
-    </ul>
+    <p id="mhc-learn"></p>
 
     <p id="larva-crawl" class="presentation">
       The motor programs underlying navigation in Drosophila larva,
     </p>
     <ul class="materials">
       <li class="slides"><a href="presentations/GFP-Headsweep.pdf">Seminar at Stanford, 2011,</a>
-        (download <a href="presentations/vids.zip">higher quality videos</a>,
+        (downloads: <a href="presentations/vids.zip">higher quality videos</a>,
         <a href="presentations/GFP-Headsweep.zip">PDF + videos</a>).</li>
     <span class="note">
       (The videos embedded in the PDF should play in
@@ -84,9 +59,11 @@
     </ul>
   </div>
 
-  <script type="text/javascript" src="scripts/nav.js"></script>
-  <script type="text/javascript">
+  <script type="module">
+    import {buildPage} from "./scripts/nav.js"
+    import {presentationLinks} from "./scripts/works.js"
     buildPage("pres");
+    presentationLinks();
   </script>
 </body>
 </html>

@@ -50,7 +50,7 @@ function entryNav(entry, baseURL) {
     if (entry.internal) {
         listItem += baseURL;
     }
-    return `${listItem + entry.url}">${entry.name}</a></li>`;
+    return `${listItem + entry.url}">${entry.name}</a></li>`
 }
 
-export { getDir, getJSON };
+export { getDir, getJSON, buildPage };

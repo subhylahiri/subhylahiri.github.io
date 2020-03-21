@@ -1,4 +1,4 @@
-import { getJSON } from "nav.js";
+import { getJSON } from "./nav.js";
 
 function projectLinks(baseURL) {
     if (baseURL === undefined) {
@@ -9,7 +9,7 @@ function projectLinks(baseURL) {
             for (const project in worksData) {
                 let paragraph = document.getElementById(project);
                 if (paragraph) {
-                    paragraph.append(projectWorks(worksData[project], baseURL));
+                    paragraph.insertAdjacentHTML('afterend', projectWorks(worksData[project], baseURL));
                 }
             }
         })
@@ -35,7 +35,7 @@ function projectEntry(entry, type, baseURL) {
     if (type === "article" || type === "preprint") {
         work += `cite="${entry.description}"`;
     }
-    return work + `>${typeName}</a></li>`
+    return work + `>${typeName}</a></li> `
 }
 
 function presentationLinks(baseURL) {
@@ -50,14 +50,14 @@ function presentationLinks(baseURL) {
                 if ((projectData.slides || projectData.poster) && paragraph) {
                     paragraph.className = "presentation";
                     paragraph.innerHTML = projectData.title;
-                    paragraph.append(projectPresentations(projectData, baseURL));
+                    paragraph.insertAdjacentHTML('afterend', projectPresentations(projectData, baseURL));
                 }
             }
         })
 }
 
 function projectPresentations(projectData, baseURL) {
-    listEntries = '<ul class="presentation"';
+    let listEntries = '<ul class="materials">';
     ["slides", "poster"].forEach(type => {
         projectData[type].forEach(entry => {
             listEntries += presentationMaterials(entry, type, baseURL)
@@ -69,3 +69,5 @@ function projectPresentations(projectData, baseURL) {
 function presentationMaterials(entry, type, baseURL) {
     return `<li class="${type}"><a href="${baseURL + entry.url}">${entry.description}</a>.</li>`
 }
+
+export { projectLinks, presentationLinks };
