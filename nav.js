@@ -16,7 +16,7 @@ function buildNav(activeID, baseURL) {
     if (baseURL === undefined) {
         baseURL = '';
     }
-    getJSON(baseURL + "navData.json")
+    getJSON(`${baseURL}data/nav.json`)
     .then((navData) => {
         let body = document.getElementsByTagName("body");
         let headDiv = document.getElementsByClassName("header");
@@ -37,7 +37,7 @@ function buildNav(activeID, baseURL) {
 function getDir() {
     let loc = window.location.pathname;
     let dir = loc.substring(0, loc.lastIndexOf('/'));
-    return dir + '/'
+    return `${dir}/`
 }
 
 async function getJSON(dataURL) {
@@ -52,3 +52,5 @@ function entryNav(entry, baseURL) {
     }
     return `${listItem + entry.url}">${entry.name}</a></li>`;
 }
+
+export { getDir, getJSON };

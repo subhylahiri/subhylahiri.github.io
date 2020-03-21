@@ -1,14 +1,14 @@
 {
     "memory-frontier": {
         "title": "Learning and memory with complex synaptic plasticity",
-        "articles": [
+        "article": [
             {
                 "id": "Lahiri2013frontier",
                 "description": "‘A memory frontier for complex synapses’, Adv. Neural Inf. Process. Syst. 26 (2013) 1034–1042",
                 "url": "https://papers.nips.cc/paper/4872-a-memory-frontier-for-complex-synapses"
             }
         ],
-        "preprints": [],
+        "preprint": [],
         "slides": [
             {
                 "id": "Lahiri2016timescales",
@@ -21,7 +21,7 @@
                 "url": "presentations/SynapseTalk.pdf"
             }
         ],
-        "posters": [
+        "poster": [
             {
                 "id": "Lahiri2013frontier_bio",
                 "description": "SNI symposium 2015",
@@ -36,14 +36,14 @@
     },
     "mhc-learn": {
         "title": "Modelling impaired and enhanced learning with enhanced plasticity",
-        "articles":[
+        "article":[
             {
                 "id": "Nguyen-Vu2017mhc",
                 "description": "‘A saturation hypothesis to explain both enhanced and impaired learning with enhanced plasticity’, eLife 6 (2017), e20147",
                 "url": "https://dx.doi.org/10.7554/eLife.20147"
             }
         ],
-        "preprints": [],
+        "preprint": [],
         "slides": [
             {
                 "id": "Ganguli2014mhc",
@@ -56,12 +56,12 @@
                 "url": "presentations/MHCslides_10min.pdf"
             }
         ],
-        "posters": []
+        "poster": []
     },
     "pps": {
         "title": "A universal trade-off between power, precision and speed in physical communication",
-        "articles": [],
-        "preprints": [
+        "article": [],
+        "preprint": [
             {
                 "id": "lahiri2016power",
                 "description": "‘A universal tradeoff between power, precision and speed in physical communication’, (2016) arXiv:1603.07758 [cond-mat.stat-mech]",
@@ -77,7 +77,7 @@
             }
 
         ],
-        "posters": [
+        "poster": [
             {
                 "id": "Lahiri2016pps",
                 "description": "Cosyne 2016",
@@ -87,8 +87,8 @@
     },
     "cell-sense": {
         "title": "A universal energy accuracy tradeoff in nonequilibrium cellular sensing",
-        "articles": [],
-        "preprints": [
+        "article": [],
+        "preprint": [
             {
                 "id": "Harvey2020cellsense",
                 "description": "‘A universal energy accuracy tradeoff in nonequilibrium cellular sensing’, (2020) arXiv:2002.10567 [physics.bio-ph]",
@@ -97,18 +97,18 @@
 
         ],
         "slides": [],
-        "posters": []
+        "poster": []
     },
     "illusions": {
         "title": "Statistical mechanics of complex neural systems and high dimensional data",
-        "articles": [
+        "article": [
             {
                 "id": "advani2013statistical",
                 "description": "‘Statistical mechanics of complex neural systems and high dimensional data’, J. Stat. Mech. 2013.03 (2013) P03014",
                 "url": "https://dx.doi.org/10.1088/1742-5468/2013/03/P03014"
             }
         ],
-        "preprints": [
+        "preprint": [
             {
                 "id": "advani2013review",
                 "description": "‘Statistical mechanics of complex neural systems and high dimensional data’, (2013) arXiv:1301.7115 [q-bio.NC]",
@@ -117,12 +117,12 @@
 
         ],
         "slides": [],
-        "posters": []
+        "poster": []
     },
     "rand-proj": {
         "title": "Random projections of random manifolds",
-        "articles": [],
-        "preprints": [
+        "article": [],
+        "preprint": [
             {
                 "id": "lahiri2016randproj",
                 "description": "‘Random projections of random manifolds’, (2016) arXiv:1607.04331 [stat.ML]",
@@ -130,18 +130,18 @@
             }
         ],
         "slides": [],
-        "posters": []
+        "poster": []
     },
     "sort-free": {
         "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
-        "articles": [
+        "article": [
             {
                 "id": "Trautmann2019sortfree",
                 "description": "‘Accurate Estimation of Neural Population Dynamics without Spike Sorting’, Neuron 103.2 (2019), 292–308.e4",
                 "url": "https://dx.doi.org/10.1016/j.neuron.2019.05.003"
             }
         ],
-        "preprints": [
+        "preprint": [
             {
                 "id": "Trautmann2017sortfree",
                 "description": "‘Accurate Estimation of Neural Population Dynamics without Spike Sorting’, (2017) bioRxiv:229252.",
@@ -149,7 +149,7 @@
             }
         ],
         "slides": [],
-        "posters": [
+        "poster": [
             {
                 "id": "Lahiri2019sortfree",
                 "description": "Cosyne 2019",
