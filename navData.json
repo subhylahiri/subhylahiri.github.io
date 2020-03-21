@@ -1,0 +1,26 @@
+[
+    {
+        "id": "home",
+        "name": "Home",
+        "url": "index.html",
+        "internal": true
+    },
+    {
+        "id": "pubs",
+        "name": "Publications",
+        "url": "https://scholar.google.com/citations?user=2nEwLGcAAAAJ",
+        "internal": false
+    },
+    {
+        "id": "subj",
+        "name": "Research",
+        "url": "research.html",
+        "internal": true
+    },
+    {
+        "id": "pres",
+        "name": "Presentations",
+        "url": "presentations/index.html",
+        "internal": true
+    }
+]
