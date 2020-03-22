@@ -6,7 +6,7 @@
   <meta name="keywords" content="Subhaneil Lahiri" />
   <meta name="description" content="Subhaneil Lahiri's website" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="noreferrer">
+  <meta name="referrer" content="no-referrer">
   <meta charset="utf-8">
 </head>
 
@@ -51,14 +51,14 @@
       Harvard University.
     </p>
 
-    <p id="profiles" class="listhead">Other profiles and lists of publications:</p>
+    <p id="profiles" class="profiles">Other profiles and lists of publications:</p>
     <ul class="profile_links" itemscope itemtype="https://schema.org/Person">
       <li><a itemprop="sameAs" target="orcid.widget" rel="noopener noreferrer"
             href="https://orcid.org/0000-0003-2028-6635">
           <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" class="intext"
             alt="ORCID iD icon">orcid</a></li>
       <li><a itemprop="sameAs" href="https://arxiv.org/a/lahiri_s_1.html">
-          <img src="logos/arxiv_favicon.png" class="intext" alt="Arxiv">ArXiv</a></li>
+          <img src="logos/arxiv_favicon.png" class="intext" alt="Arxiv">arXiv</a></li>
       <li><a href="https://www.ncbi.nlm.nih.gov/pubmed?term=Lahiri+Subhaneil+%5Bau%5D">
           <img src="logos/pubmed_favicon.png" class="intext" alt="PubMed">PubMed</a></li>
       <li><a itemprop="sameAs" href="https://inspirehep.net/author/profile/S.Lahiri.1">
@@ -68,7 +68,7 @@
       <li><a itemprop="sameAs" href="https://academic.microsoft.com/profile/68e05002-4f51-43jg-e978-f847h4f27jf4/SubhaneilLahiri/">
           <img src="logos/ms-acad.png" class="intext" alt="Microsoft Academic">Microsoft Academic</a></li>.
             <!-- <a href="https://scholar.google.com/citations?user=2nEwLGcAAAAJ">Google Scholar</a>, -->
-      <!-- <a href="https://profiles.stanford.edu/subhaneil-lahiri">Stanford profile</a>, -->
+      <!-- <a href="https://profiles.stasnford.edu/subhaneil-lahiri">Stanford profile</a>, -->
       <!-- <a href="https://www.researchgate.net/profile/Subhaneil_Lahiri">ResearchGate</a>, -->
       <!-- <li><a href="https://stackexchange.com/users/9645419/subhaneil-lahiri">
         <img src="https://stackexchange.com/users/flair/9645419.png" width="208" height="58"
@@ -84,8 +84,8 @@
     <p id="thesis"><a href="files/thesis.pdf">My PhD Thesis.</a></p>
   </div>
 
-  <script type="text/javascript" src="nav.js"></script>
-  <script type="text/javascript">
+  <script type="module">
+    import {buildPage} from "./scripts/nav.js"
     buildPage("home");
   </script>
 </body>

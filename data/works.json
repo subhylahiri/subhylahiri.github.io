@@ -1,0 +1,279 @@
+{
+    "memory-frontier": {
+        "title": "Learning and memory with complex synaptic plasticity",
+        "article": [
+            {
+                "id": "Lahiri2013frontier",
+                "description": "‘A memory frontier for complex synapses’, Adv. Neural Inf. Process. Syst. 26 (2013) 1034–1042",
+                "url": "https://papers.nips.cc/paper/4872-a-memory-frontier-for-complex-synapses"
+            }
+        ],
+        "preprint": [],
+        "slides": [
+            {
+                "id": "Lahiri2016timescales",
+                "description": "Cosyne 2016",
+                "url": "presentations/SynapseTalk_10min.pdf"
+            },
+            {
+                "id": "synapse_all",
+                "description": "Complete slide deck",
+                "url": "presentations/SynapseTalk.pdf"
+            }
+        ],
+        "poster": [
+            {
+                "id": "Lahiri2013frontier_bio",
+                "description": "SNI symposium 2015",
+                "url": "presentations/SynapsePoster_bio.pdf"
+            },
+            {
+                "id": "Lahiri2013frontier_maths",
+                "description": "NeurIPS 2013",
+                "url": "presentations/SynapsePoster_maths.pdf"
+            }
+        ]
+    },
+    "mhc-learn": {
+        "title": "Modelling impaired and enhanced learning with enhanced plasticity",
+        "article":[
+            {
+                "id": "Nguyen-Vu2017mhc",
+                "description": "‘A saturation hypothesis to explain both enhanced and impaired learning with enhanced plasticity’, eLife 6 (2017), e20147",
+                "url": "https://dx.doi.org/10.7554/eLife.20147"
+            }
+        ],
+        "preprint": [],
+        "slides": [
+            {
+                "id": "Ganguli2014mhc",
+                "description": "Ganguli lab evening, 2014",
+                "url": "presentations/MHCslides_20min.pdf"
+            },
+            {
+                "id": "Lahiri2014mhc",
+                "description": "Cosyne 2014",
+                "url": "presentations/MHCslides_10min.pdf"
+            }
+        ],
+        "poster": []
+    },
+    "pps": {
+        "title": "A universal trade-off between power, precision and speed in physical communication",
+        "article": [],
+        "preprint": [
+            {
+                "id": "lahiri2016power",
+                "description": "‘A universal tradeoff between power, precision and speed in physical communication’, (2016) arXiv:1603.07758 [cond-mat.stat-mech]",
+                "url": "https://arxiv.org/abs/1603.07758"
+            }
+
+        ],
+        "slides": [
+            {
+                "id": "lahiri2016lineq",
+                "description": "Lineq meeting, 2016",
+                "url": "presentations/pps_slides.pdf"
+            }
+
+        ],
+        "poster": [
+            {
+                "id": "Lahiri2016pps",
+                "description": "Cosyne 2016",
+                "url": "presentations/pps_poster.pdf"
+            }
+        ]
+    },
+    "cell-sense": {
+        "title": "A universal energy accuracy tradeoff in nonequilibrium cellular sensing",
+        "article": [],
+        "preprint": [
+            {
+                "id": "Harvey2020cellsense",
+                "description": "‘A universal energy accuracy tradeoff in nonequilibrium cellular sensing’, (2020) arXiv:2002.10567 [physics.bio-ph]",
+                "url": "https://arxiv.org/abs/2002.10567"
+            }
+
+        ],
+        "slides": [],
+        "poster": []
+    },
+    "illusions": {
+        "title": "Statistical mechanics of complex neural systems and high dimensional data",
+        "article": [
+            {
+                "id": "advani2013statistical",
+                "description": "‘Statistical mechanics of complex neural systems and high dimensional data’, J. Stat. Mech. 2013.03 (2013) P03014",
+                "url": "https://dx.doi.org/10.1088/1742-5468/2013/03/P03014"
+            }
+        ],
+        "preprint": [
+            {
+                "id": "advani2013review",
+                "description": "‘Statistical mechanics of complex neural systems and high dimensional data’, (2013) arXiv:1301.7115 [q-bio.NC]",
+                "url": "https://arxiv.org/abs/1301.7115"
+            }
+
+        ],
+        "slides": [],
+        "poster": []
+    },
+    "rand-proj": {
+        "title": "Random projections of random manifolds",
+        "article": [],
+        "preprint": [
+            {
+                "id": "lahiri2016randproj",
+                "description": "‘Random projections of random manifolds’, (2016) arXiv:1607.04331 [stat.ML]",
+                "url": "https://arxiv.org/abs/1607.04331"
+            }
+        ],
+        "slides": [],
+        "poster": []
+    },
+    "sort-free": {
+        "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+        "article": [
+            {
+                "id": "Trautmann2019sortfree",
+                "description": "‘Accurate Estimation of Neural Population Dynamics without Spike Sorting’, Neuron 103.2 (2019) 292–308.e4",
+                "url": "https://dx.doi.org/10.1016/j.neuron.2019.05.003"
+            }
+        ],
+        "preprint": [
+            {
+                "id": "Trautmann2017sortfree",
+                "description": "‘Accurate Estimation of Neural Population Dynamics without Spike Sorting’, (2017) bioRxiv:229252.",
+                "url": "https://dx.doi.org/10.1101/229252"
+            }
+        ],
+        "slides": [],
+        "poster": [
+            {
+                "id": "Lahiri2019sortfree",
+                "description": "Cosyne 2019",
+                "url": "presentations/sortfree_poster.pdf"
+            }
+        ]
+    },
+    "deep-chaos": {
+        "title": "Exponential expressivity in deep neural networks through transient chaos",
+        "article": [
+            {
+                "id": "poole2016deepchaos",
+                "description": "‘Exponential expressivity in deep neural networks through transient chaos’, Adv. Neural Inf. Process. Syst. 29 (2016) 3360--3368",
+                "url": "http://papers.nips.cc/paper/6322-exponential-expressivity-in-deep-neural-networks-through-transient-chaos"
+            }
+        ],
+        "preprint": [
+            {
+                "id": "poole2016deepchaos",
+                "description": "‘Exponential expressivity in deep neural networks through transient chaos’, (2016) arXiv:1606.05340 [stat.ML]",
+                "url": "https://arxiv.org/abs/1606.05340"
+            }
+        ],
+        "slides": [],
+        "poster": []
+    },
+    "larva-crawl": {
+        "title": "The motor programs underlying navigation in Drosophila larva",
+        "article": [
+            {
+                "id": "Lahiri2011larvamotor",
+                "description": "‘Two alternatingmotor programs drive navigation inDrosophilalarva’, PLoS ONE 6 (2011) e23180",
+                "url": "http://dx.doi.org/10.1371/journal.pone.0023180"
+            }
+        ],
+        "preprint": [],
+        "slides": [
+            {
+                "id": "Lahiri2011job",
+                "description": "Seminar at Stanford, 2011",
+                "url": "presentations/GFP-Headsweep.pdf"
+            }
+        ],
+        "poster": []
+    },
+    "plasmaring": {
+        "title": "Black rings from fluid mechanics",
+        "article": [
+            {
+                "id": "Bhattacharya2010gm",
+                "description": "‘Lumps of plasma in arbitrary dimensions’, JHEP 1008 (2010) 073",
+                "url": "http://dx.doi.org/10.1007/JHEP08(2010)073"
+            },
+            {
+                "id": "Bhattacharyya2008vs",
+                "description": "‘Large rotating AdS black holes from fluid mechanics’, JHEP 09 (2008) 054",
+                "url": "http://dx.doi.org/10.1088/1126-6708/2008/09/054"
+            },
+            {
+                "id": "Lahiri2008ae",
+                "description": "‘Plasmarings as dual black rings’, JHEP05 (2008) 001",
+                "url": "http://dx.doi.org/10.1088/1126-6708/2008/05/001"
+            }
+        ],
+        "preprint": [
+            {
+                "id": "Bhattacharya2009gm",
+                "description": "‘Lumps of plasma in arbitrary dimensions’, (2009) arXiv:0903.4734 [hep-th]",
+                "url": "https://arxiv.org/abs/0903.4734"
+            },
+            {
+                "id": "Bhattacharyya2007vs",
+                "description": "‘Large rotating AdS black holes from fluid mechanics’, (2007) arXiv:0708.1770 [hep-th]",
+                "url": "https://arxiv.org/abs/0708.1770"
+            },
+            {
+                "id": "Lahiri2007ae",
+                "description": "‘Plasmarings as dual black rings’ (2007) arXiv:0705.3404 [hep-th]",
+                "url": "https://arxiv.org/abs/0705.3404"
+            }
+        ],
+        "slides": [
+            {
+                "id": "Lahiri2009defence",
+                "description": "PhD defence, 2009",
+                "url": "presentations/plasmaring_defence.pdf"
+            },
+            {
+                "id": "Lahiri2009family",
+                "description": "HETG family meeting, 2009",
+                "url": "presentations/plasmaring_talk.pdf"
+            }
+        ],
+        "poster": []
+    },
+    "giant-graviton": {
+        "title": "Giant gravitons and the supersymmetric states of N=4 Yang-Mills",
+        "article": [
+            {
+                "id": "Biswas2007tj",
+                "description": "‘Supersymmetric states ofN= 4 Yang-Mills from giantgravitons’, JHEP12 (2007) 006",
+                "url": "http://dx.doi.org/10.1088/1126-6708/2007/12/006"
+            }
+        ],
+        "preprint": [
+            {
+                "id": "Biswas2006tj",
+                "description": "‘Supersymmetric states ofN= 4 Yang-Mills from giantgravitons’, (2006) arXiv:hep-th/0606087",
+                "url": "https://arxiv.org/abs/hep-th/0606087"
+            }
+        ],
+        "slides": [
+            {
+                "id": "Lahiri2007korea",
+                "description": "The 1st Asian Winter School on String Theory, 2007",
+                "url": "presentations/gg_korea.pdf"
+            },
+            {
+                "id": "Lahiri2006qual",
+                "description": "Oral qualifying exam, 2006",
+                "url": "presentations/gg_oral.pdf"
+            }
+
+        ],
+        "poster": []
+    }
+}
