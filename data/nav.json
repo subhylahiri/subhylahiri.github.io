@@ -20,7 +20,7 @@
     {
         "id": "pres",
         "name": "Presentations",
-        "url": "presentations/index.html",
+        "url": "presentations.html",
         "internal": true
     }
 ]
