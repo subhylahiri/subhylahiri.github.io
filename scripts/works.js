@@ -6,13 +6,19 @@ function projectLinks(baseURL) {
     }
     getJSON(`${baseURL}data/works.json`)
         .then((worksData) => {
-            for (const project in worksData) {
-                let paragraph = document.getElementById(project);
-                if (paragraph) {
-                    paragraph.insertAdjacentHTML('afterend', projectWorks(worksData[project], baseURL));
-                }
-            }
+            projectJSON(worksData, baseURL);
         })
+}
+
+function projectJSON(worksData, baseURL) {
+    for (const project in worksData) {
+        let paragraph = document.getElementById(project);
+        if (paragraph) {
+            paragraph.insertAdjacentHTML(
+                'afterend', projectWorks(worksData[project], baseURL)
+            );
+        }
+    }
 }
 
 function projectWorks(projectData, baseURL) {
@@ -44,16 +50,22 @@ function presentationLinks(baseURL) {
     }
     getJSON(`${baseURL}data/works.json`)
         .then((worksData) => {
-            for (const project in worksData) {
-                const projectData = worksData[project];
-                let paragraph = document.getElementById(project);
-                if ((projectData.slides || projectData.poster) && paragraph) {
-                    paragraph.className = "presentation";
-                    paragraph.innerHTML = projectData.title;
-                    paragraph.insertAdjacentHTML('afterend', projectPresentations(projectData, baseURL));
-                }
-            }
+            presentationJSON(worksData, baseURL);
         })
+}
+
+function presentationJSON(worksData, baseURL) {
+    for (const project in worksData) {
+        const projectData = worksData[project];
+        let paragraph = document.getElementById(project);
+        if ((projectData.slides || projectData.poster) && paragraph) {
+            paragraph.className = "presentation";
+            paragraph.innerHTML = projectData.title;
+            paragraph.insertAdjacentHTML(
+                'afterend', projectPresentations(projectData, baseURL)
+            );
+        }
+    }
 }
 
 function projectPresentations(projectData, baseURL) {

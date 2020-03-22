@@ -17,21 +17,25 @@ function buildNav(activeID, baseURL) {
         baseURL = '';
     }
     getJSON(`${baseURL}data/nav.json`)
-    .then((navData) => {
-        let body = document.getElementsByTagName("body");
-        let headDiv = document.getElementsByClassName("header");
-        let navDiv = document.createElement("div");
-        navDiv.className = "nav";
-        let navString = '<ul>';
-        for (let i = 0; i < navData.length; i++) {
-            navString += entryNav(navData[i], baseURL);
-        }
-        navDiv.innerHTML = navString + '</ul>';
-        body[0].insertBefore(navDiv, headDiv[0])
-        headDiv[0].style.paddingTop = "0em";
-        let activeObj = document.getElementById(activeID);
-        activeObj.className = "active";
-    });
+        .then((navData) => {
+            insertNav(navData, activeID, baseURL);
+        });
+}
+
+function insertNav(navData, activeID, baseURL) {
+    let body = document.getElementsByTagName("body");
+    let headDiv = document.getElementsByClassName("header");
+    let navDiv = document.createElement("div");
+    navDiv.className = "nav";
+    let navString = '<ul>';
+    for (let i = 0; i < navData.length; i++) {
+        navString += entryNav(navData[i], baseURL);
+    }
+    navDiv.innerHTML = navString + '</ul>';
+    body[0].insertBefore(navDiv, headDiv[0])
+    headDiv[0].style.paddingTop = "0em";
+    let activeObj = document.getElementById(activeID);
+    activeObj.className = "active";
 }
 
 function getDir() {

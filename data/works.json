@@ -157,6 +157,25 @@
             }
         ]
     },
+    "deep-chaos": {
+        "title": "Exponential expressivity in deep neural networks through transient chaos",
+        "article": [
+            {
+                "id": "poole2016deepchaos",
+                "description": "‘Exponential expressivity in deep neural networks through transient chaos’, Adv. Neural Inf. Process. Syst. 29 (2016) 3360--3368",
+                "url": "http://papers.nips.cc/paper/6322-exponential-expressivity-in-deep-neural-networks-through-transient-chaos"
+            }
+        ],
+        "preprint": [
+            {
+                "id": "poole2016deepchaos",
+                "description": "‘Exponential expressivity in deep neural networks through transient chaos’, (2016) arXiv:1606.05340 [stat.ML]",
+                "url": "https://arxiv.org/abs/1606.05340"
+            }
+        ],
+        "slides": [],
+        "poster": []
+    },
     "larva-crawl": {
         "title": "The motor programs underlying navigation in Drosophila larva",
         "article": [
