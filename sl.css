@@ -1,12 +1,12 @@
 ﻿/* Subhaneil Lahiri CSS */
 :root {
     --major-bg-color: #FFFFFF;
-    --minor-bg-color: #DAE6FE;
-    --title-bg-color: #757D88;
-    --inert-bg-color: #8C96A3;
-    --title-fg-color: #FFFFFF;
     --major-fg-color: #000000;
+    --minor-bg-color: #DAE6FE;
     --minor-fg-color: #757D88;
+    --inert-bg-color: #8C96A3;
+    --title-bg-color: #757D88;
+    --title-fg-color: #FFFFFF;
     --links-fg-color: #0000A0;
     /* --footer-fg-color: #999999; */
 }
@@ -84,8 +84,9 @@ hr {
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     color: inherit;
-    margin: 0em;
     font-family: Helvetica, Arial, sans-serif;
+    margin: 0em;
+    padding: 1em 1em 0.3rem 1.875rem;
 }
 
 h1 {
@@ -102,29 +103,24 @@ h2 {
 
 h3 {
     text-align: left;
-    padding: 1em 1em 0.3rem 1.875rem;
     font-size: 1.6em;
 }
 
 h4 {
     text-align: left;
-    display: inline;
     font-size: 1em;
-    padding: 0.625em;
 }
 
 h5 {
     text-align: left;
     font-size: 1em;
-    color: var(--major-fg-color);
-    padding: 0.75em 0.3em 0.75em 1.875rem;
+    font-style: italic;
 }
 
 h6 {
+    display: inline;
     text-align: left;
     font-size: 1em;
-    color: var(--major-fg-color);
-    padding: 0.625em 0.3em 0.625em 1.875em;
 }
 
 /* Basic links */
@@ -147,9 +143,10 @@ p {
     font-size: 1em;
     margin: 0em;
     padding: 1em 1em 0.3em 1.875em;
-    font-family: inherit;
     line-height: 1.4;
     max-width: 50em;
+    font-family: inherit;
+    color: inherit;
 }
 
 /* Before list */
