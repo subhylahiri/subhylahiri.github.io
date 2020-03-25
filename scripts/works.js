@@ -32,16 +32,24 @@ function projectWorks(projectData, baseURL) {
 }
 
 function projectEntry(entry, type, baseURL) {
-    let typeName = type.charAt(0).toUpperCase() + type.substring(1)
+    const typeName = type.charAt(0).toUpperCase() + type.substring(1)
+    const description = makeDescription(entry, type);
     let work = `<li><a class="icon ${type}" href="`
     if (type === "slides" || type === "poster") {
         work += baseURL;
     }
-    work += `${entry.url}" title="${entry.description}"`;
+    work += `${entry.url}" title="${description}"`;
     if (type === "article" || type === "preprint") {
-        work += `cite="${entry.description}"`;
+        work += ` cite="${description}"`;
     }
     return work + `>${typeName}</a></li> `
+}
+
+function makeDescription(entry, type) {
+    if (type === "slides" || type === "poster") {
+        return entry.description
+    }
+    return `‘${entry.title}’, ${entry.ref} (${entry.year})`;
 }
 
 function presentationLinks(baseURL) {
