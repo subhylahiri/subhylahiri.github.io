@@ -8,8 +8,8 @@
     {
         "id": "pubs",
         "name": "Publications",
-        "url": "https://scholar.google.com/citations?user=2nEwLGcAAAAJ",
-        "internal": false
+        "url": "publications.html",
+        "internal": true
     },
     {
         "id": "subj",

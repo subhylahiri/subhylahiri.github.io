@@ -1,0 +1,53 @@
+
+.articles, .preprints {
+    list-style-position: outside;
+    max-width: 60em;
+    padding-top: 1em;
+}
+
+.articles li, .preprints li {
+    padding-top: 0.5em;
+}
+
+.articles {
+    list-style-type: disc;
+}
+
+.preprints {
+    list-style-type: circle;
+}
+
+.author, .title, .journal, .volume, .pages, .year, .eprint {
+    font-size: inherit;
+}
+.author, .title {
+    display: block;
+}
+.author::after {
+    content: ",";
+}
+
+.title {
+    font-style: italic;
+}
+.title::before {
+    content: "‘";
+}
+.title::after {
+    content: "’,";
+}
+
+.volume {
+    font-weight: bold;
+}
+
+.year::before {
+    content: "(";
+}
+.year::after {
+    content: ")";
+}
+
+.eprint {
+    font-family:  "Courier New", "Lucida Console", Courier, monospace;
+}

@@ -60,7 +60,7 @@ em {
 }
 
 tt {
-    font-family: "Courier New", "Lucida Console", Monospace;
+    font-family: "Courier New", "Lucida Console", Courier, monospace;
 }
 
 strong {
