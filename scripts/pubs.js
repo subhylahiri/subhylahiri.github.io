@@ -65,24 +65,24 @@ function listPreprints(preprints) {
 function citeArticle(article, preprints) {
     // return `<li>${formatArticle(article)}.</li> `
     if (!(article.eprint)) {
-        return `<li>${formatArticle(article)}.</li> `
+        return `<li class="article">${formatArticle(article)}.</li> `
     }
     let eprint = getEprint(article.eprint, preprints);
-    return `<li>${formatArticlePreprint(article, eprint)}.</li> `
+    return `<li class="article">${formatArticlePreprint(article, eprint)}.</li> `
 }
 
 function citePreprint(preprint) {
     if (preprint.pub) {
         return ''
     }
-    return `<li>${formatPreprint(preprint)}.</li> `
+    return `<li class="preprint">${formatPreprint(preprint)}.</li> `
 }
 
 function getEprint(id, preprints) {
     let theEntry = null;
     preprints.forEach(entry => {
         if (entry.id === id) {
-            theEntry = { ...entry };
+            theEntry = entry;
         }
     });
     if (theEntry) {
@@ -91,35 +91,46 @@ function getEprint(id, preprints) {
     throw `Unknown eprint: ${id}`;
 }
 
+function formatArticlePreprint(article, preprint) {
+    return `${formatArticle(article)}, ${encaseURL(formatEprint(preprint), preprint)}`
+}
+
 function formatArticle(entry) {
-    return `${formatAuthor(entry)} ${formatTitle(entry)} ${formatJournal(entry)} ${formatYear(entry)}`
+    return formatCitation(entry, `${formatJournal(entry)} ${formatYear(entry)}`);
 }
 
 function formatPreprint(entry) {
-    return `${formatAuthor(entry)} ${formatTitle(entry)} ${formatEprint(entry)} ${formatYear(entry)}`
+    return formatCitation(entry, `${formatEprint(entry)} ${formatYear(entry)}`)
 }
 
-function formatArticlePreprint(article, preprint) {
-    return `${formatArticle(article)}, ${formatEprint(preprint)}`
+function formatCitation(entry, ref) {
+    return `${formatAuthor(entry)} ${formatTitle(entry)} ${encaseURL(ref, entry)}`
 }
 
 function formatAuthor(entry) {
-    return `<span class="author">${entry.author}</span>`
+    return encaseSpan(entry.author, "author")
 }
 function formatTitle(entry) {
-    return `<span class="title">${entry.title}</span>`
+    return encaseSpan(entry.title, "title")
+}
+function formatJournal(entry) {
+    return encaseSpan(formatVolume(entry.ref), "journal")
 }
 function formatVolume(ref) {
     return ref.replace(/([^\d]+)(\d+)([^\d])/, '$1</span><span class="volume">$2</span><span class="pages">$3')
 }
-function formatJournal(entry) {
-    return `<span class="journal"><a href="${entry.url}">${formatVolume(entry.ref)}</a></span>`
-}
 function formatEprint(entry) {
-    return `<span class="eprint"><a href="${entry.url}">${entry.ref}</a></span>`
+    return encaseSpan(entry.ref, "eprint")
 }
 function formatYear(entry) {
-    return `<span class="year"><a href="${entry.url}">${entry.year}</a></span>`
+    return encaseSpan(entry.year, "year")
+}
+
+function encaseSpan(text, cssClass) {
+    return `<span class="${cssClass}">${text}</span>`
+}
+function encaseURL(text, entry) {
+    return `<a href="${entry.url}">${text}</a>`
 }
 
 export { publicationLinks };

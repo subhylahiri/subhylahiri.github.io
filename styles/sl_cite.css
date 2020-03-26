@@ -1,34 +1,62 @@
 
 .articles, .preprints {
-    list-style-position: outside;
+    list-style-position: inside;
+    list-style-type: none;
     max-width: 60em;
     padding-top: 1em;
 }
 
 .articles li, .preprints li {
-    padding-top: 0.5em;
+    padding-top: 0.7em;
+    line-height: 1.4em;
+    background-image: none;
 }
 
-.articles {
+.articles li::before, .preprints li::before {
+    display: inline-block;
+    margin-left: -1.5em;
+    line-height: 1em;
+    height: 1em;
+    width: 1em;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-right: 0.5em;
+}
+
+.articles li::before {
+    background-image: url(../icons/article.svg);
+    content: 'Article:';
+}
+.preprints li::before {
+    background-image: url(../icons/preprint.svg);
+    content: 'Preprint:';
+}
+
+/* .articles {
     list-style-type: disc;
 }
 
 .preprints {
     list-style-type: circle;
-}
+} */
 
 .author, .title, .journal, .volume, .pages, .year, .eprint {
     font-size: inherit;
 }
-.author, .title {
+/* .author, .title {
     display: block;
-}
+} */
 .author::after {
     content: ",";
 }
 
 .title {
     font-style: italic;
+    display: block;
 }
 .title::before {
     content: "‘";

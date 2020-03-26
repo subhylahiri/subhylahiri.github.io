@@ -86,6 +86,7 @@ ul {
     white-space: nowrap;
     overflow: hidden;
     background-color: var(--major-bg-color);
+    color: var(--minor-fg-color);
 }
 .icon:hover {
     text-indent: 0%;
@@ -106,7 +107,6 @@ ul {
 }
 .article:hover, .preprint:hover, .slides:hover, .poster:hover {
     background-image: none;
-    color: var(--minor-fg-color);
 }
 
 ul.materials {
