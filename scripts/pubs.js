@@ -108,7 +108,10 @@ function formatCitation(entry, ref) {
 }
 
 function formatAuthor(entry) {
-    return encaseSpan(entry.author, "author")
+    return encaseSpan(formatSelf(entry.author), "author")
+}
+function formatSelf(authors) {
+    return authors.replace(/(S Lahiri)/, '<span class="self">$1</span>')
 }
 function formatTitle(entry) {
     return encaseSpan(entry.title, "title")

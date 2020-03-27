@@ -47,11 +47,11 @@
 .author, .title, .journal, .volume, .pages, .year, .eprint {
     font-size: inherit;
 }
-/* .author, .title {
-    display: block;
-} */
 .author::after {
     content: ",";
+}
+.self {
+    font-weight: inherit;
 }
 
 .title {
