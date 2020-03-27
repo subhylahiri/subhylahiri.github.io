@@ -27,11 +27,9 @@ function readPapers(worksData) {
     preprints.sort(compareMonth).sort(compareYear);
     return {articles, preprints}
 }
-
 function compareMonth(entryA, entryB) {
     return entryB.month - entryA.month
 }
-
 function compareYear(entryA, entryB) {
     return entryB.year - entryA.year
 }
@@ -63,7 +61,6 @@ function listPreprints(preprints) {
 }
 
 function citeArticle(article, preprints) {
-    // return `<li>${formatArticle(article)}.</li> `
     if (!(article.eprint)) {
         return `<li class="article">${formatArticle(article)}.</li> `
     }
@@ -111,7 +108,7 @@ function formatAuthor(entry) {
     return encaseSpan(formatSelf(entry.author), "author")
 }
 function formatSelf(authors) {
-    return authors.replace(/(S Lahiri)/, '<span class="self">$1</span>')
+    return authors.replace(/(S\w* Lahiri)/, '<span class="self">$1</span>')
 }
 function formatTitle(entry) {
     return encaseSpan(entry.title, "title")
@@ -120,7 +117,7 @@ function formatJournal(entry) {
     return encaseSpan(formatVolume(entry.ref), "journal")
 }
 function formatVolume(ref) {
-    return ref.replace(/([^\d]+)(\d+)([^\d])/, '$1</span><span class="volume">$2</span><span class="pages">$3')
+    return ref.replace(/([^\d]+)(\d+)([^\d])/, '$1<span class="volume">$2</span>$3')
 }
 function formatEprint(entry) {
     return encaseSpan(entry.ref, "eprint")
