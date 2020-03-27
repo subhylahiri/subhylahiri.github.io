@@ -45,7 +45,7 @@
             {
                 "id": "Nguyen-Vu2017mhc",
                 "url": "https://dx.doi.org/10.7554/eLife.20147",
-                "author": "TDB Nguyen-Vu*, GQ Zhao*, S Lahiri*, RR Kimpo, H Lee, S Ganguli, CJ Shatz and JL Raymond",
+                "author": "TDB Nguyen-Vu, GQ Zhao, S Lahiri, RR Kimpo, H Lee, S Ganguli, CJ Shatz and JL Raymond",
                 "title": "A saturation hypothesis to explain both enhanced and impaired learning with enhanced plasticity",
                 "ref": "eLife 6:e20147",
                 "year": 2017,
@@ -237,7 +237,7 @@
             {
                 "id": "Lahiri2011larvamotor",
                 "url": "http://dx.doi.org/10.1371/journal.pone.0023180",
-                "author": "S Lahiri*, K Shen*, M Klein, A Tang, E Kane, M Gershow, P Garrity and ADT Samuel",
+                "author": "S Lahiri, K Shen, M Klein, A Tang, E Kane, M Gershow, P Garrity and ADT Samuel",
                 "title": "Two alternating motor programs drive navigation in Drosophila larva",
                 "ref": "PLoS ONE 6:e23180",
                 "year": 2011,
@@ -261,7 +261,7 @@
             {
                 "id": "Bhattacharya2010gm",
                 "url": "http://dx.doi.org/10.1007/JHEP08(2010)073",
-                "author": "J Bhattacharya* and S Lahiri",
+                "author": "J Bhattacharya and S Lahiri",
                 "title": "Lumps of plasma in arbitrary dimensions",
                 "ref": "JHEP 2010 08:073",
                 "year": 2010,
@@ -271,7 +271,7 @@
             {
                 "id": "Bhattacharyya2008vs",
                 "url": "http://dx.doi.org/10.1088/1126-6708/2008/09/054",
-                "author": "S Bhattacharyya*, S Lahiri*, R Loganayagam* and S Minwalla*",
+                "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "title": "Large rotating AdS black holes from fluid mechanics",
                 "ref": "JHEP 2008 09:054",
                 "year": 2008,
@@ -281,7 +281,7 @@
             {
                 "id": "Lahiri2008ae",
                 "url": "http://dx.doi.org/10.1088/1126-6708/2008/05/001",
-                "author": "S Lahiri* and S Minwalla*",
+                "author": "S Lahiri and S Minwalla",
                 "title": "Plasmarings as dual black rings",
                 "ref": "JHEP 2008 05:001",
                 "year": 2008,
@@ -293,7 +293,7 @@
             {
                 "id": "Bhattacharya2009gm",
                 "url": "https://arxiv.org/abs/0903.4734",
-                "author": "J Bhattacharya* and S Lahiri",
+                "author": "J Bhattacharya and S Lahiri",
                 "title": "Lumps of plasma in arbitrary dimensions",
                 "ref": "arXiv:0903.4734 [hep-th]",
                 "year": 2009,
@@ -303,7 +303,7 @@
             {
                 "id": "Bhattacharyya2007vs",
                 "url": "https://arxiv.org/abs/0708.1770",
-                "author": "S Bhattacharyya*, S Lahiri*, R Loganayagam* and S Minwalla*",
+                "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "title": "Large rotating AdS black holes from fluid mechanics",
                 "ref": "arXiv:0708.1770 [hep-th]",
                 "year": 2007,
@@ -313,7 +313,7 @@
             {
                 "id": "Lahiri2007ae",
                 "url": "https://arxiv.org/abs/0705.3404",
-                "author": "S Lahiri* and S Minwalla*",
+                "author": "S Lahiri and S Minwalla",
                 "title": "Plasmarings as dual black rings",
                 "ref": "arXiv:0705.3404 [hep-th]",
                 "year": 2007,
@@ -341,7 +341,7 @@
             {
                 "id": "Biswas2007tj",
                 "url": "http://dx.doi.org/10.1088/1126-6708/2007/12/006",
-                "author": "I Biswas*, D Gaiotto*, S Lahiri* and S Minwalla*",
+                "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "title": "Supersymmetric states of N=4 Yang-Mills from giant gravitons",
                 "ref": "JHEP 2007 12:006",
                 "year": 2007,
@@ -353,7 +353,7 @@
             {
                 "id": "Biswas2006tj",
                 "url": "https://arxiv.org/abs/hep-th/0606087",
-                "author": "I Biswas*, D Gaiotto*, S Lahiri* and S Minwalla*",
+                "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "title": "Supersymmetric states of N=4 Yang-Mills from giant gravitons",
                 "ref": "arXiv:hep-th/0606087",
                 "year": 2006,
