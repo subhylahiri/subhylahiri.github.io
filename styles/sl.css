@@ -149,6 +149,39 @@ p {
     color: inherit;
 }
 
+/* Lists */
+
+ul {
+    list-style-position: outside;
+    list-style-type: none;
+    padding: 0em 1em 0.3em 1.875em;
+    margin: 0;
+    max-width: 50em;
+}
+
+/* Navigation bar */
+
+.nav ul {
+    padding: 0;
+    border-style: hidden;
+}
+
+.nav li {
+    display: inline-block;
+    margin: 0;
+    background-color: var(--inert-bg-color);
+    color: inherit;
+}
+
+.nav li:hover, .nav .active {
+    background-color: inherit;
+}
+
+.nav a {
+    padding: 0.5em;
+    color: inherit;
+    line-height: 2em;
+}
 
 /* special image styles */
 
