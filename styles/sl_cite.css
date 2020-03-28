@@ -49,10 +49,10 @@
     display: block;
 }
 .title::before {
-    content: "‘";
+    content: "“";
 }
 .title::after {
-    content: "’,";
+    content: "”,";
 }
 
 .volume {

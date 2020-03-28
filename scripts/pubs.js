@@ -1,19 +1,14 @@
 import { getJSON } from "./nav.js";
 
-function publicationLinks(baseURL) {
-    if (baseURL === undefined) {
-        baseURL = '';
-    }
+function publicationLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)
-        .then((worksData) => {
-            papersJSON(worksData);
-        })
+        .then(papersJSON);
 }
 
-function papersJSON(baseURL) {
-    let {articles, preprints} = readPapers(baseURL);
-    listArticles(articles, preprints);
-    listPreprints(preprints);
+function papersJSON(worksData) {
+    let {articles, preprints} = readPapers(worksData);
+    listPapers(articles, "articles", entry => citeArticle(entry, preprints));
+    listPapers(preprints, "preprints", citePreprint);
 }
 
 function readPapers(worksData) {
@@ -23,58 +18,48 @@ function readPapers(worksData) {
         articles = articles.concat(entry.article);
         preprints = preprints.concat(entry.preprint);
     }
-    articles.sort(compareMonth).sort(compareYear);
-    preprints.sort(compareMonth).sort(compareYear);
+    reverseChronology(articles);
+    reverseChronology(preprints);
     return {articles, preprints}
 }
-function compareMonth(entryA, entryB) {
-    return entryB.month - entryA.month
-}
-function compareYear(entryA, entryB) {
-    return entryB.year - entryA.year
+function reverseChronology(papers) {
+    papers.sort((a,b) => b.month - a.month).sort((a,b) => b.year - a.year);
 }
 
-function listArticles(articles, preprints) {
-    let anchor = document.getElementById("articles");
+function listPapers(papers, anchorID, citeFunc) {
+    let anchor = document.getElementById(anchorID);
     if (anchor) {
         let paperList = '<ul class="papers"> ';
-        articles.forEach(entry => {
-            paperList += citeArticle(entry, preprints);
+        papers.forEach(entry => {
+            paperList += citeFunc(entry);
         });
-        anchor.insertAdjacentHTML(
-            'afterend', `${paperList} </ul>`
-        );
+        anchor.insertAdjacentHTML('afterend', `${paperList} </ul>`);
     }
 }
 
-function listPreprints(preprints) {
-    let anchor = document.getElementById("preprints");
-    if (anchor) {
-        let paperList = '<ul class="papers"> ';
-        preprints.forEach(entry => {
-            paperList += citePreprint(entry);
-        });
-        anchor.insertAdjacentHTML(
-            'afterend', `${paperList} </ul>`
-        );
+function citeArticle(entry, preprints) {
+    let citation = `<li class="article">${makeCitation(entry, formatJournal)}`;
+    if (entry.eprint) {
+        citation += appendEprint(getEprint(entry.eprint, preprints));
     }
+    return `${citation}.</li> `
 }
 
-function citeArticle(article, preprints) {
-    if (!(article.eprint)) {
-        return `<li class="article">${formatArticle(article)}.</li> `
-    }
-    let eprint = getEprint(article.eprint, preprints);
-    return `<li class="article">${formatArticlePreprint(article, eprint)}.</li> `
-}
-
-function citePreprint(preprint) {
-    if (preprint.pub) {
+function citePreprint(entry) {
+    if (entry.pub) {
         return ''
     }
-    return `<li class="preprint">${formatPreprint(preprint)}.</li> `
+    return `<li class="preprint">${makeCitation(entry, formatEprint)}.</li> `
 }
 
+function makeCitation(entry, refFunc) {
+    let ref = `${refFunc(entry)} ${formatYear(entry)}`;
+    return `${formatAuthor(entry)} ${formatTitle(entry)} ${encaseURL(ref, entry)}`
+}
+
+function appendEprint(preprint) {
+    return `, ${encaseURL(formatEprint(preprint), preprint)}`
+}
 function getEprint(id, preprints) {
     let theEntry = null;
     preprints.forEach(entry => {
@@ -88,36 +73,14 @@ function getEprint(id, preprints) {
     throw `Unknown eprint: ${id}`;
 }
 
-function formatArticlePreprint(article, preprint) {
-    return `${formatArticle(article)}, ${encaseURL(formatEprint(preprint), preprint)}`
-}
-
-function formatArticle(entry) {
-    return formatCitation(entry, `${formatJournal(entry)} ${formatYear(entry)}`);
-}
-
-function formatPreprint(entry) {
-    return formatCitation(entry, `${formatEprint(entry)} ${formatYear(entry)}`)
-}
-
-function formatCitation(entry, ref) {
-    return `${formatAuthor(entry)} ${formatTitle(entry)} ${encaseURL(ref, entry)}`
-}
-
 function formatAuthor(entry) {
-    return encaseSpan(formatSelf(entry.author), "author")
-}
-function formatSelf(authors) {
-    return authors.replace(/(S\w* Lahiri)/, '<span class="self">$1</span>')
+    return encaseSpan(encaseSelf(entry.author), "author")
 }
 function formatTitle(entry) {
     return encaseSpan(entry.title, "title")
 }
 function formatJournal(entry) {
-    return encaseSpan(formatVolume(entry.ref), "journal")
-}
-function formatVolume(ref) {
-    return ref.replace(/([^\d]+)(\d+)([^\d])/, '$1<span class="volume">$2</span>$3')
+    return encaseSpan(encaseVolume(entry.ref), "journal")
 }
 function formatEprint(entry) {
     return encaseSpan(entry.ref, "eprint")
@@ -126,6 +89,12 @@ function formatYear(entry) {
     return encaseSpan(entry.year, "year")
 }
 
+function encaseSelf(authors) {
+    return authors.replace(/(S\w* Lahiri)/, '<span class="self">$1</span>')
+}
+function encaseVolume(ref) {
+    return ref.replace(/([^\d]+)(\d+)([^\d])/, '$1<span class="volume">$2</span>$3')
+}
 function encaseSpan(text, cssClass) {
     return `<span class="${cssClass}">${text}</span>`
 }

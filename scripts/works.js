@@ -1,9 +1,6 @@
 import { getJSON } from "./nav.js";
 
-function projectLinks(baseURL) {
-    if (baseURL === undefined) {
-        baseURL = '';
-    }
+function projectLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)
         .then((worksData) => {
             projectJSON(worksData, baseURL);
@@ -52,10 +49,7 @@ function makeDescription(entry, type) {
     return `‘${entry.title}’, ${entry.ref} (${entry.year})`;
 }
 
-function presentationLinks(baseURL) {
-    if (baseURL === undefined) {
-        baseURL = '';
-    }
+function presentationLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)
         .then((worksData) => {
             presentationJSON(worksData, baseURL);
