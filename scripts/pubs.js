@@ -37,7 +37,7 @@ function compareYear(entryA, entryB) {
 function listArticles(articles, preprints) {
     let anchor = document.getElementById("articles");
     if (anchor) {
-        let paperList = '<ul class="articles"> ';
+        let paperList = '<ul class="papers"> ';
         articles.forEach(entry => {
             paperList += citeArticle(entry, preprints);
         });
@@ -50,7 +50,7 @@ function listArticles(articles, preprints) {
 function listPreprints(preprints) {
     let anchor = document.getElementById("preprints");
     if (anchor) {
-        let paperList = '<ul class="preprints"> ';
+        let paperList = '<ul class="papers"> ';
         preprints.forEach(entry => {
             paperList += citePreprint(entry);
         });
