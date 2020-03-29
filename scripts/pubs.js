@@ -90,10 +90,10 @@ function formatYear(entry) {
 }
 
 function encaseSelf(authors) {
-    return authors.replace(/(S\w* Lahiri)/, '<span class="self">$1</span>')
+    return authors.replace(/(S\w* Lahiri)/, encaseSpan("$1", "self"))
 }
 function encaseVolume(ref) {
-    return ref.replace(/([^\d]+)(\d+)([^\d])/, '$1<span class="volume">$2</span>$3')
+    return ref.replace(/([^\d]+)(\d+)([^\d])/, `$1${encaseSpan("$2", "volume")}$3`)
 }
 function encaseSpan(text, cssClass) {
     return `<span class="${cssClass}">${text}</span>`

@@ -1,9 +1,5 @@
 /* Before list */
 
-p.profiles {
-    padding-bottom: 0.3em;
-}
-
 p.project {
     padding-bottom: 0.5em;
 }
@@ -17,10 +13,6 @@ p.presentation {
 }
 
 /*Lists */
-
-.profile_links li {
-    display: inline-block;
-}
 
 /* List of works under projects */
 
@@ -71,6 +63,9 @@ p.presentation {
 .article:hover, .preprint:hover, .slides:hover, .poster:hover {
     background-image: none;
 }
+
+/* @media (min-width: 600px) {
+} */
 
 /* List of slides/poster for each presentation */
 

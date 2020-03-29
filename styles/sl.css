@@ -44,7 +44,7 @@ div.footer {
 
 div.main {
     margin: 0 5% 0 5%;
-    padding: 0.625em;
+    padding: 0.625em 0.625em 1.625em 0.625em;
     background-color: var(--major-bg-color);
 }
 
@@ -157,6 +157,17 @@ ul {
     padding: 0em 1em 0.3em 1.875em;
     margin: 0;
     max-width: 50em;
+}
+/* Before list */
+
+p.profiles {
+    padding-bottom: 0.3em;
+}
+
+/* Profiles & publications */
+
+.profile_links li {
+    display: inline-block;
 }
 
 /* Navigation bar */
