@@ -4,14 +4,6 @@ p.project {
     padding-bottom: 0.5em;
 }
 
-p.presentation {
-    padding-left: 1.25em;
-    padding-bottom: 0em;
-    padding-top: 1em;
-    font-style: italic;
-    font-weight: bolder;
-}
-
 /*Lists */
 
 /* List of works under projects */
