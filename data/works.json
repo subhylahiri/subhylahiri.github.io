@@ -207,7 +207,7 @@
         "article": [
             {
                 "id": "poole2016deepchaos",
-                "url": "http://papers.nips.cc/paper/6322-exponential-expressivity-in-deep-neural-networks-through-transient-chaos",
+                "url": "https://papers.nips.cc/paper/6322-exponential-expressivity-in-deep-neural-networks-through-transient-chaos",
                 "author": "B Poole, S Lahiri, M Raghu, J Sohl-Dickstein and S Ganguli",
                 "title": "Exponential expressivity in deep neural networks through transient chaos",
                 "ref": "Adv. Neural Inf. Process. Syst. 29:3360-3368",
@@ -236,7 +236,7 @@
         "article": [
             {
                 "id": "Lahiri2011larvamotor",
-                "url": "http://dx.doi.org/10.1371/journal.pone.0023180",
+                "url": "https://dx.doi.org/10.1371/journal.pone.0023180",
                 "author": "S Lahiri, K Shen, M Klein, A Tang, E Kane, M Gershow, P Garrity and ADT Samuel",
                 "title": "Two alternating motor programs drive navigation in Drosophila larva",
                 "ref": "PLoS ONE 6:e23180",
@@ -260,7 +260,7 @@
         "article": [
             {
                 "id": "Bhattacharya2010gm",
-                "url": "http://dx.doi.org/10.1007/JHEP08(2010)073",
+                "url": "https://dx.doi.org/10.1007/JHEP08(2010)073",
                 "author": "J Bhattacharya and S Lahiri",
                 "title": "Lumps of plasma in arbitrary dimensions",
                 "ref": "JHEP 2010.08:073",
@@ -270,7 +270,7 @@
             },
             {
                 "id": "Bhattacharyya2008vs",
-                "url": "http://dx.doi.org/10.1088/1126-6708/2008/09/054",
+                "url": "https://dx.doi.org/10.1088/1126-6708/2008/09/054",
                 "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "title": "Large rotating AdS black holes from fluid mechanics",
                 "ref": "JHEP 2008.09:054",
@@ -280,7 +280,7 @@
             },
             {
                 "id": "Lahiri2008ae",
-                "url": "http://dx.doi.org/10.1088/1126-6708/2008/05/001",
+                "url": "https://dx.doi.org/10.1088/1126-6708/2008/05/001",
                 "author": "S Lahiri and S Minwalla",
                 "title": "Plasmarings as dual black rings",
                 "ref": "JHEP 2008.05:001",
@@ -340,7 +340,7 @@
         "article": [
             {
                 "id": "Biswas2007tj",
-                "url": "http://dx.doi.org/10.1088/1126-6708/2007/12/006",
+                "url": "https://dx.doi.org/10.1088/1126-6708/2007/12/006",
                 "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "title": "Supersymmetric states of N=4 Yang-Mills from giant gravitons",
                 "ref": "JHEP 2007.12:006",
