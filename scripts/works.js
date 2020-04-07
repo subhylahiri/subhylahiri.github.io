@@ -36,9 +36,6 @@ function projectEntry(entry, type, baseURL) {
         work += baseURL;
     }
     work += `${entry.url}" title="${description}"`;
-    if (!isInternal(type)) {
-        work += ` cite="${description}"`;
-    }
     return work + `>${typeName}</a></li> `
 }
 

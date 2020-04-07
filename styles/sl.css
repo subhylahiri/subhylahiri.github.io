@@ -73,6 +73,11 @@ a {
     text-decoration: none;
 }
 
+code {
+    font-family: "Courier New", "Lucida Console", Courier, monospace;
+    color: inherit;
+}
+
 hr {
     height: 0.5em;
     background-color: var(--inert-bg-color);
@@ -136,6 +141,7 @@ h6 {
 /* text */
 
 span.note {
+    display: block;
     font-size: 0.8em;
 }
 
