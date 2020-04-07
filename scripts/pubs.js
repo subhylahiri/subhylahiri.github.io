@@ -1,4 +1,4 @@
-import { getJSON } from "./nav.js";
+import { getJSON } from "./getJSON.js";
 
 function publicationLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)

@@ -1,3 +1,5 @@
+import { getJSON } from "./getJSON.js";
+
 function buildPage(activeID, baseURL) {
     buildNav(activeID, baseURL);
     buildFoot();
@@ -38,17 +40,6 @@ function insertNav(navData, activeID, baseURL) {
     activeObj.className = "active";
 }
 
-function getDir() {
-    let loc = window.location.pathname;
-    let dir = loc.substring(0, loc.lastIndexOf('/'));
-    return `${dir}/`
-}
-
-async function getJSON(dataURL) {
-    const response = await fetch(getDir() + dataURL);
-    return await response.json();
-}
-
 function entryNav(entry, baseURL) {
     let listItem = `<li id="${entry.id}"><a href="`;
     if (entry.internal) {
@@ -57,4 +48,4 @@ function entryNav(entry, baseURL) {
     return `${listItem + entry.url}">${entry.name}</a></li>`
 }
 
-export { getDir, getJSON, buildPage };
+export { buildPage };

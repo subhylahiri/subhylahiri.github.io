@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" type="text/css" href="styles/sl.css" />
-  <link rel="stylesheet" type="text/css" href="styles/sl_lists.css" />
+  <link rel="stylesheet" type="text/css" href="styles/sl_pres.css" />
+  <link rel="preload" href="scripts/getJSON.js" as="script" crossorigin="anonymous" />
   <title>Subhaneil Lahiri: Presentations</title>
   <meta name="keywords" content="Subhaneil Lahiri slides posters presentations" />
   <meta name="description" content="Slides and posters from Subhaneil Lahiri's presentations" />
@@ -47,7 +48,7 @@
 
   <script type="module">
     import {buildPage} from "./scripts/nav.js"
-    import {presentationLinks} from "./scripts/works.js"
+    import {presentationLinks} from "./scripts/pres.js"
     buildPage("pres");
     presentationLinks();
   </script>
