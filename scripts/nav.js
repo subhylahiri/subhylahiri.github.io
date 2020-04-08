@@ -7,11 +7,26 @@ function buildPage(activeID, baseURL) {
 
 function buildFoot() {
     let body = document.getElementsByTagName("body");
-    let footDiv = document.createElement("div");
-    footDiv.className = "footer";
-    footDiv.innerHTML = '<address>Subhaneil Lahiri: <code>sulahiri at stanford dot edu</code>. ' +
-        '<a href="https://github.com/subhylahiri/subhylahiri.github.io">[Source]</a>.</address>';
-    body[0].appendChild(footDiv);
+    let foot = document.createElement("div");
+    foot.className = "footer";
+
+    let address = document.createElement("address");
+    let email = document.createElement("code");
+    let source = document.createElement('a');
+    let myName = document.createTextNode("Subhaneil Lahiri: ")
+    let spacer = document.createTextNode(". ");
+
+    email.textContent = "sulahiri at stanford dot edu";
+    source.textContent = "[Source]";
+    source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
+    source.title = "Source code on GitHub";
+
+    [myName, email, spacer, source].forEach(elem => {
+        address.appendChild(elem);
+    });
+    address.textContent += ".";
+    foot.appendChild(address);
+    body[0].appendChild(foot);
 }
 
 function buildNav(activeID, baseURL) {
@@ -29,11 +44,11 @@ function insertNav(navData, activeID, baseURL) {
     let headDiv = document.getElementsByClassName("header");
     let navDiv = document.createElement("div");
     navDiv.className = "nav";
-    let navString = "<ul>";
+    let navList = document.createElement("ul");
     navData.forEach(entry => {
-        navString += entryNav(entry, baseURL);
+        navList.appendChild(entryNav(entry, baseURL));
     });
-    navDiv.innerHTML = `${navString}</ul>`;
+    navDiv.appendChild(navList);
     body[0].insertBefore(navDiv, headDiv[0])
     headDiv[0].style.paddingTop = "0em";
     let activeObj = document.getElementById(activeID);
@@ -41,11 +56,16 @@ function insertNav(navData, activeID, baseURL) {
 }
 
 function entryNav(entry, baseURL) {
-    let listItem = `<li id="${entry.id}"><a href="`;
+    let listItem = document.createElement("li");
+    listItem.id = entry.id;
+    let link = document.createElement("a");
+    link.textContent = entry.name;
+    link.href = entry.url;
     if (entry.internal) {
-        listItem += baseURL;
+        link.href = baseURL + link.href;
     }
-    return `${listItem + entry.url}">${entry.name}</a></li>`
+    listItem.appendChild(link);
+    return listItem
 }
 
 export { buildPage };

@@ -13,26 +13,33 @@ function presentationJSON(worksData, baseURL) {
         let paragraph = document.getElementById(project);
         if ((projectData.slides || projectData.poster) && paragraph) {
             paragraph.className = "presentation";
-            paragraph.innerHTML = projectData.title;
-            paragraph.insertAdjacentHTML(
-                'afterend', projectPresentations(projectData, baseURL)
-            );
+            paragraph.textContent = projectData.title;
+            paragraph.after(projectPresentations(projectData, baseURL));
         }
     }
 }
 
 function projectPresentations(projectData, baseURL) {
-    let listEntries = '<ul class="materials">';
+    let listEntries = document.createElement("ul");
+    listEntries.className = "materials";
     ["slides", "poster"].forEach(type => {
         projectData[type].forEach(entry => {
-            listEntries += presentationMaterials(entry, type, baseURL)
+            listEntries.appendChild(presentationMaterials(entry, type, baseURL));
         });
     });
-    return `${listEntries}</ul>`
+    return listEntries
 }
 
 function presentationMaterials(entry, type, baseURL) {
-    return `<li class="${type}"><a href="${baseURL + entry.url}">${entry.description}</a>.</li>`
+    let listItem = document.createElement("li");
+    let link = document.createElement("a");
+
+    link.textContent = entry.description;
+    link.href = baseURL + entry.url;
+    listItem.className = type;
+    listItem.appendChild(link);
+    listItem.textContent +=".";
+    return listItem
 }
 
 export { presentationLinks };

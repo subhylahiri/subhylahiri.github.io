@@ -11,32 +11,37 @@ function projectJSON(worksData, baseURL) {
     for (const project in worksData) {
         let paragraph = document.getElementById(project);
         if (paragraph) {
-            paragraph.insertAdjacentHTML(
-                'afterend', projectWorks(worksData[project], baseURL)
-            );
+            paragraph.after(projectWorks(worksData[project], baseURL));
         }
     }
 }
 
 function projectWorks(projectData, baseURL) {
-    let listEntries = '<ul class="project_links">';
+    let listEntries = document.createElement("ul");
+    listEntries.className = "project_links";
     ["article", "preprint", "slides", "poster"].forEach(type => {
         projectData[type].forEach(entry => {
-            listEntries += projectEntry(entry, type, baseURL);
+            listEntries.appendChild(projectEntry(entry, type, baseURL));
         });
     });
-    return `${listEntries}</ul>`
+    return listEntries
 }
 
 function projectEntry(entry, type, baseURL) {
     const typeName = type.charAt(0).toUpperCase() + type.substring(1)
     const description = makeDescription(entry, type);
-    let work = `<li><a class="icon ${type}" href="`
+    let listItem = document.createElement("li");
+    let link = document.createElement("a");
+
+    link.className = "icon " + type;
+    link.title = description;
+    link.textContent = typeName;
+    link.href = entry.url;
     if (isInternal(type)) {
-        work += baseURL;
+        link.href = baseURL + link.href;
     }
-    work += `${entry.url}" title="${description}"`;
-    return work + `>${typeName}</a></li> `
+    listItem.appendChild(link)
+    return listItem
 }
 
 function makeDescription(entry, type) {
