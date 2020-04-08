@@ -38,7 +38,7 @@ function presentationMaterials(entry, type, baseURL) {
     link.href = baseURL + entry.url;
     listItem.className = type;
     listItem.appendChild(link);
-    listItem.textContent +=".";
+    listItem.appendChild(document.createTextNode("."));
     return listItem
 }
 

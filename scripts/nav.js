@@ -21,10 +21,9 @@ function buildFoot() {
     source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
     source.title = "Source code on GitHub";
 
-    [myName, email, spacer, source].forEach(elem => {
+    [myName, email, spacer.cloneNode(), source, spacer].forEach(elem => {
         address.appendChild(elem);
     });
-    address.textContent += ".";
     foot.appendChild(address);
     body[0].appendChild(foot);
 }
