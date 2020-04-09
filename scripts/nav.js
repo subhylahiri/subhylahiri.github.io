@@ -1,10 +1,15 @@
 import { getJSON } from "./getJSON.js";
-
+/**
+ *  Create and insert nav-bar and footer
+ * @param {string} activeID  - id of current nav-bar tab
+ * @param {string} baseURL - URL relative to which local urls are interpreted
+ */
 function buildPage(activeID, baseURL) {
     buildNav(activeID, baseURL);
     buildFoot();
 }
 
+/** Create and insert footer */
 function buildFoot() {
     let body = document.getElementsByTagName("body");
     let foot = document.createElement("div");
@@ -28,16 +33,24 @@ function buildFoot() {
     body[0].appendChild(foot);
 }
 
-function buildNav(activeID, baseURL) {
-    if (baseURL === undefined) {
-        baseURL = '';
-    }
+/**
+ * Read JSON file and pass to insertNav
+ * @param {string} activeID - id of current  nav-bar tab
+ * @param {string} baseURL - URL relative to which local urls are interpreted
+ */
+function buildNav(activeID, baseURL = '') {
     getJSON(`${baseURL}data/nav.json`)
         .then((navData) => {
             insertNav(navData, activeID, baseURL);
         });
 }
 
+/**
+ * Create and insert list of nav-bar tabs
+ * @param {Object[]} navData - array of nav-bar entries from JSON
+ * @param {string} activeID - id of current  nav-bar tab
+ * @param {string} baseURL - URL relative to which local urls are interpreted
+ */
 function insertNav(navData, activeID, baseURL) {
     let body = document.getElementsByTagName("body");
     let headDiv = document.getElementsByClassName("header");
@@ -53,7 +66,12 @@ function insertNav(navData, activeID, baseURL) {
     let activeObj = document.getElementById(activeID);
     activeObj.className = "active";
 }
-
+/**
+ * Create a list entry for nav-bar tab
+ * @param {Object} entry - dict with id, name and url
+ * @param {string} baseURL - URL relative to which local urls are interpreted
+ * @returns {HTMLLIElement} list entry for nav-bar tab
+ */
 function entryNav(entry, baseURL) {
     let listItem = document.createElement("li");
     listItem.id = entry.id;
