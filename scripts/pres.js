@@ -1,6 +1,22 @@
 import { getJSON } from "./getJSON.js";
 
 /**
+ * A piece of work: paper or presentation
+ * @typedef {Object} Work
+ * @property {string} id - identifier for work
+ * @property {string} url - link to file/paper
+ * @property {string} title - title/description of work
+ */
+
+/**
+ * All of the works associated with a project
+ * @typedef {Object} Project
+ * @property {string} title - name of project
+ * @property {Work[]} slides - array of slides objects
+ * @property {Work[]} poster - array of poster objects
+ */
+
+/**
  * Read JSON file and pass to presentationJSON
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
@@ -13,7 +29,7 @@ function presentationLinks(baseURL = '') {
 
 /**
  * Process JSON data to add presentation list to each project id'd paragraph
- * @param {Object} worksData - json dict: project id -> title, work types
+ * @param {Object.<string,Project>} worksData - json dict: project id -> title, work types
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function presentationJSON(worksData, baseURL) {
@@ -30,7 +46,7 @@ function presentationJSON(worksData, baseURL) {
 
 /**
  * Create UList of presentations for one project
- * @param {Object} projectData - dict: work types -> array of works
+ * @param {Project} projectData - dict: work types -> array of works
  * @param {string} baseURL - URL relative to which local urls are interpreted
  * @returns {HTMLUListElement} list of presentations
  */
@@ -47,7 +63,7 @@ function projectPresentations(projectData, baseURL) {
 
 /**
  * Create an li element for one presentation
- * @param {Object} entry - one slide/poster entry from json
+ * @param {Work} entry - one slide/poster entry from json
  * @param {string} type - type of presentation (slides | poster)
  * @param {string} baseURL - URL relative to which local urls are interpreted
  * @returns {HTMLLIElement} list entry for a presentation
@@ -56,7 +72,7 @@ function presentationMaterials(entry, type, baseURL) {
     let listItem = document.createElement("li");
     let link = document.createElement("a");
 
-    link.textContent = entry.description;
+    link.textContent = entry.title;
     link.href = baseURL + entry.url;
     listItem.className = type;
     listItem.appendChild(link);

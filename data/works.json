@@ -5,12 +5,12 @@
             {
                 "id": "Lahiri2013frontier",
                 "url": "https://papers.nips.cc/paper/4872-a-memory-frontier-for-complex-synapses",
-                "author": "S Lahiri and S Ganguli",
                 "title": "A memory frontier for complex synapses",
+                "author": "S Lahiri and S Ganguli",
                 "ref": "Adv. Neural Inf. Process. Syst. 26:1034–1042",
                 "year": 2013,
                 "month": 12,
-                "eprint": false
+                "sameAs": false
             }
         ],
         "preprint": [],
@@ -18,24 +18,24 @@
             {
                 "id": "Lahiri2016timescales",
                 "url": "presentations/SynapseTalk_10min.pdf",
-                "description": "Cosyne 2016"
+                "title": "Cosyne 2016"
             },
             {
                 "id": "synapse_all",
                 "url": "presentations/SynapseTalk.pdf",
-                "description": "Complete slide deck"
+                "title": "Complete slide deck"
             }
         ],
         "poster": [
             {
                 "id": "Lahiri2013frontier_bio",
                 "url": "presentations/SynapsePoster_bio.pdf",
-                "description": "SNI symposium 2015"
+                "title": "SNI symposium 2015"
             },
             {
                 "id": "Lahiri2013frontier_maths",
                 "url": "presentations/SynapsePoster_maths.pdf",
-                "description": "NeurIPS 2013"
+                "title": "NeurIPS 2013"
             }
         ]
     },
@@ -45,12 +45,12 @@
             {
                 "id": "Nguyen-Vu2017mhc",
                 "url": "https://dx.doi.org/10.7554/eLife.20147",
-                "author": "TDB Nguyen-Vu, GQ Zhao, S Lahiri, RR Kimpo, H Lee, S Ganguli, CJ Shatz and JL Raymond",
                 "title": "A saturation hypothesis to explain both enhanced and impaired learning with enhanced plasticity",
+                "author": "TDB Nguyen-Vu, GQ Zhao, S Lahiri, RR Kimpo, H Lee, S Ganguli, CJ Shatz and JL Raymond",
                 "ref": "eLife 6:e20147",
                 "year": 2017,
                 "month": 2,
-                "eprint": false
+                "sameAs": false
             }
         ],
         "preprint": [],
@@ -58,12 +58,12 @@
             {
                 "id": "Ganguli2014mhc",
                 "url": "presentations/MHCslides_20min.pdf",
-                "description": "Ganguli lab evening, 2014"
+                "title": "Ganguli lab evening, 2014"
             },
             {
                 "id": "Lahiri2014mhc",
                 "url": "presentations/MHCslides_10min.pdf",
-                "description": "Cosyne 2014"
+                "title": "Cosyne 2014"
             }
         ],
         "poster": []
@@ -75,12 +75,12 @@
             {
                 "id": "lahiri2016power",
                 "url": "https://arxiv.org/abs/1603.07758",
-                "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
                 "title": "A universal tradeoff between power, precision and speed in physical communication",
+                "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
                 "ref": "arXiv:1603.07758 [cond-mat.stat-mech]",
                 "year": 2016,
                 "month": 3,
-                "pub": false
+                "sameAs": false
             }
 
         ],
@@ -88,7 +88,7 @@
             {
                 "id": "lahiri2016lineq",
                 "url": "presentations/pps_slides.pdf",
-                "description": "Lineq meeting, 2016"
+                "title": "Lineq meeting, 2016"
             }
 
         ],
@@ -96,7 +96,7 @@
             {
                 "id": "Lahiri2016pps",
                 "url": "presentations/pps_poster.pdf",
-                "description": "Cosyne 2016"
+                "title": "Cosyne 2016"
             }
         ]
     },
@@ -107,12 +107,12 @@
             {
                 "id": "Harvey2020cellsense",
                 "url": "https://arxiv.org/abs/2002.10567",
-                "author": "SE Harvey, S Lahiri and S Ganguli",
                 "title": "A universal energy accuracy tradeoff in nonequilibrium cellular sensing",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
                 "ref": "arXiv:2002.10567 [physics.bio-ph]",
                 "year": 2020,
                 "month": 1,
-                "pub": false
+                "sameAs": false
             }
 
         ],
@@ -125,24 +125,24 @@
             {
                 "id": "advani2013statistical",
                 "url": "https://dx.doi.org/10.1088/1742-5468/2013/03/P03014",
-                "author": "M Advani, S Lahiri and S Ganguli",
                 "title": "Statistical mechanics of complex neural systems and high dimensional data",
+                "author": "M Advani, S Lahiri and S Ganguli",
                 "ref": "J. Stat. Mech. 2013.03:P03014",
                 "year": 2013,
                 "month": 1,
-                "eprint": "advani2013review"
+                "sameAs": "advani2013review"
             }
         ],
         "preprint": [
             {
                 "id": "advani2013review",
                 "url": "https://arxiv.org/abs/1301.7115",
-                "author": "M Advani, S Lahiri and S Ganguli",
                 "title": "Statistical mechanics of complex neural systems and high dimensional data",
+                "author": "M Advani, S Lahiri and S Ganguli",
                 "ref": "arXiv:1301.7115 [q-bio.NC]",
                 "year": 2013,
                 "month": 1,
-                "pub": "advani2013statistical"
+                "sameAs": "advani2013statistical"
             }
 
         ],
@@ -161,7 +161,7 @@
                 "ref": "arXiv:1607.04331 [stat.ML]",
                 "year": 2016,
                 "month": 7,
-                "pub": false
+                "sameAs": false
             }
         ],
         "slides": [],
@@ -173,24 +173,24 @@
             {
                 "id": "Trautmann2019sortfree",
                 "url": "https://dx.doi.org/10.1016/j.neuron.2019.05.003",
-                "author": "EM Trautmann, SD Stavisky, S Lahiri, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+                "author": "EM Trautmann, SD Stavisky, S Lahiri, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "ref": " Neuron 103.2:292–308.e4",
                 "year": 2019,
                 "month": 6,
-                "eprint": "Trautmann2017sortfree"
+                "sameAs": "Trautmann2017sortfree"
             }
         ],
         "preprint": [
             {
                 "id": "Trautmann2017sortfree",
                 "url": "https://dx.doi.org/10.1101/229252",
-                "author": "EM Trautmann, SD Stavisky, S Lahiri, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+                "author": "EM Trautmann, SD Stavisky, S Lahiri, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "ref": "bioRxiv:229252",
                 "year": 2017,
                 "month": 12,
-                "pub": "Trautmann2019sortfree"
+                "sameAs": "Trautmann2019sortfree"
             }
         ],
         "slides": [],
@@ -198,7 +198,7 @@
             {
                 "id": "Lahiri2019sortfree",
                 "url": "presentations/sortfree_poster.pdf",
-                "description": "Cosyne 2019"
+                "title": "Cosyne 2019"
             }
         ]
     },
@@ -208,24 +208,24 @@
             {
                 "id": "poole2016deepchaos",
                 "url": "https://papers.nips.cc/paper/6322-exponential-expressivity-in-deep-neural-networks-through-transient-chaos",
-                "author": "B Poole, S Lahiri, M Raghu, J Sohl-Dickstein and S Ganguli",
                 "title": "Exponential expressivity in deep neural networks through transient chaos",
+                "author": "B Poole, S Lahiri, M Raghu, J Sohl-Dickstein and S Ganguli",
                 "ref": "Adv. Neural Inf. Process. Syst. 29:3360-3368",
                 "year": 2016,
                 "month": 12,
-                "eprint": "poole2016expressivity"
+                "sameAs": "poole2016expressivity"
             }
         ],
         "preprint": [
             {
                 "id": "poole2016expressivity",
                 "url": "https://arxiv.org/abs/1606.05340",
-                "author": "B Poole, S Lahiri, M Raghu, J Sohl-Dickstein and S Ganguli",
                 "title": "Exponential expressivity in deep neural networks through transient chaos",
+                "author": "B Poole, S Lahiri, M Raghu, J Sohl-Dickstein and S Ganguli",
                 "ref": "arXiv:1606.05340 [stat.ML]",
                 "year": 2016,
                 "month": 6,
-                "pub": "poole2016deepchaos"
+                "sameAs": "poole2016deepchaos"
             }
         ],
         "slides": [],
@@ -237,12 +237,12 @@
             {
                 "id": "Lahiri2011larvamotor",
                 "url": "https://dx.doi.org/10.1371/journal.pone.0023180",
-                "author": "S Lahiri, K Shen, M Klein, A Tang, E Kane, M Gershow, P Garrity and ADT Samuel",
                 "title": "Two alternating motor programs drive navigation in Drosophila larva",
+                "author": "S Lahiri, K Shen, M Klein, A Tang, E Kane, M Gershow, P Garrity and ADT Samuel",
                 "ref": "PLoS ONE 6:e23180",
                 "year": 2011,
                 "month": 8,
-                "eprint": false
+                "sameAs": false
             }
         ],
         "preprint": [],
@@ -250,7 +250,7 @@
             {
                 "id": "Lahiri2011job",
                 "url": "presentations/GFP-Headsweep.pdf",
-                "description": "Seminar at Stanford, 2011"
+                "title": "Seminar at Stanford, 2011"
             }
         ],
         "poster": []
@@ -261,76 +261,76 @@
             {
                 "id": "Bhattacharya2010gm",
                 "url": "https://dx.doi.org/10.1007/JHEP08(2010)073",
-                "author": "J Bhattacharya and S Lahiri",
                 "title": "Lumps of plasma in arbitrary dimensions",
+                "author": "J Bhattacharya and S Lahiri",
                 "ref": "JHEP 2010.08:073",
                 "year": 2010,
                 "month": 8,
-                "eprint": "Bhattacharya2009gm"
+                "sameAs": "Bhattacharya2009gm"
             },
             {
                 "id": "Bhattacharyya2008vs",
                 "url": "https://dx.doi.org/10.1088/1126-6708/2008/09/054",
-                "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "title": "Large rotating AdS black holes from fluid mechanics",
+                "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "ref": "JHEP 2008.09:054",
                 "year": 2008,
                 "month": 9,
-                "eprint": "Bhattacharyya2007vs"
+                "sameAs": "Bhattacharyya2007vs"
             },
             {
                 "id": "Lahiri2008ae",
                 "url": "https://dx.doi.org/10.1088/1126-6708/2008/05/001",
-                "author": "S Lahiri and S Minwalla",
                 "title": "Plasmarings as dual black rings",
+                "author": "S Lahiri and S Minwalla",
                 "ref": "JHEP 2008.05:001",
                 "year": 2008,
                 "month": 5,
-                "eprint": "Lahiri2007ae"
+                "sameAs": "Lahiri2007ae"
             }
         ],
         "preprint": [
             {
                 "id": "Bhattacharya2009gm",
                 "url": "https://arxiv.org/abs/0903.4734",
-                "author": "J Bhattacharya and S Lahiri",
                 "title": "Lumps of plasma in arbitrary dimensions",
+                "author": "J Bhattacharya and S Lahiri",
                 "ref": "arXiv:0903.4734 [hep-th]",
                 "year": 2009,
                 "month": 3,
-                "pub": "Bhattacharya2010gm"
+                "sameAs": "Bhattacharya2010gm"
             },
             {
                 "id": "Bhattacharyya2007vs",
                 "url": "https://arxiv.org/abs/0708.1770",
-                "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "title": "Large rotating AdS black holes from fluid mechanics",
+                "author": "S Bhattacharyya, S Lahiri, R Loganayagam and S Minwalla",
                 "ref": "arXiv:0708.1770 [hep-th]",
                 "year": 2007,
                 "month": 8,
-                "pub": "Bhattacharyya2008vs"
+                "sameAs": "Bhattacharyya2008vs"
             },
             {
                 "id": "Lahiri2007ae",
                 "url": "https://arxiv.org/abs/0705.3404",
-                "author": "S Lahiri and S Minwalla",
                 "title": "Plasmarings as dual black rings",
+                "author": "S Lahiri and S Minwalla",
                 "ref": "arXiv:0705.3404 [hep-th]",
                 "year": 2007,
                 "month": 5,
-                "pub": "Lahiri2008ae"
+                "sameAs": "Lahiri2008ae"
             }
         ],
         "slides": [
             {
                 "id": "Lahiri2009defence",
                 "url": "presentations/plasmaring_defence.pdf",
-                "description": "PhD defence, 2009"
+                "title": "PhD defence, 2009"
             },
             {
                 "id": "Lahiri2009family",
                 "url": "presentations/plasmaring_talk.pdf",
-                "description": "HETG family meeting, 2009"
+                "title": "HETG family meeting, 2009"
             }
         ],
         "poster": []
@@ -341,36 +341,36 @@
             {
                 "id": "Biswas2007tj",
                 "url": "https://dx.doi.org/10.1088/1126-6708/2007/12/006",
-                "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "title": "Supersymmetric states of N=4 Yang-Mills from giant gravitons",
+                "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "ref": "JHEP 2007.12:006",
                 "year": 2007,
                 "month": 12,
-                "eprint": "Biswas2006tj"
+                "sameAs": "Biswas2006tj"
             }
         ],
         "preprint": [
             {
                 "id": "Biswas2006tj",
                 "url": "https://arxiv.org/abs/hep-th/0606087",
-                "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "title": "Supersymmetric states of N=4 Yang-Mills from giant gravitons",
+                "author": "I Biswas, D Gaiotto, S Lahiri and S Minwalla",
                 "ref": "arXiv:hep-th/0606087",
                 "year": 2006,
                 "month": 8,
-                "pub": "Biswas2007tj"
+                "sameAs": "Biswas2007tj"
             }
         ],
         "slides": [
             {
                 "id": "Lahiri2007korea",
                 "url": "presentations/gg_korea.pdf",
-                "description": "The 1st Asian Winter School on String Theory, 2007"
+                "title": "The 1st Asian Winter School on String Theory, 2007"
             },
             {
                 "id": "Lahiri2006qual",
                 "url": "presentations/gg_oral.pdf",
-                "description": "Oral qualifying exam, 2006"
+                "title": "Oral qualifying exam, 2006"
             }
 
         ],

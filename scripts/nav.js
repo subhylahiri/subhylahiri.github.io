@@ -46,8 +46,17 @@ function buildNav(activeID, baseURL = '') {
 }
 
 /**
+ * A tab in the navigation bar
+ * @typedef {Object} Tab
+ * @property {string} id - identifier of list item
+ * @property {string} name - display name of tab
+ * @property {string} url - URL of page to link to
+ * @property {boolean} internal - is the URL local?
+ */
+
+/**
  * Create and insert list of nav-bar tabs
- * @param {Object[]} navData - array of nav-bar entries from JSON
+ * @param {Tab[]} navData - array of nav-bar entries from JSON
  * @param {string} activeID - id of current  nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
@@ -68,7 +77,7 @@ function insertNav(navData, activeID, baseURL) {
 }
 /**
  * Create a list entry for nav-bar tab
- * @param {Object} entry - dict with id, name and url
+ * @param {Tab} entry - dict with id, name and url
  * @param {string} baseURL - URL relative to which local urls are interpreted
  * @returns {HTMLLIElement} list entry for nav-bar tab
  */
