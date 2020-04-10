@@ -64,9 +64,9 @@ function listPapers(papers, anchorID, citeFunc, ...extra) {
 }
 
 /**
- * Create a new list item ffor a article citation
+ * Create a new list item for an article citation
  * @param {HTMLUListElement} parent - UList to add list item to
- * @param {*} entry - article object with details
+ * @param {Object} entry - article object with details
  * @param {Object[]} preprints - array of preprint objects
  */
 function citeArticle(parent, entry, preprints) {
@@ -80,7 +80,7 @@ function citeArticle(parent, entry, preprints) {
 /**
  * Create a new list item ffor a preprint citation
  * @param {HTMLUListElement} parent - UList to add list item to
- * @param {*} entry - preprint object with details
+ * @param {Object} entry - preprint object with details
  */
 function citePreprint(parent, entry) {
     if (!entry.pub) {

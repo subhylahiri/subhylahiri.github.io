@@ -73,7 +73,7 @@ function makeDescription(entry, type) {
     if (isInternal(type)) {
         return entry.description
     }
-    return `‘${entry.title}’, ${entry.ref} (${entry.year})`;
+    return `“${entry.title}”, ${entry.ref} (${entry.year})`;
 }
 /**
  * Make URL of work for local/global work types

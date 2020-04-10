@@ -17,25 +17,25 @@
         "slides": [
             {
                 "id": "Lahiri2016timescales",
-                "description": "Cosyne 2016",
-                "url": "presentations/SynapseTalk_10min.pdf"
+                "url": "presentations/SynapseTalk_10min.pdf",
+                "description": "Cosyne 2016"
             },
             {
                 "id": "synapse_all",
-                "description": "Complete slide deck",
-                "url": "presentations/SynapseTalk.pdf"
+                "url": "presentations/SynapseTalk.pdf",
+                "description": "Complete slide deck"
             }
         ],
         "poster": [
             {
                 "id": "Lahiri2013frontier_bio",
-                "description": "SNI symposium 2015",
-                "url": "presentations/SynapsePoster_bio.pdf"
+                "url": "presentations/SynapsePoster_bio.pdf",
+                "description": "SNI symposium 2015"
             },
             {
                 "id": "Lahiri2013frontier_maths",
-                "description": "NeurIPS 2013",
-                "url": "presentations/SynapsePoster_maths.pdf"
+                "url": "presentations/SynapsePoster_maths.pdf",
+                "description": "NeurIPS 2013"
             }
         ]
     },
@@ -57,13 +57,13 @@
         "slides": [
             {
                 "id": "Ganguli2014mhc",
-                "description": "Ganguli lab evening, 2014",
-                "url": "presentations/MHCslides_20min.pdf"
+                "url": "presentations/MHCslides_20min.pdf",
+                "description": "Ganguli lab evening, 2014"
             },
             {
                 "id": "Lahiri2014mhc",
-                "description": "Cosyne 2014",
-                "url": "presentations/MHCslides_10min.pdf"
+                "url": "presentations/MHCslides_10min.pdf",
+                "description": "Cosyne 2014"
             }
         ],
         "poster": []
@@ -87,16 +87,16 @@
         "slides": [
             {
                 "id": "lahiri2016lineq",
-                "description": "Lineq meeting, 2016",
-                "url": "presentations/pps_slides.pdf"
+                "url": "presentations/pps_slides.pdf",
+                "description": "Lineq meeting, 2016"
             }
 
         ],
         "poster": [
             {
                 "id": "Lahiri2016pps",
-                "description": "Cosyne 2016",
-                "url": "presentations/pps_poster.pdf"
+                "url": "presentations/pps_poster.pdf",
+                "description": "Cosyne 2016"
             }
         ]
     },
@@ -197,8 +197,8 @@
         "poster": [
             {
                 "id": "Lahiri2019sortfree",
-                "description": "Cosyne 2019",
-                "url": "presentations/sortfree_poster.pdf"
+                "url": "presentations/sortfree_poster.pdf",
+                "description": "Cosyne 2019"
             }
         ]
     },
@@ -249,8 +249,8 @@
         "slides": [
             {
                 "id": "Lahiri2011job",
-                "description": "Seminar at Stanford, 2011",
-                "url": "presentations/GFP-Headsweep.pdf"
+                "url": "presentations/GFP-Headsweep.pdf",
+                "description": "Seminar at Stanford, 2011"
             }
         ],
         "poster": []
@@ -324,13 +324,13 @@
         "slides": [
             {
                 "id": "Lahiri2009defence",
-                "description": "PhD defence, 2009",
-                "url": "presentations/plasmaring_defence.pdf"
+                "url": "presentations/plasmaring_defence.pdf",
+                "description": "PhD defence, 2009"
             },
             {
                 "id": "Lahiri2009family",
-                "description": "HETG family meeting, 2009",
-                "url": "presentations/plasmaring_talk.pdf"
+                "url": "presentations/plasmaring_talk.pdf",
+                "description": "HETG family meeting, 2009"
             }
         ],
         "poster": []
@@ -364,13 +364,13 @@
         "slides": [
             {
                 "id": "Lahiri2007korea",
-                "description": "The 1st Asian Winter School on String Theory, 2007",
-                "url": "presentations/gg_korea.pdf"
+                "url": "presentations/gg_korea.pdf",
+                "description": "The 1st Asian Winter School on String Theory, 2007"
             },
             {
                 "id": "Lahiri2006qual",
-                "description": "Oral qualifying exam, 2006",
-                "url": "presentations/gg_oral.pdf"
+                "url": "presentations/gg_oral.pdf",
+                "description": "Oral qualifying exam, 2006"
             }
 
         ],
