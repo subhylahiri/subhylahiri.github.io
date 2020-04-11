@@ -49,6 +49,19 @@ p.project {
     background-image: url(../icons/poster.svg);
 }
 
+.article::after {
+    content: "Article";
+}
+.preprint::after {
+    content: "Preprint";
+}
+.slides::after {
+    content: "Slides";
+}
+.poster::after {
+    content: "Poster";
+}
+
 @media (min-width: 600px) {
     .icon {
         height: 3em;

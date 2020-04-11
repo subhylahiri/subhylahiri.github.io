@@ -50,14 +50,12 @@ function projectWorks(projectData, baseURL) {
  * @returns {HTMLLIElement} - icon li element for one work
  */
 function projectEntry(entry, type, baseURL) {
-    const typeName = type.charAt(0).toUpperCase() + type.substring(1)
     const description = makeDescription(entry, type);
     let listItem = document.createElement("li");
     let link = document.createElement("a");
 
     link.className = "icon " + type;
     link.title = description;
-    link.textContent = typeName;
     link.href = makeURL(entry, type, baseURL);
     listItem.appendChild(link)
     return listItem
