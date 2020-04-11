@@ -42,18 +42,49 @@ function buildFoot() {
 function buildNav(activeID, baseURL = '') {
     getJSON(`${baseURL}data/nav.json`)
         .then((navData) => {
-            insertNav(navData, activeID, baseURL);
+            insertNav(readTabData(navData), activeID, baseURL);
         });
 }
 
 /**
- * A tab in the navigation bar
- * @typedef {Object} Tab
+ * @class {Object} Tab
+ * @classdesc A tab in the navigation bar
  * @property {string} id - identifier of list item
  * @property {string} name - display name of tab
  * @property {string} url - URL of page to link to
  * @property {boolean} internal - is the URL local?
  */
+class Tab {
+    constructor(entry) {
+        Object.assign(this, entry);
+    }
+    /**
+     * Append Tab into UList
+     * @param {HTMLUListElement} parent - UList to append entry to
+     * @param {string} baseURL - URL relative to which local urls are interpreted
+     */
+    appendTab(parent, baseURL="") {
+        let listItem = document.createElement("li");
+        listItem.id = this.id;
+        let link = document.createElement("a");
+        link.textContent = this.name;
+        link.href = this.url;
+        if (this.internal) {
+            link.href = baseURL + link.href;
+        }
+        listItem.appendChild(link);
+        parent.appendChild(listItem);
+    }
+}
+
+/**
+ * Convert JSON array of objects to Tab objects
+ * @param {Object[]} navData - JSON array of tabs
+ * @returns {Tab[]} - corresponding array of Tab objects
+ */
+function readTabData(navData) {
+    return navData.map(entry => new Tab(entry))
+}
 
 /**
  * Create and insert list of nav-bar tabs
@@ -61,38 +92,20 @@ function buildNav(activeID, baseURL = '') {
  * @param {string} activeID - id of current  nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function insertNav(navData, activeID, baseURL) {
+function insertNav(navData, activeID, baseURL="") {
     let body = document.getElementsByTagName("body");
     let headDiv = document.getElementsByClassName("header");
     let navDiv = document.createElement("div");
     navDiv.className = "nav";
     let navList = document.createElement("ul");
-    navData.forEach(entry => {
-        navList.appendChild(entryNav(entry, baseURL));
+    navData.forEach((entry) => {
+        entry.appendTab(navList, baseURL);
     });
     navDiv.appendChild(navList);
     body[0].insertBefore(navDiv, headDiv[0])
     headDiv[0].style.paddingTop = "0em";
     let activeObj = document.getElementById(activeID);
     activeObj.className = "active";
-}
-/**
- * Create a list entry for nav-bar tab
- * @param {Tab} entry - dict with id, name and url
- * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLLIElement} list entry for nav-bar tab
- */
-function entryNav(entry, baseURL) {
-    let listItem = document.createElement("li");
-    listItem.id = entry.id;
-    let link = document.createElement("a");
-    link.textContent = entry.name;
-    link.href = entry.url;
-    if (entry.internal) {
-        link.href = baseURL + link.href;
-    }
-    listItem.appendChild(link);
-    return listItem
 }
 
 export { buildPage };
