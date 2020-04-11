@@ -37,7 +37,7 @@ function publicationLinks(baseURL = '') {
  * @param {Object.<string,Project>} worksData - json dict: project id -> project object
  */
 function papersJSON(worksData) {
-    let {articles, preprints} = readPapers(worksData);
+    let {articles, preprints} = collectPapers(worksData);
     listPapers(articles, "articles", citeArticle, preprints);
     listPapers(preprints, "preprints", citePreprint);
 }
@@ -46,7 +46,7 @@ function papersJSON(worksData) {
  * Process JSON data to create paper lists
  * @param {Object.<string,Project>} worksData - json dict: project id -> project object
  */
-function readPapers(worksData) {
+function collectPapers(worksData) {
     let [articles, preprints] = [[], []];
     for (const project in worksData) {
         const entry = worksData[project];
@@ -95,7 +95,7 @@ function citeArticle(parent, entry, preprints) {
     if (entry.sameAs) {
         appendEprint(citation, entry.sameAs, preprints);
     }
-    makeListItem(parent, "article", citation);
+    addListItem(parent, "article", citation);
 }
 
 /**
@@ -106,7 +106,7 @@ function citeArticle(parent, entry, preprints) {
 function citePreprint(parent, entry) {
     if (!entry.sameAs) {
         let citation = makeCitation(entry, formatEprint);
-        makeListItem(parent, "preprint", citation);
+        addListItem(parent, "preprint", citation);
     }
 }
 
@@ -116,7 +116,7 @@ function citePreprint(parent, entry) {
  * @param {string} cssClass - name of list item's class
  * @param {HTMLElement[]} citation - array of paper's citation elements
  */
-function makeListItem(parent, cssClass, citation) {
+function addListItem(parent, cssClass, citation) {
     let listItem = document.createElement("li");
     listItem.className = cssClass;
     citation.push(document.createTextNode("."));

@@ -1,4 +1,5 @@
 import { getJSON } from "./getJSON.js";
+
 /**
  *  Create and insert nav-bar and footer
  * @param {string} activeID  - id of current nav-bar tab
@@ -18,7 +19,7 @@ function buildFoot() {
     let address = document.createElement("address");
     let email = document.createElement("code");
     let source = document.createElement('a');
-    let myName = document.createTextNode("Subhaneil Lahiri: ")
+    let myName = document.createTextNode("Subhaneil Lahiri: ");
     let spacer = document.createTextNode(". ");
 
     email.textContent = "sulahiri at stanford dot edu";
