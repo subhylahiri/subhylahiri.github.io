@@ -1,11 +1,55 @@
 import { getJSON } from "./getJSON.js";
 
 /**
+ * @class {Object} Tab
+ * @classdesc A tab in the navigation bar
+ */
+class Tab {
+    constructor(entry) {
+        if (entry === undefined) {
+            /** identifier of list item */
+            this.id = "";
+            /** display name of tab */
+            this.name = "";
+            /** URL of page to link to */
+            this.url = "";
+            /** is the URL local? */
+            this.internal = true;
+        }
+        Object.assign(this, entry);
+    }
+    /**
+     * Append Tab into UList
+     * @param {HTMLUListElement} parent - UList to append entry to
+     */
+    appendTab(parent) {
+        let listItem = document.createElement("li");
+        listItem.id = this.id;
+        let link = document.createElement("a");
+        link.textContent = this.name;
+        link.href = (this.internal ? Tab.baseURL : "") + this.url;
+        listItem.appendChild(link);
+        parent.appendChild(listItem);
+    }
+}
+/** URL relative to which local urls are interpreted */
+Tab.baseURL = "";
+
+/**
+ * Convert JSON array of objects to Tab objects
+ * @param {Object[]} navData - JSON array of tabs
+ * @returns {Tab[]} - corresponding array of Tab objects
+ */
+function readTabData(navData) {
+    return navData.map(entry => new Tab(entry))
+}
+
+/**
  *  Create and insert nav-bar and footer
  * @param {string} activeID  - id of current nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function buildPage(activeID, baseURL) {
+function buildPage(activeID, baseURL = '') {
     buildNav(activeID, baseURL);
     buildFoot();
 }
@@ -40,66 +84,26 @@ function buildFoot() {
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function buildNav(activeID, baseURL = '') {
+    Tab.baseURL = baseURL;
     getJSON(`${baseURL}data/nav.json`)
         .then((navData) => {
-            insertNav(readTabData(navData), activeID, baseURL);
+            insertNav(readTabData(navData), activeID);
         });
-}
-
-/**
- * @class {Object} Tab
- * @classdesc A tab in the navigation bar
- * @property {string} id - identifier of list item
- * @property {string} name - display name of tab
- * @property {string} url - URL of page to link to
- * @property {boolean} internal - is the URL local?
- */
-class Tab {
-    constructor(entry) {
-        Object.assign(this, entry);
-    }
-    /**
-     * Append Tab into UList
-     * @param {HTMLUListElement} parent - UList to append entry to
-     * @param {string} baseURL - URL relative to which local urls are interpreted
-     */
-    appendTab(parent, baseURL="") {
-        let listItem = document.createElement("li");
-        listItem.id = this.id;
-        let link = document.createElement("a");
-        link.textContent = this.name;
-        link.href = this.url;
-        if (this.internal) {
-            link.href = baseURL + link.href;
-        }
-        listItem.appendChild(link);
-        parent.appendChild(listItem);
-    }
-}
-
-/**
- * Convert JSON array of objects to Tab objects
- * @param {Object[]} navData - JSON array of tabs
- * @returns {Tab[]} - corresponding array of Tab objects
- */
-function readTabData(navData) {
-    return navData.map(entry => new Tab(entry))
 }
 
 /**
  * Create and insert list of nav-bar tabs
  * @param {Tab[]} navData - array of nav-bar entries from JSON
  * @param {string} activeID - id of current  nav-bar tab
- * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function insertNav(navData, activeID, baseURL="") {
+function insertNav(navData, activeID) {
     let body = document.getElementsByTagName("body");
     let headDiv = document.getElementsByClassName("header");
     let navDiv = document.createElement("div");
     navDiv.className = "nav";
     let navList = document.createElement("ul");
     navData.forEach((entry) => {
-        entry.appendTab(navList, baseURL);
+        entry.appendTab(navList);
     });
     navDiv.appendChild(navList);
     body[0].insertBefore(navDiv, headDiv[0])
