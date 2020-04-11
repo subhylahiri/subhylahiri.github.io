@@ -145,7 +145,7 @@ function makeCitation(entry, refFunc) {
 function appendEprint(citation, id, preprints) {
     citation.push(document.createTextNode(", "));
     const preprint = getEprint(id, preprints);
-    citation.push(putInLink([formatEprint(preprint)], preprint));
+    citation.push(putInLink(formatEprint(preprint), preprint));
 }
 /**
  * Get the preprint object from its id
@@ -241,13 +241,7 @@ function pickVolume(ref) {
 function putInSpan(elements, cssClass) {
     let span = document.createElement("span");
     span.className = cssClass;
-    if (typeof elements === "string") {
-        span.appendChild(document.createTextNode(elements));
-        return span
-    }
-    elements.forEach(element => {
-        span.appendChild(element);
-    });
+    insertThings(span, elements);
     return span
 }
 /**
@@ -259,10 +253,24 @@ function putInSpan(elements, cssClass) {
 function putInLink(elements, entry) {
     let link = document.createElement("a");
     link.href = entry.url;
-    elements.forEach(elements => {
-        link.appendChild(elements);
-    });
+    insertThings(link, elements);
     return link
+}
+/**
+ * Insert some element(s) into another
+ * @param {HTMLElement} parent - element to insert things 
+ * @param {(HTMLElement[]|HTMLElement|string)} elements - things to insert into parent
+ */
+function insertThings(parent, elements) {
+    if (["string", "number"].includes(typeof elements)) {
+        parent.appendChild(document.createTextNode(elements));
+    } else if (Array.isArray(elements)) {
+        elements.forEach(element => {
+            parent.appendChild(element);
+        });
+    } else {
+        parent.appendChild(elements);
+    }
 }
 
 export { publicationLinks };
