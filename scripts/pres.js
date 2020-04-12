@@ -1,20 +1,19 @@
 import { getJSON } from "./getJSON.js";
+import { readWorks, Project, Work } from "./works.js";
 
-/**
- * A piece of work: paper or presentation
- * @typedef {Object} Work
- * @property {string} id - identifier for work
- * @property {string} url - link to file/paper
- * @property {string} title - title/description of work
+/** Append presentation to list of project's materials
+ * @param {HTMLUListElement} parent UList to append item to
  */
-
-/**
- * All of the works associated with a project
- * @typedef {Object} Project
- * @property {string} title - name of project
- * @property {Work[]} slides - array of slides objects
- * @property {Work[]} poster - array of poster objects
- */
+Work.prototype.appendList = function(parent) {
+    let listItem = document.createElement("li");
+    let link = document.createElement("a");
+    link.textContent = this.title;
+    link.href = this.getURL();
+    listItem.className = this.type;
+    listItem.appendChild(link);
+    listItem.appendChild(document.createTextNode("."));
+    parent.appendChild(listItem);
+}
 
 /**
  * Read JSON file and pass to presentationJSON
@@ -23,7 +22,7 @@ import { getJSON } from "./getJSON.js";
 function presentationLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)
         .then((worksData) => {
-            presentationJSON(worksData, baseURL);
+            presentationJSON(readWorks(worksData), baseURL);
         })
 }
 
@@ -55,7 +54,8 @@ function projectPresentations(projectData, baseURL) {
     listEntries.className = "materials";
     ["slides", "poster"].forEach(type => {
         projectData[type].forEach(entry => {
-            listEntries.appendChild(presentationMaterials(entry, type, baseURL));
+            entry.appendList(listEntries);
+            // listEntries.appendChild(presentationMaterials(entry, type, baseURL));
         });
     });
     return listEntries
