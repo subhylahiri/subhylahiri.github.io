@@ -3,20 +3,21 @@ import { getJSON } from "./getJSON.js";
 /**
  * @class {Object} Tab
  * @classdesc A tab in the navigation bar
+ * @param {Object} entry - a JSON object containing properties
  */
 class Tab {
     constructor(entry) {
-        if (entry === undefined) {
-            /** identifier of list item */
-            this.id = "";
-            /** display name of tab */
-            this.name = "";
-            /** URL of page to link to */
-            this.url = "";
-            /** is the URL local? */
-            this.internal = true;
+        /** identifier of list item */
+        this.id = "";
+        /** display name of tab */
+        this.name = "";
+        /** URL of page to link to */
+        this.url = "";
+        /** is the URL local? */
+        this.internal = true;
+        if (entry) {
+            Object.assign(this, entry);
         }
-        Object.assign(this, entry);
     }
     /**
      * Append Tab into UList

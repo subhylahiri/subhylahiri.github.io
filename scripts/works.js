@@ -1,12 +1,39 @@
-import { getJSON } from "./getJSON.js";
 
 /**
- * A piece of work: paper or presentation
- * @typedef {Object} Work
- * @property {string} id - identifier for work
- * @property {string} url - link to file/paper
- * @property {string} title - title/description of work
+ * @classdesc A piece of work: paper or presentation
+ * @class {Object} Work
+ * @param {string} type - type of work
+ * @param {Object} entry - a JSON object containing properties
  */
+class Work {
+    constructor(type, entry) {
+        /** type of work item */
+        this.type = type;
+        /** identifier of work item */
+        this.id = "";
+        /** display name of work item */
+        this.title = "";
+        /** URL of file to link to */
+        this.url = "";
+        if (entry) {
+            Object.assign(this, entry);
+        }
+    }
+    getURL() {
+        return Work.baseURL + this.url;
+    }
+    description() {
+        return this.title;
+    }
+    link() {
+        let link = document.createElement("a");
+        link.title = this.description();
+        link.href = this.getURL();
+        return link
+    }
+}
+/** URL relative to which local urls are interpreted */
+Work.baseURL = "";
 
 /**
  * Citation info for a paper
@@ -17,6 +44,145 @@ import { getJSON } from "./getJSON.js";
  * @property {number} month - month of publication
  * @property {(string|boolean)} sameAs - corresponding article/preprint/false
  */
+class Paper extends Work {
+    constructor(type, entry) {
+        super(type, entry);
+        if (entry === undefined) {
+            /** list of paper authors */
+            this.author = "";
+            /** reference to journal/eprint */
+            this.ref = "";
+            /** year of publication */
+            this.year = 0;
+            /** month of publication */
+            this.month = 0;
+            /** corresponding article/preprint/false
+             * @type {(string|boolean)}
+             */
+            this.sameAs = false;
+        }
+    }
+    getURL() {
+        return this.url;
+    }
+    description() {
+        return `“${this.title}”, ${this.ref} (${this.year})`;
+    }
+    /**
+     * Put an object property in a span of that class
+     * @param {string} field - name of field to put in span
+     * @returns {HTMLSpanElement} span element containing field
+     */
+    span(field) {
+        let span = document.createElement("span");
+        span.className = field;
+        if (field in this) {
+            span.textContent = this[field];
+        }
+        return span
+    }
+    /**
+     * put authors in a span
+     * @param {RegExp} myName - regex matching my name
+     */
+    authorSpan() {
+        let span = this.span("author");
+        if (Paper.myName.test(this.author)) {
+            span.textContent = "";
+            const items = this.author.match(Paper.myName);
+            this.self = items[2];
+            span.appendChild(document.createTextNode(items[1]));
+            span.appendChild(this.span("self"));
+            span.appendChild(document.createTextNode(items[3]));
+        }
+        return span
+    }
+    /**
+     * Produce lList of elements to put in citation
+     * @returns {HTMLElement[]} list of elements to put in citation
+     */
+    cite() {
+        let link = this.link();
+        [this.refSpan(), addSpace(), this.span("year")].forEach(element => {
+            link.appendChild(element);
+        });
+        return [this.authorSpan(), addSpace(), this.span("title"), addSpace(), link]
+    }
+    /**
+     * Compare two papers for sorting
+     * @param {Paper} paperA - first paper to compare
+     * @param {Paper} paperB - second paper to compare
+     */
+    static compare(paperA, paperB) {
+        const yearDiff = paperB.year - paperA.year;
+        return yearDiff === 0 ? paperB.month - paperA.month : yearDiff
+    }
+}
+Paper.myName = /(.*)([^\w\W])(.*)/
+
+class Article extends Paper {
+    /**
+     * Produce span for journal reference
+     * @returns {HTMLSpanElement} span containing reference
+     */
+    refSpan() {
+        let span = this.span("journal");
+        const items = this.ref.match(/([^\d]+)(\d+)([^\d].*)/);
+        this.volume = items[2];
+        span.appendChild(document.createTextNode(items[1]));
+        span.appendChild(this.span("volume"));
+        span.appendChild(document.createTextNode(items[3]));
+        return span
+    }
+    /**
+     * Produce list of elements to put in citation
+     * @returns {HTMLElement[]} list of elements to put in citation
+     */
+    cite(preprints) {
+        let citation = super.cite()
+        if (this.sameAs) {
+            const preprint = getEprint(this.sameAs, preprints);
+            this.eprint = preprint.ref;
+            let link = preprint.link();
+            link.appendChild(this.span("eprint"));
+            citation.push(document.createTextNode(", "));
+            citation.push(link);
+        }
+        citation.push(document.createTextNode("."));
+        return citation
+    }
+}
+
+class Preprint extends Paper {
+    /**
+     * Produce span for eprint reference
+     * @returns {HTMLSpanElement} span containing reference
+     */
+    refSpan() {
+        let span = this.span("eprint");
+        span.textContent = this.ref;
+        return span
+    }
+    /**
+     * Produce list of elements to put in citation
+     * @returns {HTMLElement[]} list of elements to put in citation
+     */
+    cite() {
+        if (this.sameAs) {
+            return []
+        }
+        let citation = super.cite();
+        citation.push(document.createTextNode("."));
+        return citation
+    }
+}
+
+const worksMap = {
+    "article": Article,
+    "preprint": Preprint,
+    "slides": Work,
+    "poster": Work,
+}
 
 /**
  * All of the works associated with a project
@@ -27,107 +193,53 @@ import { getJSON } from "./getJSON.js";
  * @property {Work[]} slides - array of slides objects
  * @property {Work[]} poster - array of poster objects
  */
-
-/**
- * Read JSON file and pass to projectJSON
- * @param {string} baseURL - URL relative to which local urls are interpreted
- */
-function projectLinks(baseURL = '') {
-    getJSON(`${baseURL}data/works.json`)
-        .then((worksData) => {
-            projectJSON(worksData, baseURL);
+class Project {
+    constructor(projectData) {
+        /** Title of project */
+        this.title = projectData.title;
+        ["article", "preprint", "slides", "poster"].forEach(type => {
+            this[type] = projectData[type].map(entry => new worksMap[type](type, entry));
         });
+    }
 }
 
 /**
- * Process JSON data to add works list to each project id'd paragraph
- * @param {Object.<string,Project>} worksData - json dict: project id -> title, work types
- * @param {string} baseURL - URL relative to which local urls are interpreted
+ * Convert JSON dict of objects to Project objects
+ * @param {Object} worksData - JSON dict of works
+ * @returns {Object.<string,Project>} - corresponding dict of Project objects
  */
-function projectJSON(worksData, baseURL) {
-    for (const project in worksData) {
-        let paragraph = document.getElementById(project);
-        if (paragraph) {
-            paragraph.after(projectWorks(worksData[project], baseURL));
+function readWorks(worksData) {
+    let projects = {};
+    for (const projID in worksData) {
+        projects[projID] = new Project(worksData[projID]);
+    }
+    return projects
+}
+
+/**
+ * Add a text element comprising a space
+ * @returns {Text} a space
+ */
+function addSpace() {
+    return document.createTextNode(" ");
+}
+/**
+ * Get the preprint object from its id
+ * @param {string} id - the id of the preprint object
+ * @param {Paper[]} preprints - array of preprint objects
+ * @returns {Paper} the preprint object with details
+ */
+function getEprint(id, preprints) {
+    let theEntry = null;
+    preprints.forEach(entry => {
+        if (entry.id === id) {
+            theEntry = entry;
         }
-    }
-}
-
-/**
- * Create UList of works for one project
- * @param {Project} projectData - dict: work types -> array of works
- * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLUListElement} - UList of works for one project
- */
-function projectWorks(projectData, baseURL) {
-    let listEntries = document.createElement("ul");
-    listEntries.className = "project_links";
-    ["article", "preprint", "slides", "poster"].forEach(type => {
-        projectData[type].forEach(entry => {
-            listEntries.appendChild(projectEntry(entry, type, baseURL));
-        });
     });
-    return listEntries
-}
-
-/**
- * Create icon li element for one work
- * @param {Work} entry - dict of info about work
- * @param {string} type - type of work
- * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLLIElement} - icon li element for one work
- */
-function projectEntry(entry, type, baseURL) {
-    const description = makeDescription(entry, type);
-    let listItem = document.createElement("li");
-    let link = document.createElement("a");
-
-    link.className = "icon " + type;
-    link.title = description;
-    link.href = makeURL(entry, type, baseURL);
-    listItem.appendChild(link)
-    return listItem
-}
-
-/**
- * Make description of work for paper/presentation work types
- * @param {Work} entry - dict of info about work
- * @param {string} type - type of work
- * @returns {string} - description of work
- */
-function makeDescription(entry, type) {
-    if (isInternal(type)) {
-        return entry.title
+    if (theEntry) {
+        return theEntry
     }
-    return `“${entry.title}”, ${entry.ref} (${entry.year})`;
-}
-/**
- * Make URL of work for local/global work types
- * @param {Work} entry - dict of info about work
- * @param {string} type - type of work
- * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {string} - URL of work
- */
-function makeURL(entry, type, baseURL) {
-    if (isInternal(type)) {
-        return baseURL + entry.url
-    }
-    return entry.url
+    throw `Unknown eprint: ${id}`;
 }
 
-/**
- * Is the work type one with a local URL?
- * @param {string} type - type of work
- * @returns {boolean} - does it have a local URL?
- */
-function isInternal(type) {
-    if (type === "slides" || type === "poster") {
-        return true
-    } else if (type === "article" || type === "preprint") {
-        return false
-    } else {
-        throw `Unknown work type: ${type}`
-    }
-}
-
-export { projectLinks };
+export { Work, Paper, Article, Preprint, Project, readWorks }
