@@ -5,11 +5,9 @@ import { readWorks, Project, Work } from "./works.js";
  * @param {HTMLUListElement} parent UList to append item to
  */
 Work.prototype.appendList = function(parent) {
-    let listItem = document.createElement("li");
     let link = this.link();
-    link.className = "icon " + this.type;
-    listItem.appendChild(link);
-    parent.appendChild(listItem);
+    link.className = "icon";
+    parent.appendChild(this.listItem(link));
 }
 
 /**
@@ -19,9 +17,7 @@ Work.prototype.appendList = function(parent) {
 function projectLinks(baseURL = '') {
     Work.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
-        .then((worksData) => {
-            projectJSON(readWorks(worksData));
-        });
+        .then(worksData => projectJSON(readWorks(worksData)));
 }
 
 /**
@@ -46,10 +42,7 @@ function projectWorks(projectData) {
     let listEntries = document.createElement("ul");
     listEntries.className = "project_links";
     ["article", "preprint", "slides", "poster"].forEach(type => {
-        projectData[type].forEach(entry => {
-            entry.appendList(listEntries);
-            // listEntries.appendChild(projectEntry(entry, type, baseURL));
-        });
+        projectData[type].forEach(entry => entry.appendList(listEntries));
     });
     return listEntries
 }

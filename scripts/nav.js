@@ -87,9 +87,7 @@ function buildFoot() {
 function buildNav(activeID, baseURL = '') {
     Tab.baseURL = baseURL;
     getJSON(`${baseURL}data/nav.json`)
-        .then((navData) => {
-            insertNav(readTabData(navData), activeID);
-        });
+        .then(navData => insertNav(readTabData(navData), activeID));
 }
 
 /**
@@ -103,9 +101,7 @@ function insertNav(navData, activeID) {
     let navDiv = document.createElement("div");
     navDiv.className = "nav";
     let navList = document.createElement("ul");
-    navData.forEach((entry) => {
-        entry.appendTab(navList);
-    });
+    navData.forEach(entry => entry.appendTab(navList));
     navDiv.appendChild(navList);
     body[0].insertBefore(navDiv, headDiv[0])
     headDiv[0].style.paddingTop = "0em";

@@ -5,13 +5,8 @@ import { readWorks, Project, Work } from "./works.js";
  * @param {HTMLUListElement} parent UList to append item to
  */
 Work.prototype.appendList = function(parent) {
-    let listItem = document.createElement("li");
-    let link = document.createElement("a");
-    link.textContent = this.title;
-    link.href = this.getURL();
-    listItem.className = this.type;
-    listItem.appendChild(link);
-    listItem.appendChild(document.createTextNode("."));
+    let link = this.link(document.createTextNode(this.title));
+    let listItem = this.listItem(link, document.createTextNode("."));
     parent.appendChild(listItem);
 }
 
@@ -20,10 +15,9 @@ Work.prototype.appendList = function(parent) {
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function presentationLinks(baseURL = '') {
+    Work.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
-        .then((worksData) => {
-            presentationJSON(readWorks(worksData), baseURL);
-        })
+        .then(worksData => presentationJSON(readWorks(worksData)));
 }
 
 /**
@@ -31,14 +25,14 @@ function presentationLinks(baseURL = '') {
  * @param {Object.<string,Project>} worksData - json dict: project id -> title, work types
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function presentationJSON(worksData, baseURL) {
+function presentationJSON(worksData) {
     for (const project in worksData) {
         const projectData = worksData[project];
         let paragraph = document.getElementById(project);
         if ((projectData.slides || projectData.poster) && paragraph) {
             paragraph.className = "presentation";
             paragraph.textContent = projectData.title;
-            paragraph.after(projectPresentations(projectData, baseURL));
+            paragraph.after(projectPresentations(projectData));
         }
     }
 }
@@ -49,35 +43,15 @@ function presentationJSON(worksData, baseURL) {
  * @param {string} baseURL - URL relative to which local urls are interpreted
  * @returns {HTMLUListElement} list of presentations
  */
-function projectPresentations(projectData, baseURL) {
+function projectPresentations(projectData) {
     let listEntries = document.createElement("ul");
     listEntries.className = "materials";
     ["slides", "poster"].forEach(type => {
         projectData[type].forEach(entry => {
             entry.appendList(listEntries);
-            // listEntries.appendChild(presentationMaterials(entry, type, baseURL));
         });
     });
     return listEntries
-}
-
-/**
- * Create an li element for one presentation
- * @param {Work} entry - one slide/poster entry from json
- * @param {string} type - type of presentation (slides | poster)
- * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLLIElement} list entry for a presentation
- */
-function presentationMaterials(entry, type, baseURL) {
-    let listItem = document.createElement("li");
-    let link = document.createElement("a");
-
-    link.textContent = entry.title;
-    link.href = baseURL + entry.url;
-    listItem.className = type;
-    listItem.appendChild(link);
-    listItem.appendChild(document.createTextNode("."));
-    return listItem
 }
 
 export { presentationLinks };
