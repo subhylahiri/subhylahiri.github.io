@@ -36,13 +36,10 @@ class Work {
 Work.baseURL = "";
 
 /**
- * Citation info for a paper
- * @typedef {Work} Paper
- * @property {string} author - author list
- * @property {string} ref - reference to journal/eprint
- * @property {number} year - year of publication
- * @property {number} month - month of publication
- * @property {(string|boolean)} sameAs - corresponding article/preprint/false
+ * @classdesc Citation info for a paper
+ * @class {Work} Paper
+ * @param {string} type - type of work
+ * @param {Object} entry - a JSON object containing properties
  */
 class Paper extends Work {
     constructor(type, entry) {
@@ -120,6 +117,10 @@ class Paper extends Work {
 }
 Paper.myName = /(.*)([^\w\W])(.*)/
 
+/**
+ * @classdesc Citation info for a journal article
+ * @class {Paper} Article
+ */
 class Article extends Paper {
     /**
      * Produce span for journal reference
@@ -153,6 +154,10 @@ class Article extends Paper {
     }
 }
 
+/**
+ * @classdesc Citation info for a preprpint
+ * @class {Paper} Preprint
+ */
 class Preprint extends Paper {
     /**
      * Produce span for eprint reference
