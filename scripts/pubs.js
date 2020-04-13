@@ -17,7 +17,7 @@ function publicationLinks(baseURL = '') {
  */
 function papersJSON(worksData) {
     let {articles, preprints} = readPapers(worksData);
-    listPapers(articles, "articles", citeArticle, preprints);
+    listPapers(articles, "articles", citeArticle, objectify(preprints));
     listPapers(preprints, "preprints", citePreprint);
 }
 
@@ -48,7 +48,7 @@ function reverseChronology(papers) {
  * Insert a UList of paper citations after an id'd element
  * @param {Object[]} papers - list of paper objects
  * @param {string} anchorID - id of element the list will appear after
- * @param {Function} citeFunc - function that creates list of citation elements
+ * @param {Function} citeFunc - function that appends a citation list item
  * @param  {...any} extra - additional parameters for citeFunc
  */
 function listPapers(papers, anchorID, citeFunc, ...extra) {
@@ -67,12 +67,12 @@ function listPapers(papers, anchorID, citeFunc, ...extra) {
  * Create a new list item for an article citation
  * @param {HTMLUListElement} parent - UList to add list item to
  * @param {Object} entry - article object with details
- * @param {Object[]} preprints - array of preprint objects
+ * @param {Object.<string,Object>} preprints - dict of preprint objects
  */
 function citeArticle(parent, entry, preprints) {
     let citation = makeCitation(entry, formatJournal);
     if (entry.eprint) {
-        appendEprint(citation, entry.eprint, preprints);
+        appendEprint(citation, preprints[entry.eprint]);
     }
     makeListItem(parent, "article", citation);
 }
@@ -84,7 +84,7 @@ function citeArticle(parent, entry, preprints) {
  */
 function citePreprint(parent, entry) {
     if (!entry.pub) {
-        let citation = makeCitation(entry, formatEprint);
+        const citation = makeCitation(entry, formatEprint);
         makeListItem(parent, "preprint", citation);
     }
 }
@@ -98,10 +98,7 @@ function citePreprint(parent, entry) {
 function makeListItem(parent, cssClass, citation) {
     let listItem = document.createElement("li");
     listItem.className = cssClass;
-    citation.push(document.createTextNode("."));
-    citation.forEach(element => {
-        listItem.appendChild(element);
-    })
+    insertThings(listItem, ...citation);
     parent.appendChild(listItem);
 }
 /**
@@ -111,38 +108,17 @@ function makeListItem(parent, cssClass, citation) {
  * @returns {HTMLElement[]} array of paper's citation elements
  */
 function makeCitation(entry, refFunc) {
-    const ref = [refFunc(entry), document.createTextNode(" "), formatYear(entry)];
-    return [formatAuthor(entry), formatTitle(entry), putInURL(ref, entry)]
+    const ref = [refFunc(entry), " ", formatYear(entry)];
+    return [formatAuthor(entry), " ", formatTitle(entry), " ", putInURL(entry, ...ref), "."]
 }
 
 /**
  * Append preprint link to list of citation elements for article
  * @param {HTMLElement[]} citation - array of article's citation elements
- * @param {string} id - the id of the preprint object
- * @param {Object[]} preprints - array of preprint objects
+ * @param {Object} preprint - preprint object
  */
-function appendEprint(citation, id, preprints) {
-    citation.push(document.createTextNode(", "));
-    const preprint = getEprint(id, preprints);
-    citation.push(putInURL([formatEprint(preprint)], preprint));
-}
-/**
- * Get the preprint object from its id
- * @param {string} id - the id of the preprint object
- * @param {Object[]} preprints - array of preprint objects
- * @returns {Object} the preprint object with details
- */
-function getEprint(id, preprints) {
-    let theEntry = null;
-    preprints.forEach(entry => {
-        if (entry.id === id) {
-            theEntry = entry;
-        }
-    });
-    if (theEntry) {
-        return theEntry
-    }
-    throw `Unknown eprint: ${id}`;
+function appendEprint(citation, preprint) {
+    citation.splice(-1, 0, ", ", putInURL(preprint, formatEprint(preprint)));
 }
 
 /**
@@ -152,7 +128,8 @@ function getEprint(id, preprints) {
  * @returns {HTMLSpanElement} span element
  */
 function formatAuthor(entry) {
-    return putInSpan(pickSelf(entry.author), "author")
+    const items = pickPart(entry.author, "self", myName);
+    return putInSpan("author", ...items)
 }
 /**
  * Create the span element for title
@@ -161,7 +138,7 @@ function formatAuthor(entry) {
  * @returns {HTMLSpanElement} span element
  */
 function formatTitle(entry) {
-    return encaseSpan(entry.title, "title")
+    return putInSpan("title", entry.title)
 }
 /**
  * Create the span element for journal reference
@@ -170,7 +147,8 @@ function formatTitle(entry) {
  * @returns {HTMLSpanElement} span element
  */
 function formatJournal(entry) {
-    return putInSpan(pickVolume(entry.ref), "journal")
+    const items = pickPart(entry.ref, "volume", /([^\d]+)(\d+)([^\d].*)/);
+    return putInSpan("journal", ...items)
 }
 /**
  * Create the span element for eprint reference
@@ -179,7 +157,7 @@ function formatJournal(entry) {
  * @returns {HTMLSpanElement} span element
  */
 function formatEprint(entry) {
-    return encaseSpan(entry.ref, "eprint")
+    return putInSpan("eprint", entry.ref)
 }
 /**
  * Create the span element for publication year
@@ -188,71 +166,73 @@ function formatEprint(entry) {
  * @returns {HTMLSpanElement} span element
  */
 function formatYear(entry) {
-    return encaseSpan(entry.year, "year")
+    return putInSpan("year", entry.year)
 }
 
 /**
- * Pick out my name from a list of authors and put it in a span
- * @param {string} authors - the list of authors
- * @returns {HTMLElement[]} array of [earlier names, my name, later names] elements
+ * Search text for pattern and put central group in a span
+ * @param {string} text - text to search for match
+ * @param {string} cssClass - class of span to put central match in
+ * @param {RegExp} pattern - regex with three groups to match
+ * @returns {(string|HTMLElement)[]} [before text, central span, after text]
  */
-function pickSelf(authors) {
-    const items = authors.match(myName);
-    const first = document.createTextNode(items[1]);
-    const me = encaseSpan(items[2], "self");
-    const last = document.createTextNode(items[3]);
-    return [first, me, last]
-}
-/**
- * Pick out the volume number from a journal reference and put it in a span
- * @param {string} ref - the full journal reference
- * @returns {HTMLElement[]} array of [journal name, volume, number+pages] elements
- */
-function pickVolume(ref) {
-    const items = ref.match(/([^\d]+)(\d+)([^\d].*)/);
-    const journal = document.createTextNode(items[1]);
-    const volume = encaseSpan(items[2], "volume");
-    const pages = document.createTextNode(items[3]);
-    return [journal, volume, pages]
-}
-
-/**
- * Create a span element, with text contents and class
- * @param {string} text - contents of span
- * @param {string} cssClass - class of span element
- * @returns {HTMLSpanElement} span element
- */
-function encaseSpan(text, cssClass) {
-    return putInSpan([document.createTextNode(text)], cssClass)
+function pickPart(text, cssClass, pattern) {
+    if (pattern.test(text)) {
+        const items = text.match(pattern);
+        return [items[1], putInSpan(cssClass, items[2]), items[3]]
+    }
+    return [text]
 }
 /**
  * Create a span element, with contents and class
- * @param {HTMLElement[]} elements - array of elements to put in span
  * @param {string} cssClass - class of span element
+ * @param {...(HTMLElement|string|number)} elements - elements to put in span
  * @returns {HTMLSpanElement} span element
  */
-function putInSpan(elements, cssClass) {
+function putInSpan(cssClass, ...elements) {
     let span = document.createElement("span");
     span.className = cssClass;
-    elements.forEach(element => {
-        span.appendChild(element);
-    });
+    insertThings(span, ...elements);
     return span
 }
 /**
  * Create a link element, with contents and url
- * @param {HTMLElement[]} elements - array of elements to put in link
  * @param {Object} entry - paper object with details
  * @param {string} entry.url - url where paper can be found
+ * @param {...(HTMLElement|string|number)} elements - elements to put in link
  * @returns {HTMLAnchorElement} link element
  */
-function putInURL(elements, entry) {
+function putInURL(entry, ...elements) {
     let link = document.createElement("a");
     link.href = entry.url;
-    elements.forEach(elements => {
-        link.appendChild(elements);
-    });
+    insertThings(link, ...elements)
     return link
+}
+/**
+ * Insert some element(s) into another
+ * @param {HTMLElement} parent - element to insert things into
+ * @param {...(HTMLElement|string|number)} elements - things to insert into parent
+ */
+function insertThings(parent, ...elements) {
+    elements.forEach(item => {
+        if (["string", "number"].includes(typeof item)) {
+            parent.appendChild(document.createTextNode(item));
+        } else {
+            parent.appendChild(item);
+        }
+    });
+}
+/**
+ * Convert array of works to object indexed by id's
+ * @param {Object[]} workArray - array of Work objects
+ * @returns {Object.<string,Object>} - dict of work objects
+ */
+function objectify(workArray) {
+    let workObject = {};
+    workArray.forEach(entry => {
+        workObject[entry.id] = entry;
+    });
+    return workObject
 }
 
 export { publicationLinks };
