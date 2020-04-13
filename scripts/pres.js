@@ -9,6 +9,11 @@ Work.prototype.appendList = function(parent) {
     let listItem = this.listItem(link, document.createTextNode("."));
     parent.appendChild(listItem);
 }
+/** Class to use for each entry type */
+Project.worksMap = {
+    "slides": Work,
+    "poster": Work,
+}
 
 /**
  * Read JSON file and pass to presentationJSON

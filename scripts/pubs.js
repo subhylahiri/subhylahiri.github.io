@@ -1,6 +1,7 @@
 import { getJSON } from "./getJSON.js";
-import { readWorks, Project, Paper, Work } from "./works.js";
+import { readWorks, Project, Paper } from "./works.js";
 
+/** Pattern to match for my name */
 const myName = /(.*)(S\w* Lahiri)(.*)/;
 
 /**
@@ -24,7 +25,7 @@ class Publication extends Paper {
         return span
     }
     /**
-     * Produce lList of elements to put in citation
+     * Produce List of elements to put in citation
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
@@ -35,7 +36,7 @@ class Publication extends Paper {
             link, document.createTextNode(".")
         ]
     }
-    /** Append icon to list of project's works
+    /** Append citation to list of papers
      * @param {HTMLUListElement} parent UList to append item to
      */
     appendList(parent, ...extra) {
@@ -45,20 +46,23 @@ class Publication extends Paper {
         }
     }
     /**
-     * Compare two papers for sorting
+     * Compare two papers for sorting with reverse chronology
      * @param {Paper} paperA - first paper to compare
      * @param {Paper} paperB - second paper to compare
+     * @returns {number} positive if paperA goes after paperB
      */
     static compare(paperA, paperB) {
         const yearDiff = paperB.year - paperA.year;
         return yearDiff ? yearDiff : paperB.month - paperA.month
     }
 }
-/** Pattern to match for myy name */
+/** Pattern to match for my name */
 Publication.myName = myName;
 
 /**
  * @classdesc Citation info for a journal article
+ * @param {string} type - type of work
+ * @param {Object} entry - a JSON object containing properties
  */
 class Article extends Publication {
     /**
@@ -92,7 +96,8 @@ class Article extends Publication {
 
 /**
  * @classdesc Citation info for a preprpint
- * @class {Paper} Preprint
+ * @param {string} type - type of work
+ * @param {Object} entry - a JSON object containing properties
  */
 class Preprint extends Publication {
     /**
@@ -120,8 +125,6 @@ class Preprint extends Publication {
 Project.worksMap = {
     "article": Article,
     "preprint": Preprint,
-    "slides": Work,
-    "poster": Work,
 }
 
 /**

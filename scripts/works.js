@@ -70,7 +70,7 @@ class Paper extends Work {
             this.year = 0;
             /** month of publication */
             this.month = 0;
-            /** corresponding article/preprint/false
+            /** id of corresponding article/preprint/false
              * @type {(string|boolean)}
              */
             this.sameAs = false;
@@ -91,9 +91,17 @@ class Paper extends Work {
 class Project {
     constructor(projectData) {
         this.title = projectData.title;
-        ["article", "preprint", "slides", "poster"].forEach(type => {
-            this[type] = projectData[type].map(entry => new Project.worksMap[type](type, entry));
-        });
+        for (const type in Project.worksMap) {
+            this[type] = projectData[type].map(Project.makeWork(type));
+        }
+    }
+    /**
+     * Create a function to convert JSON object to Work object
+     * @param {string} type - type of work to create
+     * @returns {Function} converter function
+     */
+    static makeWork(type) {
+        return entry => new Project.worksMap[type](type, entry)
     }
 }
 /** Class to use for each entry type */
@@ -117,4 +125,4 @@ function readWorks(worksData) {
     return projects
 }
 
-export { Work, Paper, Project, readWorks }
+export { readWorks, Project, Paper, Work }
