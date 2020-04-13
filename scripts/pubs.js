@@ -2,7 +2,7 @@ import { getJSON } from "./getJSON.js";
 import { readWorks, Project, Paper, insertThings } from "./works.js";
 
 /** Pattern to match for my name */
-const myName = /(.*)(S\w* Lahiri)(.*)/;
+const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
 /**
  * @classdesc Citation info for a paper
@@ -10,6 +10,15 @@ const myName = /(.*)(S\w* Lahiri)(.*)/;
  * @param {Object} entry - a JSON object containing properties
  */
 class Publication extends Paper {
+    constructor(type, entry) {
+        super(type, entry);
+        /** field -> function to post-process spans for given field */
+        this.spanMap = {};
+        /** function to post-process author span */
+        this.spanMap.author = span => {
+            pickSpanPart(this, span, "self", Publication.myName);
+        }
+    }
     /**
      * Put an object property in a span of that class
      * @param {string} field - name of field to put in span
@@ -19,8 +28,8 @@ class Publication extends Paper {
         let span = document.createElement("span");
         span.className = field;
         span.textContent = this[field];
-        if (field === "author") {
-            pickSpanPart(this, span, "self", Publication.myName);
+        if (field in this.spanMap) {
+            this.spanMap[field](span);
         }
         return span
     }
@@ -61,18 +70,13 @@ Publication.myName = myName;
  * @param {Object} entry - a JSON object containing properties
  */
 class Article extends Publication {
-    /**
-     * Put an object property in a span of that class
-     * @param {string} field - name of field to put in span
-     * @returns {HTMLSpanElement} span element containing field
-     */
-    span(field) {
-        let span = super.span(field);
-        if (field === "ref") {
+    constructor(type, entry) {
+        super(type, entry);
+        /** function to post-process ref span */
+        this.spanMap.ref = span => {
             span.className = "journal";
             pickSpanPart(this, span, "volume", /([^\d]+)(\d+)([^\d].*)/);
         }
-        return span
     }
     /**
      * Produce list of elements to put in citation
@@ -96,17 +100,12 @@ class Article extends Publication {
  * @param {Object} entry - a JSON object containing properties
  */
 class Preprint extends Publication {
-    /**
-     * Put an object property in a span of that class
-     * @param {string} field - name of field to put in span
-     * @returns {HTMLSpanElement} span element containing field
-     */
-    span(field) {
-        let span = super.span(field);
-        if (field === "ref") {
+    constructor(type, entry) {
+        super(type, entry);
+        /** function to post-process ref span */
+        this.spanMap.ref = span => {
             span.className = "eprint";
         }
-        return span
     }
     /**
      * Produce list of elements to put in citation
