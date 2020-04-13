@@ -16,7 +16,7 @@ function publicationLinks(baseURL = '') {
  * @param {Object} worksData - json dict: project id -> title, work types
  */
 function papersJSON(worksData) {
-    let {articles, preprints} = readPapers(worksData);
+    let {articles, preprints} = collectPapers(worksData);
     listPapers(articles, "articles", citeArticle, objectify(preprints));
     listPapers(preprints, "preprints", citePreprint);
 }
@@ -25,12 +25,12 @@ function papersJSON(worksData) {
  * Process JSON data to create paper lists
  * @param {Object} worksData - json dict: project id -> title, work types
  */
-function readPapers(worksData) {
+function collectPapers(worksData) {
     let [articles, preprints] = [[], []];
     for (const project in worksData) {
         const entry = worksData[project];
-        articles = articles.concat(entry.article);
-        preprints = preprints.concat(entry.preprint);
+        articles.push(...entry.article);
+        preprints.push(...entry.preprint);
     }
     reverseChronology(articles);
     reverseChronology(preprints);
