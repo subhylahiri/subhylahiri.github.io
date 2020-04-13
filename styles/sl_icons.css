@@ -20,6 +20,23 @@ p.project {
     background-color: var(--major-bg-color);
 } */
 
+.article {
+    background-image: url(../icons/article.svg);
+    --icon-label: "Article";
+}
+.preprint {
+    background-image: url(../icons/preprint.svg);
+    --icon-label: "Preprint";
+}
+.slides {
+    background-image: url(../icons/slides.svg);
+    --icon-label: "Slides";
+}
+.poster {
+    background-image: url(../icons/poster.svg);
+    --icon-label: "Poster";
+}
+
 .icon {
     display: block;
     border-radius: 10%;
@@ -35,18 +52,8 @@ p.project {
     background-color: var(--major-bg-color);
     color: var(--minor-fg-color);
 }
-
-.article {
-    background-image: url(../icons/article.svg);
-}
-.preprint {
-    background-image: url(../icons/preprint.svg);
-}
-.slides {
-    background-image: url(../icons/slides.svg);
-}
-.poster {
-    background-image: url(../icons/poster.svg);
+.icon::after {
+    content: var(--icon-label);
 }
 
 @media (min-width: 600px) {
@@ -61,8 +68,6 @@ p.project {
         .icon:hover {
         text-indent: 0%;
         background-color: var(--minor-bg-color);
-    }
-    .article:hover, .preprint:hover, .slides:hover, .poster:hover {
         background-image: none;
     }
 }
