@@ -34,7 +34,7 @@ class Work {
         let link = document.createElement("a");
         link.title = this.description();
         link.href = this.getURL();
-        elements.forEach(part => link.appendChild(part))
+        insertThings(link, ...elements);
         return link
     }
     /**
@@ -45,7 +45,7 @@ class Work {
     listItem(...elements) {
         let item = document.createElement("li");
         item.className = this.type;
-        elements.forEach(part => item.appendChild(part))
+        insertThings(item, ...elements);
         return item
     }
 }
@@ -125,4 +125,19 @@ function readWorks(worksData) {
     return projects
 }
 
-export { readWorks, Project, Paper, Work }
+/**
+ * Insert some element(s) into another
+ * @param {HTMLElement} parent - element to insert things into
+ * @param {...(HTMLElement|string|number)} elements - things to insert into parent
+ */
+function insertThings(parent, ...elements) {
+    elements.forEach(item => {
+        if (["string", "number"].includes(typeof item)) {
+            parent.appendChild(document.createTextNode(item));
+        } else {
+            parent.appendChild(item);
+        }
+    });
+}
+
+export { readWorks, Project, Paper, Work, insertThings }

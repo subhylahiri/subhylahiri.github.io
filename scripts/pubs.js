@@ -1,5 +1,5 @@
 import { getJSON } from "./getJSON.js";
-import { readWorks, Project, Paper } from "./works.js";
+import { readWorks, Project, Paper, insertThings } from "./works.js";
 
 /** Pattern to match for my name */
 const myName = /(.*)(S\w* Lahiri)(.*)/;
@@ -29,12 +29,8 @@ class Publication extends Paper {
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
-        let link = this.link(this.span("ref"), addSpace(), this.span("year"));
-        return [
-            this.span("author"), addSpace(),
-            this.span("title"), addSpace(),
-            link, document.createTextNode(".")
-        ]
+        let link = this.link(this.span("ref"), " ", this.span("year"));
+        return [this.span("author"), " ", this.span("title"), " ", link, "."]
     }
     /** Append citation to list of papers
      * @param {HTMLUListElement} parent UList to append item to
@@ -88,7 +84,7 @@ class Article extends Publication {
         if (this.sameAs) {
             const preprint = preprints[this.sameAs];
             let link = preprint.link(preprint.span("ref"));
-            citation.splice(-1, 0, addSpace(","), link);
+            citation.splice(-1, 0, ", ", link);
         }
         return citation
     }
@@ -192,13 +188,6 @@ function objectify(workArray) {
     return workObject
 }
 /**
- * Add a text element comprising a space
- * @returns {Text} a space
- */
-function addSpace(punctuation="") {
-    return document.createTextNode(`${punctuation} `);
-}
-/**
  * Pick out a part of a span and put in a child span
  * @param {Paper} obj - paper from which we construct the span
  * @param {HTMLSpanElement} span - containing span
@@ -210,9 +199,7 @@ function pickSpanPart(obj, span, cssClass, toMatch) {
         const items = span.textContent.match(toMatch);
         obj[cssClass] = items[2];
         span.textContent = "";
-        span.appendChild(document.createTextNode(items[1]));
-        span.appendChild(obj.span(cssClass));
-        span.appendChild(document.createTextNode(items[3]));
+        insertThings(span, items[1], obj.span(cssClass), items[3]);
     }
 }
 
