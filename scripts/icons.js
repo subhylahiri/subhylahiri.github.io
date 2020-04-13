@@ -41,9 +41,9 @@ function projectJSON(worksData) {
 function projectWorks(projectData) {
     let listEntries = document.createElement("ul");
     listEntries.className = "project_links";
-    ["article", "preprint", "slides", "poster"].forEach(type => {
+    for (const type in Project.worksMap) {
         projectData[type].forEach(entry => entry.appendList(listEntries));
-    });
+    }
     return listEntries
 }
 
