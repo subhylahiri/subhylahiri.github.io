@@ -1,6 +1,6 @@
 import { getJSON } from "./getJSON.js";
 
-const myName = /(.*)(S\w* Lahiri)(.*)/;
+const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
 /**
  * Read JSON file and pass to presentationJSON

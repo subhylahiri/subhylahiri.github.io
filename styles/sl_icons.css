@@ -16,9 +16,6 @@ p.project {
     background-color: var(--minor-bg-color);
     color: var(--minor-fg-color);
 }
-/* .project_links li:hover {
-    background-color: var(--major-bg-color);
-} */
 
 .article {
     background-image: url(../icons/article.svg);
@@ -37,6 +34,7 @@ p.project {
     --icon-label: "Poster";
 }
 
+/* Mobile */
 .icon {
     display: block;
     border-radius: 10%;
@@ -50,13 +48,16 @@ p.project {
     text-align: center;
     text-indent: 0%;
     background-color: var(--major-bg-color);
-    color: var(--minor-fg-color);
+    color: inherit;
 }
 .icon::after {
     content: var(--icon-label);
 }
-
+/* Desktop */
 @media (min-width: 600px) {
+    /* .project_links li:hover {
+        background-color: var(--major-bg-color);
+    } */
     .icon {
         height: 3em;
         line-height: 3em;
@@ -65,9 +66,9 @@ p.project {
         white-space: nowrap;
         overflow: hidden;
     }
-        .icon:hover {
+    .icon:hover {
         text-indent: 0%;
-        background-color: var(--minor-bg-color);
+        background-color: inherit;
         background-image: none;
     }
 }
