@@ -87,8 +87,7 @@ class Article extends Publication {
         let citation = super.cite()
         if (this.sameAs) {
             const preprint = preprints[this.sameAs];
-            const link = preprint.link(preprint.span("ref"));
-            citation.splice(-1, 0, ", ", link);
+            citation.splice(-1, 0, ", ", preprint.link(preprint.span("ref")));
         }
         return citation
     }
@@ -150,8 +149,8 @@ function collectPapers(worksData) {
     let [articles, preprints] = [[], []];
     for (const project in worksData) {
         const entry = worksData[project];
-        articles = articles.concat(entry.article);
-        preprints = preprints.concat(entry.preprint);
+        articles.push(...entry.article);
+        preprints.push(...entry.preprint);
     }
     articles.sort(Publication.compare)
     preprints.sort(Publication.compare)
@@ -186,6 +185,7 @@ function objectify(workArray) {
     });
     return workObject
 }
+
 /**
  * Pick out a part of a span and put in a child span
  * @param {Paper} obj - paper from which we construct the span
