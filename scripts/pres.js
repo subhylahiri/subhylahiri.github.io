@@ -5,8 +5,8 @@ import { readWorks, Project, Work } from "./works.js";
  * @param {HTMLUListElement} parent UList to append item to
  */
 Work.prototype.appendList = function(parent) {
-    let link = this.link(document.createTextNode(this.title));
-    let listItem = this.listItem(link, document.createTextNode("."));
+    const link = this.link(this.title);
+    const listItem = this.listItem(link, ".");
     parent.appendChild(listItem);
 }
 /** Class to use for each entry type */
@@ -52,9 +52,7 @@ function projectPresentations(projectData) {
     let listEntries = document.createElement("ul");
     listEntries.className = "materials";
     ["slides", "poster"].forEach(type => {
-        projectData[type].forEach(entry => {
-            entry.appendList(listEntries);
-        });
+        projectData[type].forEach(entry => entry.appendList(listEntries));
     });
     return listEntries
 }

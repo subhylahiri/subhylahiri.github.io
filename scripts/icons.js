@@ -26,7 +26,7 @@ function projectLinks(baseURL = '') {
  */
 function projectJSON(worksData) {
     for (const project in worksData) {
-        let paragraph = document.getElementById(project);
+        const paragraph = document.getElementById(project);
         if (paragraph) {
             paragraph.after(projectWorks(worksData[project]));
         }

@@ -57,15 +57,15 @@ function buildPage(activeID, baseURL = '') {
 
 /** Create and insert footer */
 function buildFoot() {
-    let body = document.getElementsByTagName("body");
+    const body = document.getElementsByTagName("body");
     let foot = document.createElement("div");
     foot.className = "footer";
 
     let address = document.createElement("address");
     let email = document.createElement("code");
     let source = document.createElement('a');
-    let myName = document.createTextNode("Subhaneil Lahiri: ");
-    let spacer = document.createTextNode(". ");
+    const myName = document.createTextNode("Subhaneil Lahiri: ");
+    const spacer = document.createTextNode(". ");
 
     email.textContent = "sulahiri at stanford dot edu";
     source.textContent = "[Source]";
@@ -96,7 +96,7 @@ function buildNav(activeID, baseURL = '') {
  * @param {string} activeID - id of current  nav-bar tab
  */
 function insertNav(navData, activeID) {
-    let body = document.getElementsByTagName("body");
+    const body = document.getElementsByTagName("body");
     let headDiv = document.getElementsByClassName("header");
     let navDiv = document.createElement("div");
     navDiv.className = "nav";

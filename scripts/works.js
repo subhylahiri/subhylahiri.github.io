@@ -27,7 +27,7 @@ class Work {
     }
     /**
      * Create a link element to this work
-     * @param  {...HTMLElement} elements - things to put in link
+     * @param  {...(HTMLElement|string|number)} elements - things to put in link
      * @returns {HTMLAnchorElement} the link element
      */
     link(...elements) {
@@ -38,8 +38,8 @@ class Work {
         return link
     }
     /**
-     * Create a link element to this work
-     * @param  {...HTMLElement} elements - things to put in link
+     * Create a list item for this work
+     * @param  {...(HTMLElement|string|number)} elements - things to put in li
      * @returns {HTMLAnchorElement} the link element
      */
     listItem(...elements) {

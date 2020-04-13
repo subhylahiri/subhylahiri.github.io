@@ -29,14 +29,14 @@ class Publication extends Paper {
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
-        let link = this.link(this.span("ref"), " ", this.span("year"));
+        const link = this.link(this.span("ref"), " ", this.span("year"));
         return [this.span("author"), " ", this.span("title"), " ", link, "."]
     }
     /** Append citation to list of papers
      * @param {HTMLUListElement} parent UList to append item to
      */
     appendList(parent, ...extra) {
-        let citation = this.cite(...extra);
+        const citation = this.cite(...extra);
         if (citation.length) {
             parent.appendChild(this.listItem(...citation));
         }
@@ -83,7 +83,7 @@ class Article extends Publication {
         let citation = super.cite()
         if (this.sameAs) {
             const preprint = preprints[this.sameAs];
-            let link = preprint.link(preprint.span("ref"));
+            const link = preprint.link(preprint.span("ref"));
             citation.splice(-1, 0, ", ", link);
         }
         return citation
@@ -137,7 +137,7 @@ function publicationLinks(baseURL = '') {
  * @param {Object.<string,Project>} worksData - json dict: project id -> project object
  */
 function papersJSON(worksData) {
-    let {articles, preprints} = collectPapers(worksData);
+    const {articles, preprints} = collectPapers(worksData);
     listPapers(articles, "articles", objectify(preprints));
     listPapers(preprints, "preprints");
 }
@@ -166,7 +166,7 @@ function collectPapers(worksData) {
  * @param  {...any} extra - additional parameters for citeFunc
  */
 function listPapers(papers, anchorID, ...extra) {
-    let anchor = document.getElementById(anchorID);
+    const anchor = document.getElementById(anchorID);
     if (anchor) {
         let paperList = document.createElement("ul");
         paperList.className = "papers";
