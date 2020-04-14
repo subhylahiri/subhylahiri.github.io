@@ -51,9 +51,9 @@ function presentationJSON(worksData) {
 function projectPresentations(projectData) {
     let listEntries = document.createElement("ul");
     listEntries.className = "materials";
-    ["slides", "poster"].forEach(type => {
+    for (const type in Project.worksMap) {
         projectData[type].forEach(entry => entry.appendList(listEntries));
-    });
+    }
     return listEntries
 }
 

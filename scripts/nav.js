@@ -1,11 +1,12 @@
 import { getJSON } from "./getJSON.js";
 
 /**
- * @class {Object} Tab
  * @classdesc A tab in the navigation bar
- * @param {Object} entry - a JSON object containing properties
  */
 class Tab {
+    /**
+     * @param {Object} entry - a JSON object containing properties
+     */
     constructor(entry) {
         /** identifier of list item */
         this.id = "";

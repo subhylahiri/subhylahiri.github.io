@@ -4,12 +4,12 @@ import { readWorks, Project, Paper, insertThings } from "./works.js";
 /** Pattern to match for my name */
 const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
-/**
- * @classdesc Citation info for a paper
- * @param {string} type - type of work
- * @param {Object} entry - a JSON object containing properties
- */
+/** @classdesc Citation info for a paper */
 class Publication extends Paper {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
     constructor(type, entry) {
         super(type, entry);
         /** field -> function to post-process spans for given field */
@@ -64,12 +64,12 @@ class Publication extends Paper {
 /** Pattern to match for my name */
 Publication.myName = myName;
 
-/**
- * @classdesc Citation info for a journal article
- * @param {string} type - type of work
- * @param {Object} entry - a JSON object containing properties
- */
+/** @classdesc Citation info for a journal article */
 class Article extends Publication {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
     constructor(type, entry) {
         super(type, entry);
         /** function to post-process ref span */
@@ -93,12 +93,12 @@ class Article extends Publication {
     }
 }
 
-/**
- * @classdesc Citation info for a preprpint
- * @param {string} type - type of work
- * @param {Object} entry - a JSON object containing properties
- */
+/** @classdesc Citation info for a preprpint */
 class Preprint extends Publication {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
     constructor(type, entry) {
         super(type, entry);
         /** function to post-process ref span */
@@ -187,11 +187,11 @@ function objectify(workArray) {
 }
 
 /**
- * Pick out a part of a span and put in a child span
+ * Pick out a part of a span's contents and put in a child span
  * @param {Paper} obj - paper from which we construct the span
  * @param {HTMLSpanElement} span - containing span
- * @param {string} cssClass - CSS class of part's span
- * @param {RegExp} toMatch - pattern of part to pick out
+ * @param {string} cssClass - CSS class of central part's span
+ * @param {RegExp} toMatch - pattern of part to pick out, with 3 capturing groups
  */
 function pickSpanPart(obj, span, cssClass, toMatch) {
     if (toMatch.test(span.textContent)) {

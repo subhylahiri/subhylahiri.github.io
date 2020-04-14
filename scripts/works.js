@@ -1,11 +1,12 @@
 
 /**
  * @classdesc A piece of work: paper or presentation
- * @class {Object} Work
- * @param {string} type - type of work
- * @param {Object} entry - a JSON object containing properties
  */
 class Work {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
     constructor(type, entry) {
         /** type of work item */
         this.type = type;
@@ -54,11 +55,12 @@ Work.baseURL = "";
 
 /**
  * @classdesc Citation info for a paper
- * @class {Work} Paper
- * @param {string} type - type of work
- * @param {Object} entry - a JSON object containing properties
  */
 class Paper extends Work {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
     constructor(type, entry) {
         super(type, entry);
         if (entry === undefined) {
@@ -86,9 +88,11 @@ class Paper extends Work {
 
 /**
  * @classdesc All of the works associated with a project
- * @param {Object} projectData - JSON object containing works data
  */
 class Project {
+    /**
+     * @param {Object} projectData - JSON object containing works data
+     */
     constructor(projectData) {
         this.title = projectData.title;
         for (const type in Project.worksMap) {
