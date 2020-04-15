@@ -13,14 +13,14 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --major-bg-color: #180363;
+        --major-bg-color: #200483;
         --major-fg-color: #8babee;
-        --minor-bg-color: #606570;
-        --minor-fg-color: #aba5bb;
+        --minor-bg-color: #4b4f58;
+        --minor-fg-color: #b9b1cf;
         --inert-bg-color: #4f555c;
-        --title-bg-color: #3c3f44;
+        --title-bg-color: #353b44;
         --title-fg-color: #e7b6b6;
-        --links-fg-color: #8090bb;
+        --links-fg-color: #8180bb;
         /* --footer-fg-color: #999999; */
     }
 }
