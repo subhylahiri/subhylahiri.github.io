@@ -2,7 +2,7 @@ import { getJSON, insertThings } from "./getJSON.js";
 import { readWorks, Project, Paper } from "./works.js";
 
 /** Pattern to match for my name */
-const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
+Paper.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
@@ -13,11 +13,7 @@ class Publication extends Paper {
     constructor(type, entry) {
         super(type, entry);
         /** field -> function to post-process spans for given field */
-        this.spanMap = {};
-        /** function to post-process author span */
-        this.spanMap.author = span => {
-            pickSpanPart(this, span, "self", Publication.myName);
-        }
+        this.spanMap = {"author": makeSpanMap(this, "", "self", Publication.myName)};
     }
     /**
      * Put an object property in a span of that class
@@ -61,8 +57,6 @@ class Publication extends Paper {
         return yearDiff ? yearDiff : paperB.month - paperA.month
     }
 }
-/** Pattern to match for my name */
-Publication.myName = myName;
 
 /** @classdesc Citation info for a journal article */
 class Article extends Publication {
@@ -73,10 +67,7 @@ class Article extends Publication {
     constructor(type, entry) {
         super(type, entry);
         /** function to post-process ref span */
-        this.spanMap.ref = span => {
-            span.className = "journal";
-            pickSpanPart(this, span, "volume", /([^\d]+)(\d+)([^\d].*)/);
-        }
+        this.spanMap.ref = makeSpanMap(this, "journal", "volume", /([^\d]+)(\d+)([^\d].*)/);
     }
     /**
      * Produce list of elements to put in citation
@@ -111,6 +102,31 @@ class Preprint extends Publication {
     cite() {
         return this.sameAs ? [] : super.cite()
     }
+}
+
+/**
+ * Callback to pick out a part of a span's contents and put in a child span
+ * @param {Publication} obj - paper from which we construct the span
+ * @param {string} spanClass - CSS class to use for span, "" to leave it as is
+ * @param {string} partClass - CSS class of central part's span
+ * @param {RegExp} pattern - pattern of part to pick out, with 3 capturing groups
+ */
+function makeSpanMap(obj, spanClass, partClass, pattern) {
+    /** function to post process a span element
+     * @param {HTMLSpanElement} span - containing span
+    */
+    function spanMapper(span) {
+        if (spanClass) {
+            span.className = spanClass;
+        }
+        if (partClass && pattern.test(span.textContent)) {
+            const items = span.textContent.match(pattern);
+            obj[partClass] = items[2];
+            span.textContent = "";
+            insertThings(span, items[1], obj.span(partClass), items[3]);
+        }
+    }
+    return spanMapper
 }
 
 /** Class to use for each entry type */
@@ -180,22 +196,6 @@ function objectify(workArray) {
     let workObject = {}
     workArray.forEach(entry => { workObject[entry.id] = entry; });
     return workObject
-}
-
-/**
- * Pick out a part of a span's contents and put in a child span
- * @param {Paper} obj - paper from which we construct the span
- * @param {HTMLSpanElement} span - containing span
- * @param {string} cssClass - CSS class of central part's span
- * @param {RegExp} toMatch - pattern of part to pick out, with 3 capturing groups
- */
-function pickSpanPart(obj, span, cssClass, toMatch) {
-    if (toMatch.test(span.textContent)) {
-        const items = span.textContent.match(toMatch);
-        obj[cssClass] = items[2];
-        span.textContent = "";
-        insertThings(span, items[1], obj.span(cssClass), items[3]);
-    }
 }
 
 export { publicationLinks };

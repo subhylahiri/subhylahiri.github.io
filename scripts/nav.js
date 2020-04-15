@@ -1,8 +1,6 @@
 import { getJSON, insertThings } from "./getJSON.js";
 
-/**
- * @classdesc A tab in the navigation bar
- */
+/** @classdesc A tab in the navigation bar */
 class Tab {
     /**
      * @param {Object} entry - a JSON object containing properties
@@ -21,7 +19,7 @@ class Tab {
         }
     }
     /**
-     * Append Tab into UList
+     * Append Tab to UList
      * @param {HTMLUListElement} parent - UList to append entry to
      */
     appendTab(parent) {

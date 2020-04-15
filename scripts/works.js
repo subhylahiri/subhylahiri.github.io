@@ -1,8 +1,6 @@
 import { insertThings } from "./getJSON.js";
 
-/**
- * @classdesc A piece of work: paper or presentation
- */
+/** @classdesc A piece of work: paper or presentation */
 class Work {
     /**
      * @param {string} type - type of work
@@ -54,9 +52,7 @@ class Work {
 /** URL relative to which local urls are interpreted */
 Work.baseURL = "";
 
-/**
- * @classdesc Citation info for a paper
- */
+/** @classdesc Citation info for a paper */
 class Paper extends Work {
     /**
      * @param {string} type - type of work
@@ -87,9 +83,7 @@ class Paper extends Work {
     }
 }
 
-/**
- * @classdesc All of the works associated with a project
- */
+/** @classdesc All of the works associated with a project */
 class Project {
     /**
      * @param {Object} projectData - JSON object containing works data
@@ -99,24 +93,22 @@ class Project {
          * @type {string}
          */
         this.title = projectData.title;
-        /** List of articles for thiis project
-         * @name Project#article
-         * @type {Paper[]}
-         */
-        /** List of preprints for thiis project
-         * @name Project#preprint
-         * @type {Paper[]}
-         */
-        /** List of slides for thiis project
-         * @name Project#slides
-         * @type {Work[]}
-         */
-        /** List of posters for thiis project
-         * @name Project#poster
-         * @type {Work[]}
-         */
-        for (const type in Project.worksMap) {
-            this[type] = projectData[type].map(Project.makeWork(type));
+        /** List of articles for this project
+         * @type {Paper[]} */
+        this.article = [];
+        /** List of preprints for this project
+         * @type {Paper[]} */
+        this.preprint = [];
+        /** List of slides for this project
+         * @type {Work[]} */
+        this.slides = [];
+        /** List of posters for this project
+         * @type {Work[]} */
+        this.poster = [];
+        if (projectData) {
+            for (const type in Project.worksMap) {
+                this[type] = projectData[type].map(Project.makeWork(type));
+            }
         }
     }
     /**
