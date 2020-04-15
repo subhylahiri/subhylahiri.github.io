@@ -1,3 +1,4 @@
+import { insertThings } from "./getJSON.js";
 
 /**
  * @classdesc A piece of work: paper or presentation
@@ -94,10 +95,36 @@ class Project {
      * @param {Object} projectData - JSON object containing works data
      */
     constructor(projectData) {
+        /** The title of the project
+         * @type {string}
+         */
         this.title = projectData.title;
+        /** List of articles for thiis project
+         * @name Project#article
+         * @type {Paper[]}
+         */
+        /** List of preprints for thiis project
+         * @name Project#preprint
+         * @type {Paper[]}
+         */
+        /** List of slides for thiis project
+         * @name Project#slides
+         * @type {Work[]}
+         */
+        /** List of posters for thiis project
+         * @name Project#poster
+         * @type {Work[]}
+         */
         for (const type in Project.worksMap) {
             this[type] = projectData[type].map(Project.makeWork(type));
         }
+    }
+    /**
+     * Does the project have any works of the relevant type
+     * @returns {Boolean} - are any relevant work arrays non-empty?
+     */
+    hasWorks() {
+        return Object.keys(Project.worksMap).some(type => this[type])
     }
     /**
      * Create a function to convert JSON object to Work object
@@ -130,18 +157,18 @@ function readWorks(worksData) {
 }
 
 /**
- * Insert some element(s) into another
- * @param {HTMLElement} parent - element to insert things into
- * @param {...(HTMLElement|string|number)} elements - things to insert into parent
+ * Process JSON data to add work list to each project id'd paragraph
+ * @param {Object.<string,Project>} worksData - json dict: project id -> title, work types
  */
-function insertThings(parent, ...elements) {
-    elements.forEach(item => {
-        if (["string", "number"].includes(typeof item)) {
-            parent.appendChild(document.createTextNode(item));
-        } else {
-            parent.appendChild(item);
+function loopJSON(worksData, callback) {
+    worksData = readWorks(worksData);
+    for (const project in worksData) {
+        const projectData = worksData[project];
+        let paragraph = document.getElementById(project);
+        if (paragraph && projectData.hasWorks()) {
+            callback(paragraph, projectData);
         }
-    });
+    }
 }
 
-export { readWorks, Project, Paper, Work, insertThings }
+export { readWorks, loopJSON, Project, Paper, Work }
