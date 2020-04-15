@@ -7,8 +7,22 @@
     --inert-bg-color: #8C96A3;
     --title-bg-color: #757D88;
     --title-fg-color: #FFFFFF;
-    --links-fg-color: #0000A0;
+    --links-fg-color: #5b5b8b;
     /* --footer-fg-color: #999999; */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --major-bg-color: #180363;
+        --major-fg-color: #8babee;
+        --minor-bg-color: #606570;
+        --minor-fg-color: #aba5bb;
+        --inert-bg-color: #4f555c;
+        --title-bg-color: #3c3f44;
+        --title-fg-color: #e7b6b6;
+        --links-fg-color: #8090bb;
+        /* --footer-fg-color: #999999; */
+    }
 }
 
 body {
