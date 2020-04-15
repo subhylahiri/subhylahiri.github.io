@@ -1,4 +1,4 @@
-import { getJSON } from "./getJSON.js";
+import { getJSON, insertThings } from "./getJSON.js";
 
 /**
  * @classdesc A tab in the navigation bar
@@ -47,42 +47,8 @@ function readTabData(navData) {
 }
 
 /**
- *  Create and insert nav-bar and footer
- * @param {string} activeID  - id of current nav-bar tab
- * @param {string} baseURL - URL relative to which local urls are interpreted
- */
-function buildPage(activeID, baseURL = '') {
-    buildNav(activeID, baseURL);
-    buildFoot();
-}
-
-/** Create and insert footer */
-function buildFoot() {
-    const body = document.getElementsByTagName("body");
-    let foot = document.createElement("div");
-    foot.className = "footer";
-
-    let address = document.createElement("address");
-    let email = document.createElement("code");
-    let source = document.createElement('a');
-    const myName = document.createTextNode("Subhaneil Lahiri: ");
-    const spacer = document.createTextNode(". ");
-
-    email.textContent = "sulahiri at stanford dot edu";
-    source.textContent = "[Source]";
-    source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
-    source.title = "Source code on GitHub";
-
-    [myName, email, spacer.cloneNode(), source, spacer].forEach(elem => {
-        address.appendChild(elem);
-    });
-    foot.appendChild(address);
-    body[0].appendChild(foot);
-}
-
-/**
  * Read JSON file and pass to insertNav
- * @param {string} activeID - id of current  nav-bar tab
+ * @param {string} activeID - id of current page's nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function buildNav(activeID, baseURL = '') {
@@ -108,6 +74,35 @@ function insertNav(navData, activeID) {
     headDiv[0].style.paddingTop = "0em";
     let activeObj = document.getElementById(activeID);
     activeObj.className = "active";
+}
+
+/** Create and insert footer */
+function buildFoot() {
+    const body = document.getElementsByTagName("body");
+    let foot = document.createElement("div");
+    let address = document.createElement("address");
+    let email = document.createElement("code");
+    let source = document.createElement("a");
+
+    foot.className = "footer";
+    email.textContent = "sulahiri at stanford dot edu";
+    source.textContent = "[Source]";
+    source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
+    source.title = "Source code on GitHub";
+
+    insertThings(address, "Subhaneil Lahiri: ", email, ". ", source, ".");
+    foot.appendChild(address);
+    body[0].appendChild(foot);
+}
+
+/**
+ *  Create and insert nav-bar and footer
+ * @param {string} activeID  - id of current nav-bar tab
+ * @param {string} baseURL - URL relative to which local urls are interpreted
+ */
+function buildPage(activeID, baseURL = '') {
+    buildNav(activeID, baseURL);
+    buildFoot();
 }
 
 export { buildPage };

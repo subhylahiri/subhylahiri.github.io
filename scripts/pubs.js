@@ -1,5 +1,5 @@
-import { getJSON } from "./getJSON.js";
-import { readWorks, Project, Paper, insertThings } from "./works.js";
+import { getJSON, insertThings } from "./getJSON.js";
+import { readWorks, Project, Paper } from "./works.js";
 
 /** Pattern to match for my name */
 const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
@@ -102,9 +102,7 @@ class Preprint extends Publication {
     constructor(type, entry) {
         super(type, entry);
         /** function to post-process ref span */
-        this.spanMap.ref = span => {
-            span.className = "eprint";
-        }
+        this.spanMap.ref = span => { span.className = "eprint"; }
     }
     /**
      * Produce list of elements to put in citation
@@ -127,7 +125,7 @@ Project.worksMap = {
  */
 function publicationLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)
-        .then(worksData => papersJSON(readWorks(worksData)));
+        .then(papersJSON);
 }
 
 /**
@@ -135,7 +133,7 @@ function publicationLinks(baseURL = '') {
  * @param {Object.<string,Project>} worksData - json dict: project id -> project object
  */
 function papersJSON(worksData) {
-    const {articles, preprints} = collectPapers(worksData);
+    const {articles, preprints} = collectPapers(readWorks(worksData));
     listPapers(articles, "articles", objectify(preprints));
     listPapers(preprints, "preprints");
 }
@@ -179,10 +177,8 @@ function listPapers(papers, anchorID, ...extra) {
  * @returns {Object.<string,Publication>}
  */
 function objectify(workArray) {
-    let workObject = {};
-    workArray.forEach(entry => {
-        workObject[entry.id] = entry;
-    });
+    let workObject = {}
+    workArray.forEach(entry => { workObject[entry.id] = entry; });
     return workObject
 }
 

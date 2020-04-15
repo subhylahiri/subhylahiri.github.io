@@ -1,7 +1,8 @@
 import { getJSON } from "./getJSON.js";
-import { readWorks, Project, Work } from "./works.js";
+import { Project, Work, loopJSON } from "./works.js";
 
-/** Append icon to list of project's works
+/**
+ * Append icon to list of project's works
  * @param {HTMLUListElement} parent UList to append item to
  */
 Work.prototype.appendList = function(parent) {
@@ -17,34 +18,22 @@ Work.prototype.appendList = function(parent) {
 function projectLinks(baseURL = '') {
     Work.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
-        .then(worksData => projectJSON(readWorks(worksData)));
-}
-
-/**
- * Process JSON data to add works list to each project id'd paragraph
- * @param {Object.<string,Project>} worksData - json dict: project id -> title, work types
- */
-function projectJSON(worksData) {
-    for (const project in worksData) {
-        const paragraph = document.getElementById(project);
-        if (paragraph) {
-            paragraph.after(projectWorks(worksData[project]));
-        }
-    }
+        .then(worksData => loopJSON(worksData, projectWorks));
 }
 
 /**
  * Create UList of works for one project
- * @param {Project} projectData - dict: work types -> array of works
- * @returns {HTMLUListElement} - UList of works for one project
+ * @param {HTMLParagraphElement} paragraph - before list of presentations
+ * @param {Project} projectData - object with: work types -> array of works
  */
-function projectWorks(projectData) {
+function projectWorks(paragraph, projectData) {
     let listEntries = document.createElement("ul");
     listEntries.className = "project_links";
     for (const type in Project.worksMap) {
         projectData[type].forEach(entry => entry.appendList(listEntries));
     }
-    return listEntries
+    paragraph.className = "project";
+    paragraph.after(listEntries);
 }
 
 export { projectLinks };
