@@ -16,10 +16,25 @@ p.project {
     background-color: var(--minor-bg-color);
     color: var(--minor-fg-color);
 }
-/* .project_links li:hover {
-    background-color: var(--major-bg-color);
-} */
 
+.article {
+    background-image: url(../icons/article.svg);
+    --icon-label: "Article";
+}
+.preprint {
+    background-image: url(../icons/preprint.svg);
+    --icon-label: "Preprint";
+}
+.slides {
+    background-image: url(../icons/slides.svg);
+    --icon-label: "Slides";
+}
+.poster {
+    background-image: url(../icons/poster.svg);
+    --icon-label: "Poster";
+}
+
+/* Mobile */
 .icon {
     display: block;
     border-radius: 10%;
@@ -33,36 +48,16 @@ p.project {
     text-align: center;
     text-indent: 0%;
     background-color: var(--major-bg-color);
-    color: var(--minor-fg-color);
+    color: inherit;
 }
-
-.article {
-    background-image: url(../icons/article.svg);
+.icon::after {
+    content: var(--icon-label);
 }
-.preprint {
-    background-image: url(../icons/preprint.svg);
-}
-.slides {
-    background-image: url(../icons/slides.svg);
-}
-.poster {
-    background-image: url(../icons/poster.svg);
-}
-
-.article::after {
-    content: "Article";
-}
-.preprint::after {
-    content: "Preprint";
-}
-.slides::after {
-    content: "Slides";
-}
-.poster::after {
-    content: "Poster";
-}
-
+/* Desktop */
 @media (min-width: 600px) {
+    /* .project_links li:hover {
+        background-color: var(--major-bg-color);
+    } */
     .icon {
         height: 3em;
         line-height: 3em;
@@ -71,11 +66,9 @@ p.project {
         white-space: nowrap;
         overflow: hidden;
     }
-        .icon:hover {
+    .icon:hover {
         text-indent: 0%;
-        background-color: var(--minor-bg-color);
-    }
-    .article:hover, .preprint:hover, .slides:hover, .poster:hover {
+        background-color: inherit;
         background-image: none;
     }
 }

@@ -57,7 +57,7 @@ function projectEntry(entry, type, baseURL) {
     link.className = "icon " + type;
     link.title = description;
     link.href = makeURL(entry, type, baseURL);
-    listItem.appendChild(link)
+    listItem.appendChild(link);
     return listItem
 }
 
