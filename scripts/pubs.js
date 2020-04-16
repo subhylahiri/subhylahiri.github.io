@@ -1,5 +1,5 @@
 import { getJSON, insertThings } from "./getJSON.js";
-import { readWorks, Project, Paper } from "./works.js";
+import { readWorks, Project, Paper, makeProjectLoop } from "./works.js";
 
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
@@ -37,8 +37,8 @@ class Publication extends Paper {
     /** Append citation to list of papers
      * @param {HTMLUListElement} parent UList to append item to
      */
-    appendList(parent, ...extra) {
-        const citation = this.cite(...extra);
+    appendList(parent) {
+        const citation = this.cite();
         if (citation.length) {
             parent.appendChild(this.listItem(...citation));
         }
@@ -71,15 +71,19 @@ class Article extends Publication {
      * @param {Object.<string,Preprint>} preprints - array of preprint objects
      * @returns {HTMLElement[]} list of elements to put in citation
      */
-    cite(preprints) {
+    cite() {
         let citation = super.cite()
         if (this.sameAs) {
-            const preprint = preprints[this.sameAs];
+            const preprint = Article.eprints[this.sameAs];
             citation.splice(-1, 0, ", ", preprint.link(preprint.span("ref")));
         }
         return citation
     }
 }
+/** Maps eprint ids to Preprint object
+ * @type {Object.<string,Preprint>}
+ */
+Article.eprints = {};
 
 /** @classdesc Citation info for a preprpint */
 class Preprint extends Publication {
@@ -144,47 +148,45 @@ function publicationLinks(baseURL = '') {
         .then(papersJSON);
 }
 
+const listPapers = makeProjectLoop("papers", "", "title")
+
 /**
  * Process JSON data to add paper list to each type id'd paragraph
  * @param {Object.<string,Project>} worksData - json dict: project id -> project object
  */
 function papersJSON(worksData) {
-    const {articles, preprints} = collectPapers(readWorks(worksData));
-    listPapers(articles, "articles", objectify(preprints));
-    listPapers(preprints, "preprints");
+    const projects = collectPapers(worksData);
+    Article.eprints = objectify(projects.preprints.preprint);
+    listPapers(projects);
 }
 
 /**
- * Process JSON data to create paper lists
- * @param {Object.<string,Project>} worksData - json dict: project id -> project object
- * @returns {Object.<string,Publication[]>}
+ * Process JSON data to collect paper lists
+ * @param {Object.<string,Project>} worksData - JSON dict: id -> project
+ * @returns {Object.<string,Project>} - projects for collected paper types
  */
 function collectPapers(worksData) {
-    let [articles, preprints] = [[], []];
+    let [article, preprint] = [[], []];
     for (const project in worksData) {
         const entry = worksData[project];
-        articles.push(...entry.article);
-        preprints.push(...entry.preprint);
+        article.push(...entry.article);
+        preprint.push(...entry.preprint);
     }
-    articles.sort(Publication.compare)
-    preprints.sort(Publication.compare)
-    return {articles, preprints}
-}
-
-/**
- * Insert a UList of paper citations after an id'd element
- * @param {Publication[]} papers - list of paper objects
- * @param {string} anchorID - id of element the list will appear after
- * @param  {...any} extra - additional parameters for citeFunc
- */
-function listPapers(papers, anchorID, ...extra) {
-    const anchor = document.getElementById(anchorID);
-    if (anchor) {
-        let paperList = document.createElement("ul");
-        paperList.className = "papers";
-        papers.forEach(entry => entry.appendList(paperList, ...extra));
-        anchor.after(paperList);
-    }
+    article.sort(Publication.compare);
+    preprint.sort(Publication.compare);
+    const projects = {
+        "articles": {
+            "title": "Journal and conference papers",
+            "article": article,
+            "preprint": [],
+        },
+        "preprints": {
+            "title": "Preprints",
+            "article": [],
+            "preprint": preprint,
+        }
+    };
+    return readWorks(projects)
 }
 
 /**

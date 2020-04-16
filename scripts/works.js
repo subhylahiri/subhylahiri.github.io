@@ -166,11 +166,15 @@ function makeProjectLoop(listClass, paraClass, textField) {
             let paragraph = document.getElementById(project);
             if (paragraph && projectData.hasWorks()) {
                 let list = document.createElement("ul");
-                list.className = listClass;
                 for (const type in Project.worksMap) {
                     projectData[type].forEach(entry => entry.appendList(list));
                 }
-                paragraph.className = paraClass;
+                if (listClass) {
+                    list.className = listClass;
+                }
+                if (paraClass) {
+                    paragraph.className = paraClass;
+                }
                 if (textField) {
                     paragraph.textContent = projectData[textField];
                 }
