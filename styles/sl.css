@@ -13,13 +13,13 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --major-bg-color: #200483;
+        --major-bg-color: #353b44;
         --major-fg-color: #8babee;
         --minor-bg-color: #4b4f58;
         --minor-fg-color: #b9b1cf;
         --inert-bg-color: #4f555c;
-        --title-bg-color: #353b44;
-        --title-fg-color: #e7b6b6;
+        --title-bg-color: #200483;
+        --title-fg-color: #e7d2b6;
         --links-fg-color: #8180bb;
         /* --footer-fg-color: #999999; */
     }
@@ -30,7 +30,7 @@ body {
     padding: 0;
     font-family: Helvetica, Arial, sans-serif;
     background-color: var(--minor-bg-color);
-    color: var(--major-fg-color);
+    color: var(--minor-fg-color);
 }
 
 /* Sections */
@@ -60,6 +60,7 @@ div.main {
     margin: 0 5% 0 5%;
     padding: 0.625em 0.625em 1.625em 0.625em;
     background-color: var(--major-bg-color);
+    color: var(--major-fg-color);
 }
 
 /* General  formatting */
