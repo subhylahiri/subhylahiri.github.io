@@ -199,5 +199,31 @@ function objectify(workArray) {
     workArray.forEach(entry => { workObject[entry.id] = entry; });
     return workObject
 }
+/**
+ * Insert some element(s) into another
+ * @param {HTMLElement} parent - element to insert things into
+ * @param {...(HTMLElement|string|number)} elements - things to insert into parent
+ */
+function insertThings(parent, ...elements) {
+    elements.forEach(item => {
+        if (["string", "number"].includes(typeof item)) {
+            parent.appendChild(document.createTextNode(item));
+        } else {
+            parent.appendChild(item);
+        }
+    });
+}
+/**
+ * Convert array of works to object indexed by id's
+ * @param {Object[]} workArray - array of Work objects
+ * @returns {Object.<string,Object>} - dict of work objects
+ */
+function objectify(workArray) {
+    let workObject = {};
+    workArray.forEach(entry => {
+        workObject[entry.id] = entry;
+    });
+    return workObject
+}
 
 export { publicationLinks };
