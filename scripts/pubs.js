@@ -156,17 +156,6 @@ const listPapers = makeProjectLoop("papers", "", "title")
  * @param {Object.<string,Object>} worksData - json dict: project id -> project object
  */
 function papersJSON(worksData) {
-    const papers = collectPapers(worksData);
-    Article.eprints = objectify(papers.preprints.preprint);
-    listPapers(papers);
-}
-
-/**
- * Process JSON data to collect paper lists
- * @param {Object.<string,Object>} worksData - JSON dict: id -> project
- * @returns {Object.<string,Project>} - projects for collected paper types
- */
-function collectPapers(worksData) {
     let papers = {"articles": new Project(), "preprints": new Project()}
     papers.articles.title = "Journal and conference papers";
     papers.preprints.title = "Preprints";
@@ -177,7 +166,8 @@ function collectPapers(worksData) {
     }
     papers.articles.article.sort(Publication.compare);
     papers.preprints.preprint.sort(Publication.compare);
-    return papers
+    Article.eprints = objectify(papers.preprints.preprint);
+    listPapers(papers);
 }
 
 /**
