@@ -19,12 +19,10 @@ class Work {
             Object.assign(this, entry);
         }
     }
-    getURL() {
-        return Work.baseURL + this.url;
-    }
-    description() {
-        return this.title;
-    }
+    /** URL of a copy of this work */
+    getURL() { return Work.baseURL + this.url; }
+    /** Description of work for tool-tips */
+    description() { return this.title; }
     /**
      * Create a link element to this work
      * @param  {...(HTMLElement|string|number)} elements - things to put in link
@@ -75,9 +73,9 @@ class Paper extends Work {
             this.sameAs = false;
         }
     }
-    getURL() {
-        return this.url;
-    }
+    /** URL of a copy of this work */
+    getURL() { return this.url; }
+    /** Description of work for tool-tips */
     description() {
         return `“${this.title}”, ${this.ref} (${this.year})`;
     }
@@ -89,23 +87,20 @@ class Project {
      * @param {Object} projectData - JSON object containing works data
      */
     constructor(projectData) {
-        /** The title of the project
-         * @type {string}
-         */
-        this.title = projectData.title;
-        /** List of articles for this project
-         * @type {Paper[]} */
+        /** The title of the project */
+        this.title = "";
+        /** @type {Paper[]} - List of articles for this project */
         this.article = [];
-        /** List of preprints for this project
-         * @type {Paper[]} */
+        /** @type {Paper[]} - List of preprints for this project */
         this.preprint = [];
-        /** List of slides for this project
-         * @type {Work[]} */
+        /** @type {Work[]} - List of slides for this project */
         this.slides = [];
-        /** List of posters for this project
-         * @type {Work[]} */
+        /** @type {Work[]} - List of posters for this project */
         this.poster = [];
-        if (projectData) {
+        if (projectData instanceof Project) {
+            Object.assign(this, projectData);
+        } else if (projectData) {
+            this.title = projectData.title;
             for (const type in Project.worksMap) {
                 this[type] = projectData[type].map(Project.makeWork(type));
             }
@@ -136,19 +131,6 @@ Project.worksMap = {
 }
 
 /**
- * Convert JSON dict of objects to Project objects
- * @param {Object} worksData - JSON dict of projects and works
- * @returns {Object.<string,Project>} - corresponding dict of Project objects
- */
-function readWorks(worksData) {
-    let projects = {};
-    for (const projID in worksData) {
-        projects[projID] = new Project(worksData[projID]);
-    }
-    return projects
-}
-
-/**
  * Make a function to loop over projects in JSON data
  * @param {string} listClass - CSS class for UList
  * @param {string} paraClass - CSS class for paragraph before list
@@ -160,24 +142,17 @@ function makeProjectLoop(listClass, paraClass, textField) {
      * @param {Object.<string,Project>} worksData - json dict: id -> project
      */
     function projectLoopJSON(worksData) {
-        worksData = readWorks(worksData);
-        for (const project in worksData) {
-            const projectData = worksData[project];
-            let paragraph = document.getElementById(project);
+        for (const projectID in worksData) {
+            const projectData = new Project(worksData[projectID]);
+            let paragraph = document.getElementById(projectID);
             if (paragraph && projectData.hasWorks()) {
                 let list = document.createElement("ul");
                 for (const type in Project.worksMap) {
                     projectData[type].forEach(entry => entry.appendList(list));
                 }
-                if (listClass) {
-                    list.className = listClass;
-                }
-                if (paraClass) {
-                    paragraph.className = paraClass;
-                }
-                if (textField) {
-                    paragraph.textContent = projectData[textField];
-                }
+                if (listClass) { list.className = listClass; }
+                if (paraClass) { paragraph.className = paraClass; }
+                if (textField) { paragraph.textContent = projectData[textField]; }
                 paragraph.after(list);
             }
         }
@@ -185,4 +160,4 @@ function makeProjectLoop(listClass, paraClass, textField) {
     return projectLoopJSON
 }
 
-export { readWorks, makeProjectLoop, Project, Paper, Work }
+export { makeProjectLoop, Project, Paper, Work }

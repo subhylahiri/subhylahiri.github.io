@@ -1,5 +1,5 @@
 import { getJSON, insertThings } from "./getJSON.js";
-import { readWorks, Project, Paper, makeProjectLoop } from "./works.js";
+import { Project, Paper, makeProjectLoop } from "./works.js";
 
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
@@ -148,45 +148,36 @@ function publicationLinks(baseURL = '') {
         .then(papersJSON);
 }
 
+/** Function to produce each type of paper list */
 const listPapers = makeProjectLoop("papers", "", "title")
 
 /**
  * Process JSON data to add paper list to each type id'd paragraph
- * @param {Object.<string,Project>} worksData - json dict: project id -> project object
+ * @param {Object.<string,Object>} worksData - json dict: project id -> project object
  */
 function papersJSON(worksData) {
-    const projects = collectPapers(worksData);
-    Article.eprints = objectify(projects.preprints.preprint);
-    listPapers(projects);
+    const papers = collectPapers(worksData);
+    Article.eprints = objectify(papers.preprints.preprint);
+    listPapers(papers);
 }
 
 /**
  * Process JSON data to collect paper lists
- * @param {Object.<string,Project>} worksData - JSON dict: id -> project
+ * @param {Object.<string,Object>} worksData - JSON dict: id -> project
  * @returns {Object.<string,Project>} - projects for collected paper types
  */
 function collectPapers(worksData) {
-    let [article, preprint] = [[], []];
-    for (const project in worksData) {
-        const entry = worksData[project];
-        article.push(...entry.article);
-        preprint.push(...entry.preprint);
+    let papers = {"articles": new Project(), "preprints": new Project()}
+    papers.articles.title = "Journal and conference papers";
+    papers.preprints.title = "Preprints";
+    for (const projectID in worksData) {
+        const project = new Project(worksData[projectID]);
+        papers.articles.article.push(...project.article);
+        papers.preprints.preprint.push(...project.preprint);
     }
-    article.sort(Publication.compare);
-    preprint.sort(Publication.compare);
-    const projects = {
-        "articles": {
-            "title": "Journal and conference papers",
-            "article": article,
-            "preprint": [],
-        },
-        "preprints": {
-            "title": "Preprints",
-            "article": [],
-            "preprint": preprint,
-        }
-    };
-    return readWorks(projects)
+    papers.articles.article.sort(Publication.compare);
+    papers.preprints.preprint.sort(Publication.compare);
+    return papers
 }
 
 /**
@@ -197,32 +188,6 @@ function collectPapers(worksData) {
 function objectify(workArray) {
     let workObject = {}
     workArray.forEach(entry => { workObject[entry.id] = entry; });
-    return workObject
-}
-/**
- * Insert some element(s) into another
- * @param {HTMLElement} parent - element to insert things into
- * @param {...(HTMLElement|string|number)} elements - things to insert into parent
- */
-function insertThings(parent, ...elements) {
-    elements.forEach(item => {
-        if (["string", "number"].includes(typeof item)) {
-            parent.appendChild(document.createTextNode(item));
-        } else {
-            parent.appendChild(item);
-        }
-    });
-}
-/**
- * Convert array of works to object indexed by id's
- * @param {Object[]} workArray - array of Work objects
- * @returns {Object.<string,Object>} - dict of work objects
- */
-function objectify(workArray) {
-    let workObject = {};
-    workArray.forEach(entry => {
-        workObject[entry.id] = entry;
-    });
     return workObject
 }
 
