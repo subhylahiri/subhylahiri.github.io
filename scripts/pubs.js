@@ -1,9 +1,6 @@
 import { getJSON, insertThings } from "./getJSON.js";
 import { readWorks, Project, Paper } from "./works.js";
 
-/** Pattern to match for my name */
-Paper.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
-
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
     /**
@@ -134,6 +131,9 @@ Project.worksMap = {
     "article": Article,
     "preprint": Preprint,
 }
+
+/** Pattern to match for my name */
+Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
 /**
  * Read JSON file and pass to presentationJSON

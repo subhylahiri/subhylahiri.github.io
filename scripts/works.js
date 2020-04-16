@@ -112,7 +112,7 @@ class Project {
         }
     }
     /**
-     * Does the project have any works of the relevant type
+     * Does the project have any works of the relevant types
      * @returns {Boolean} - are any relevant work arrays non-empty?
      */
     hasWorks() {
@@ -149,18 +149,36 @@ function readWorks(worksData) {
 }
 
 /**
- * Process JSON data to add work list to each project id'd paragraph
- * @param {Object.<string,Project>} worksData - json dict: project id -> title, work types
+ * Make a function to loop over projects in JSON data
+ * @param {string} listClass - CSS class for UList
+ * @param {string} paraClass - CSS class for paragraph before list
+ * @param {string} textField - Project field for paragraph contents, if present
  */
-function loopJSON(worksData, callback) {
-    worksData = readWorks(worksData);
-    for (const project in worksData) {
-        const projectData = worksData[project];
-        let paragraph = document.getElementById(project);
-        if (paragraph && projectData.hasWorks()) {
-            callback(paragraph, projectData);
+function makeProjectLoop(listClass, paraClass, textField) {
+    /**
+     * Process JSON data to add work list to each project id'd paragraph
+     * @param {Object.<string,Project>} worksData - json dict: id -> project
+     */
+    function projectLoopJSON(worksData) {
+        worksData = readWorks(worksData);
+        for (const project in worksData) {
+            const projectData = worksData[project];
+            let paragraph = document.getElementById(project);
+            if (paragraph && projectData.hasWorks()) {
+                let list = document.createElement("ul");
+                list.className = listClass;
+                for (const type in Project.worksMap) {
+                    projectData[type].forEach(entry => entry.appendList(list));
+                }
+                paragraph.className = paraClass;
+                if (textField) {
+                    paragraph.textContent = projectData[textField];
+                }
+                paragraph.after(list);
+            }
         }
     }
+    return projectLoopJSON
 }
 
-export { readWorks, loopJSON, Project, Paper, Work }
+export { readWorks, makeProjectLoop, Project, Paper, Work }
