@@ -10,7 +10,7 @@ class Publication extends Paper {
     constructor(type, entry) {
         super(type, entry);
         /** field -> function to post-process spans for given field */
-        this.spanMap = {"author": makeSpanMap(this, "", "self", Publication.myName)};
+        this.spanMap = {"author": ["", "self", Publication.myName]};
     }
     /**
      * Put an object property in a span of that class
@@ -22,7 +22,7 @@ class Publication extends Paper {
         span.className = field;
         span.textContent = this[field];
         if (field in this.spanMap) {
-            this.spanMap[field](span);
+            spanMapper(span, ...this.spanMap[field]);
         }
         return span
     }
@@ -64,7 +64,7 @@ class Article extends Publication {
     constructor(type, entry) {
         super(type, entry);
         /** function to post-process ref span */
-        this.spanMap.ref = makeSpanMap(this, "journal", "volume", /([^\d]+)(\d+)([^\d].*)/);
+        this.spanMap.ref = ["journal", "volume", /([^\d]+)(\d+)([^\d].*)/];
     }
     /**
      * Produce list of elements to put in citation
@@ -93,7 +93,7 @@ class Preprint extends Publication {
     constructor(type, entry) {
         super(type, entry);
         /** function to post-process ref span */
-        this.spanMap.ref = span => { span.className = "eprint"; }
+        this.spanMap.ref = ["eprint"];
     }
     /**
      * Produce list of elements to put in citation
@@ -106,35 +106,24 @@ class Preprint extends Publication {
 
 /**
  * Callback to pick out a part of a span's contents and put in a child span
- * @param {Publication} obj - paper from which we construct the span
+ * @param {HTMLSpanElement} span - containing span
  * @param {string} spanClass - CSS class to use for span, "" to leave it as is
  * @param {string} partClass - CSS class of central part's span
  * @param {RegExp} pattern - pattern of part to pick out, with 3 capturing groups
- * @returns {spanMapper} function to post process a span element
  */
-function makeSpanMap(obj, spanClass, partClass, pattern) {
-    /** function to post process a span element
-     * @param {HTMLSpanElement} span - containing span
-    */
-    function spanMapper(span) {
-        if (spanClass) {
-            span.className = spanClass;
-        }
-        if (partClass && pattern.test(span.textContent)) {
-            const items = span.textContent.match(pattern);
-            obj[partClass] = items[2];
-            span.textContent = "";
-            insertThings(span, items[1], obj.span(partClass), items[3]);
-        }
+function spanMapper(span, spanClass, partClass, pattern) {
+    if (spanClass) {
+        span.className = spanClass;
     }
-    return spanMapper
+    if (partClass && pattern.test(span.textContent)) {
+        const items = span.textContent.match(pattern);
+        let part = document.createElement("span");
+        part.className = partClass;
+        part.textContent = items[2];
+        span.textContent = "";
+        insertThings(span, items[1], part, items[3]);
+    }
 }
-
-/**
- * @callback spanMapper
- * function to post process a span element
- * @param {HTMLSpanElement} span - containing span
- */
 
 /** Class to use for each entry type */
 Project.worksMap = {
