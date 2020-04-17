@@ -49,36 +49,36 @@ function projectJSON(worksData, baseURL) {
         let paragraph = document.getElementById(project);
         if (paragraph) {
             paragraph.className = "project";
-            paragraph.after(projectWorks(worksData[project], baseURL));
+            projectWorks(paragraph, worksData[project], baseURL);
         }
     }
 }
 
 /**
  * Create UList of works for one project
+ * @param {HTMLParagraphElement} paragraph - paragraph before UList of works for project
  * @param {Project} projectData - dict: work types -> array of works
  * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLUListElement} - UList of works for one project
  */
-function projectWorks(projectData, baseURL) {
-    let listEntries = document.createElement("ul");
-    listEntries.className = "project_links";
-    ["article", "preprint", "slides", "poster"].forEach(type => {
+function projectWorks(paragraph, projectData, baseURL) {
+    let list = document.createElement("ul");
+    list.className = "project_links";
+    for ( const type of ["article", "preprint", "slides", "poster"]) {
         projectData[type].forEach(entry => {
-            listEntries.appendChild(projectEntry(entry, type, baseURL));
+            projectEntry(list, entry, type, baseURL);
         });
-    });
-    return listEntries
+    }
+    paragraph.after(list);
 }
 
 /**
  * Create icon li element for one work
+ * @param {HTMLUListElement} list - UList of works for one project
  * @param {Work} entry - dict of info about work
  * @param {string} type - type of work
  * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLLIElement} - icon li element for one work
  */
-function projectEntry(entry, type, baseURL) {
+function projectEntry(list, entry, type, baseURL) {
     const description = makeDescription(entry, type);
     let listItem = document.createElement("li");
     let link = document.createElement("a");
@@ -88,7 +88,7 @@ function projectEntry(entry, type, baseURL) {
     link.href = makeURL(entry, type, baseURL);
     listItem.className = type;
     listItem.appendChild(link);
-    return listItem
+    list.appendChild(listItem);
 }
 
 /**

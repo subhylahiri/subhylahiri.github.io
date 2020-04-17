@@ -1,4 +1,4 @@
-import { getJSON } from "./getJSON.js";
+import { getJSON, insertThings } from "./getJSON.js";
 
 const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
@@ -53,16 +53,19 @@ function collectPapers(worksData) {
         articles.push(...entry.article);
         preprints.push(...entry.preprint);
     }
-    reverseChronology(articles);
-    reverseChronology(preprints);
+    articles.sort(reverseChronology);
+    preprints.sort(reverseChronology);
     return {articles, preprints}
 }
 /**
- * Sort list of papers in reverse chronological order
- * @param {Paper[]} papers - list of paper objects
+ * Comparer to sort list of papers in reverse chronological order
+ * @param {Paper} paperA - first paper object
+ * @param {Paper} paperB - second paper object
+ * @returns {number} positive if paperA goes after paperB
  */
-function reverseChronology(papers) {
-    papers.sort((a,b) => b.month - a.month).sort((a,b) => b.year - a.year);
+function reverseChronology(paperA, paperB) {
+    const yearDiff = paperB.year - paperA.year;
+    return yearDiff ? yearDiff : paperB.month - paperA.month
 }
 
 /**
@@ -77,9 +80,7 @@ function listPapers(papers, anchorID, citeFunc, ...extra) {
     if (anchor) {
         let paperList = document.createElement("ul");
         paperList.className = "papers";
-        papers.forEach(entry => {
-            citeFunc(paperList, entry, ...extra);
-        });
+        papers.forEach(entry => citeFunc(paperList, entry, ...extra));
         anchor.after(paperList);
     }
 }
@@ -221,22 +222,8 @@ function putInSpan(cssClass, ...elements) {
 function putInLink(entry, ...elements) {
     let link = document.createElement("a");
     link.href = entry.url;
-    insertThings(link, ...elements)
+    insertThings(link, ...elements);
     return link
-}
-/**
- * Insert some element(s) into another
- * @param {HTMLElement} parent - element to insert things into
- * @param {...(HTMLElement|string|number)} elements - things to insert into parent
- */
-function insertThings(parent, ...elements) {
-    elements.forEach(item => {
-        if (["string", "number"].includes(typeof item)) {
-            parent.appendChild(document.createTextNode(item));
-        } else {
-            parent.appendChild(item);
-        }
-    });
 }
 /**
  * Convert array of works to object indexed by id's
@@ -245,9 +232,7 @@ function insertThings(parent, ...elements) {
  */
 function objectify(workArray) {
     let workObject = {};
-    workArray.forEach(entry => {
-        workObject[entry.id] = entry;
-    });
+    workArray.forEach(entry => workObject[entry.id] = entry);
     return workObject
 }
 

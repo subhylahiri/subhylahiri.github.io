@@ -1,5 +1,4 @@
-import { getJSON } from "./getJSON.js";
-
+import { getJSON, insertThings } from "./getJSON.js";
 /**
  *  Create and insert nav-bar and footer
  * @param {string} activeID  - id of current nav-bar tab
@@ -19,17 +18,13 @@ function buildFoot() {
     let address = document.createElement("address");
     let email = document.createElement("code");
     let source = document.createElement('a');
-    let myName = document.createTextNode("Subhaneil Lahiri: ");
-    let spacer = document.createTextNode(". ");
 
     email.textContent = "sulahiri at stanford dot edu";
     source.textContent = "[Source]";
     source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
     source.title = "Source code on GitHub";
 
-    [myName, email, spacer.cloneNode(), source, spacer].forEach(elem => {
-        address.appendChild(elem);
-    });
+    insertThings(address, "Subhaneil Lahiri: ", email, ". ", source, ".");
     foot.appendChild(address);
     body[0].appendChild(foot);
 }
@@ -41,9 +36,7 @@ function buildFoot() {
  */
 function buildNav(activeID, baseURL = '') {
     getJSON(`${baseURL}data/nav.json`)
-        .then((navData) => {
-            insertNav(navData, activeID, baseURL);
-        });
+        .then(navData => insertNav(navData, activeID, baseURL));
 }
 
 /**
@@ -67,9 +60,7 @@ function insertNav(navData, activeID, baseURL) {
     let navDiv = document.createElement("div");
     navDiv.className = "nav";
     let navList = document.createElement("ul");
-    navData.forEach(entry => {
-        navList.appendChild(entryNav(entry, baseURL));
-    });
+    navData.forEach(entry => entryNav(navList, entry, baseURL));
     navDiv.appendChild(navList);
     body[0].insertBefore(navDiv, headDiv[0])
     headDiv[0].style.paddingTop = "0em";
@@ -78,21 +69,21 @@ function insertNav(navData, activeID, baseURL) {
 }
 /**
  * Create a list entry for nav-bar tab
+ * @param {HTMLUListElement} navList - list of nav-bar tabs
  * @param {Tab} entry - dict with id, name and url
  * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLLIElement} list entry for nav-bar tab
  */
-function entryNav(entry, baseURL) {
+function entryNav(navList, entry, baseURL) {
     let listItem = document.createElement("li");
-    listItem.id = entry.id;
     let link = document.createElement("a");
     link.textContent = entry.name;
     link.href = entry.url;
     if (entry.internal) {
         link.href = baseURL + link.href;
     }
+    listItem.id = entry.id;
     listItem.appendChild(link);
-    return listItem
+    navList.appendChild(listItem);
 }
 
 export { buildPage };
