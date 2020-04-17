@@ -7,8 +7,22 @@
     --inert-bg-color: #8C96A3;
     --title-bg-color: #757D88;
     --title-fg-color: #FFFFFF;
-    --links-fg-color: #0000A0;
+    --links-fg-color: #5b5b8b;
     /* --footer-fg-color: #999999; */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --major-bg-color: #353b44;
+        --major-fg-color: #a0afd1;
+        --minor-bg-color: #4b4f58;
+        --minor-fg-color: #b9b1cf;
+        --inert-bg-color: #353b44;
+        --title-bg-color: #1e3041;
+        --title-fg-color: #e7d2b6;
+        --links-fg-color: #7f90b3;
+        /* --footer-fg-color: #999999; */
+    }
 }
 
 body {
@@ -16,7 +30,7 @@ body {
     padding: 0;
     font-family: Helvetica, Arial, sans-serif;
     background-color: var(--minor-bg-color);
-    color: var(--major-fg-color);
+    color: var(--minor-fg-color);
 }
 
 /* Sections */
@@ -46,6 +60,7 @@ div.main {
     margin: 0 5% 0 5%;
     padding: 0.625em 0.625em 1.625em 0.625em;
     background-color: var(--major-bg-color);
+    color: var(--major-fg-color);
 }
 
 /* General  formatting */

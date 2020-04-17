@@ -13,23 +13,24 @@ p.project {
     border-radius: 10%;
     padding: 3px;
     margin-right: 0.5em;
+    margin-bottom: 0.5em;
     background-color: var(--minor-bg-color);
     color: var(--minor-fg-color);
 }
 
-.article {
+.article a {
     background-image: url(../icons/article.svg);
     --icon-label: "Article";
 }
-.preprint {
+.preprint a {
     background-image: url(../icons/preprint.svg);
     --icon-label: "Preprint";
 }
-.slides {
+.slides a {
     background-image: url(../icons/slides.svg);
     --icon-label: "Slides";
 }
-.poster {
+.poster a {
     background-image: url(../icons/poster.svg);
     --icon-label: "Poster";
 }
@@ -47,7 +48,7 @@ p.project {
     background-position: center top;
     text-align: center;
     text-indent: 0%;
-    background-color: var(--major-bg-color);
+    background-color: var(--minor-bg-color);
     color: inherit;
 }
 .icon::after {

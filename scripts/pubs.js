@@ -50,8 +50,8 @@ function collectPapers(worksData) {
     let [articles, preprints] = [[], []];
     for (const project in worksData) {
         const entry = worksData[project];
-        articles = articles.concat(entry.article);
-        preprints = preprints.concat(entry.preprint);
+        articles.push(...entry.article);
+        preprints.push(...entry.preprint);
     }
     reverseChronology(articles);
     reverseChronology(preprints);

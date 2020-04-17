@@ -168,12 +168,12 @@
         "poster": []
     },
     "sort-free": {
-        "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+        "title": "Accurate estimation of neural population dynamics without spike sorting",
         "article": [
             {
                 "id": "Trautmann2019sortfree",
                 "url": "https://dx.doi.org/10.1016/j.neuron.2019.05.003",
-                "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+                "title": "Accurate estimation of neural population dynamics without spike sorting",
                 "author": "EM Trautmann, SD Stavisky, S Lahiri, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "ref": " Neuron 103.2:292–308.e4",
                 "year": 2019,
@@ -185,7 +185,7 @@
             {
                 "id": "Trautmann2017sortfree",
                 "url": "https://dx.doi.org/10.1101/229252",
-                "title": "Accurate Estimation of Neural Population Dynamics without Spike Sorting",
+                "title": "Accurate estimation of neural population dynamics without spike sorting",
                 "author": "EM Trautmann, SD Stavisky, S Lahiri, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "ref": "bioRxiv:229252",
                 "year": 2017,

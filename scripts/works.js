@@ -48,6 +48,7 @@ function projectJSON(worksData, baseURL) {
     for (const project in worksData) {
         let paragraph = document.getElementById(project);
         if (paragraph) {
+            paragraph.className = "project";
             paragraph.after(projectWorks(worksData[project], baseURL));
         }
     }
@@ -82,9 +83,10 @@ function projectEntry(entry, type, baseURL) {
     let listItem = document.createElement("li");
     let link = document.createElement("a");
 
-    link.className = "icon " + type;
+    link.className = "icon";
     link.title = description;
     link.href = makeURL(entry, type, baseURL);
+    listItem.className = type;
     listItem.appendChild(link);
     return listItem
 }
