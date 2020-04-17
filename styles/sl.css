@@ -1,26 +1,26 @@
 ﻿/* Subhaneil Lahiri CSS */
 :root {
-    --major-bg-color: #FFFFFF;
+    --major-bg-color: #e4e4e6;
     --major-fg-color: #000000;
-    --minor-bg-color: #DAE6FE;
-    --minor-fg-color: #5E646D;
-    --inert-bg-color: #8C96A3;
-    --title-bg-color: #757D88;
-    --title-fg-color: #FFFFFF;
-    --links-fg-color: #5b5b8b;
+    --links-fg-color: #51517c;
+    --minor-bg-color: #626c72;
+    --minor-fg-color: #efeafd;
+    --inert-bg-color: #4e5561;
+    --title-bg-color: #1e3041;
+    --title-fg-color: #c0ecf7;
     /* --footer-fg-color: #999999; */
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --major-bg-color: #353b44;
-        --major-fg-color: #a0afd1;
-        --minor-bg-color: #4b4f58;
-        --minor-fg-color: #b9b1cf;
-        --inert-bg-color: #353b44;
-        --title-bg-color: #1e3041;
-        --title-fg-color: #e7d2b6;
+        --major-fg-color: #a0b4d1;
         --links-fg-color: #7f90b3;
+        /* --minor-bg-color: #4b4f58;
+        --minor-fg-color: #d7ccf3;
+        --inert-bg-color: #4e5561;
+        --title-bg-color: #1e3041;
+        --title-fg-color: #e7d2b6; */
         /* --footer-fg-color: #999999; */
     }
 }
