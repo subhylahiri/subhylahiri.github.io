@@ -68,7 +68,6 @@ class Article extends Publication {
     }
     /**
      * Produce list of elements to put in citation
-     * @param {Object.<string,Preprint>} preprints - array of preprint objects
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
@@ -153,14 +152,14 @@ const listPapers = makeProjectLoop("papers", "", "title")
 
 /**
  * Process JSON data to add paper list to each type id'd paragraph
- * @param {Object.<string,Object>} worksData - json dict: project id -> project object
+ * @param {Object.<string,Object>} worksJSON - json dict: project id -> project object
  */
-function papersJSON(worksData) {
+function papersJSON(worksJSON) {
     let papers = {"articles": new Project(), "preprints": new Project()}
     papers.articles.title = "Journal and conference papers";
     papers.preprints.title = "Preprints";
-    for (const projectID in worksData) {
-        const project = new Project(worksData[projectID]);
+    for (const projectID in worksJSON) {
+        const project = new Project(worksJSON[projectID]);
         papers.articles.article.push(...project.article);
         papers.preprints.preprint.push(...project.preprint);
     }

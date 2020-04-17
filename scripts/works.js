@@ -84,9 +84,9 @@ class Paper extends Work {
 /** @classdesc All of the works associated with a project */
 class Project {
     /**
-     * @param {Object} projectData - JSON object containing works data
+     * @param {Object} projectJSON - JSON object containing works data
      */
-    constructor(projectData) {
+    constructor(projectJSON) {
         /** The title of the project */
         this.title = "";
         /** @type {Paper[]} - List of articles for this project */
@@ -97,12 +97,12 @@ class Project {
         this.slides = [];
         /** @type {Work[]} - List of posters for this project */
         this.poster = [];
-        if (projectData instanceof Project) {
-            Object.assign(this, projectData);
-        } else if (projectData) {
-            this.title = projectData.title;
+        if (projectJSON instanceof Project) {
+            Object.assign(this, projectJSON);
+        } else if (projectJSON) {
+            this.title = projectJSON.title;
             for (const type in Project.worksMap) {
-                this[type] = projectData[type].map(Project.makeWork(type));
+                this[type] = projectJSON[type].map(Project.workMaker(type));
             }
         }
     }
@@ -118,7 +118,7 @@ class Project {
      * @param {string} type - type of work to create
      * @returns {Function} converter function
      */
-    static makeWork(type) {
+    static workMaker(type) {
         return entry => new Project.worksMap[type](type, entry)
     }
 }
@@ -139,20 +139,20 @@ Project.worksMap = {
 function makeProjectLoop(listClass, paraClass, textField) {
     /**
      * Process JSON data to add work list to each project id'd paragraph
-     * @param {Object.<string,Project>} worksData - json dict: id -> project
+     * @param {Object.<string,Project>} worksJSON - json dict: id -> project
      */
-    function projectLoopJSON(worksData) {
-        for (const projectID in worksData) {
-            const projectData = new Project(worksData[projectID]);
+    function projectLoopJSON(worksJSON) {
+        for (const projectID in worksJSON) {
+            const project = new Project(worksJSON[projectID]);
             let paragraph = document.getElementById(projectID);
-            if (paragraph && projectData.hasWorks()) {
+            if (paragraph && project.hasWorks()) {
                 let list = document.createElement("ul");
                 for (const type in Project.worksMap) {
-                    projectData[type].forEach(entry => entry.appendList(list));
+                    project[type].forEach(entry => entry.appendList(list));
                 }
                 if (listClass) { list.className = listClass; }
                 if (paraClass) { paragraph.className = paraClass; }
-                if (textField) { paragraph.textContent = projectData[textField]; }
+                if (textField) { paragraph.textContent = project[textField]; }
                 paragraph.after(list);
             }
         }
