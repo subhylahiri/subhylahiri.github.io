@@ -20,6 +20,7 @@ function projectJSON(worksData, baseURL) {
     for (const project in worksData) {
         let paragraph = document.getElementById(project);
         if (paragraph) {
+            paragraph.className = "project";
             paragraph.after(projectWorks(worksData[project], baseURL));
         }
     }
