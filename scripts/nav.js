@@ -52,7 +52,8 @@ function readTabData(navData) {
 function buildNav(activeID, baseURL = '') {
     Tab.baseURL = baseURL;
     getJSON(`${baseURL}data/nav.json`)
-        .then(navData => insertNav(readTabData(navData), activeID));
+        .then(readTabData)
+        .then(navData => insertNav(navData, activeID));
 }
 
 /**
@@ -86,7 +87,7 @@ function buildFoot() {
     email.textContent = "sulahiri at stanford dot edu";
     source.textContent = "[Source]";
     source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
-    source.title = "Source code on GitHub";
+    source.title = "Source code for this website on GitHub";
 
     insertThings(address, "Subhaneil Lahiri: ", email, ". ", source, ".");
     foot.appendChild(address);

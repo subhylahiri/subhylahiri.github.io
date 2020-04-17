@@ -110,6 +110,7 @@ class Preprint extends Publication {
  * @param {string} spanClass - CSS class to use for span, "" to leave it as is
  * @param {string} partClass - CSS class of central part's span
  * @param {RegExp} pattern - pattern of part to pick out, with 3 capturing groups
+ * @returns {spanMapper} function to post process a span element
  */
 function makeSpanMap(obj, spanClass, partClass, pattern) {
     /** function to post process a span element
@@ -129,6 +130,12 @@ function makeSpanMap(obj, spanClass, partClass, pattern) {
     return spanMapper
 }
 
+/**
+ * @callback spanMapper
+ * function to post process a span element
+ * @param {HTMLSpanElement} span - containing span
+ */
+
 /** Class to use for each entry type */
 Project.worksMap = {
     "article": Article,
@@ -144,17 +151,16 @@ Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
  */
 function publicationLinks(baseURL = '') {
     getJSON(`${baseURL}data/works.json`)
-        .then(papersJSON);
+        .then(collectPapers)
+        .then(makeProjectLoop("papers", "", "title"));
 }
 
-/** Function to produce each type of paper list */
-const listPapers = makeProjectLoop("papers", "", "title")
-
 /**
- * Process JSON data to add paper list to each type id'd paragraph
- * @param {Object.<string,Object>} worksJSON - json dict: project id -> project object
+ * Process JSON data to collect paper lists as type id'd projects
+ * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
+ * @returns {Object.<string,Project>} dict: type -> all works of that type
  */
-function papersJSON(worksJSON) {
+function collectPapers(worksJSON) {
     let papers = {"articles": new Project(), "preprints": new Project()}
     papers.articles.title = "Journal and conference papers";
     papers.preprints.title = "Preprints";
@@ -166,7 +172,7 @@ function papersJSON(worksJSON) {
     papers.articles.article.sort(Publication.compare);
     papers.preprints.preprint.sort(Publication.compare);
     Article.eprints = objectify(papers.preprints.preprint);
-    listPapers(papers);
+    return papers;
 }
 
 /**

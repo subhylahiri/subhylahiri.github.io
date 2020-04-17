@@ -2,8 +2,8 @@
  * Get URL of current page
  */
 function getDir() {
-    let loc = window.location.pathname;
-    let dir = loc.substring(0, loc.lastIndexOf('/'));
+    const loc = window.location.pathname;
+    const dir = loc.substring(0, loc.lastIndexOf('/'));
     return `${dir}/`
 }
 
@@ -22,13 +22,13 @@ async function getJSON(dataURL) {
  * @param {...(HTMLElement|string|number)} elements - things to insert into parent
  */
 function insertThings(parent, ...elements) {
-    elements.forEach(item => {
+    for (const item of elements) {
         if (["string", "number"].includes(typeof item)) {
             parent.appendChild(document.createTextNode(item));
         } else {
             parent.appendChild(item);
         }
-    });
+    }
 }
 
 export { getDir, getJSON, insertThings };

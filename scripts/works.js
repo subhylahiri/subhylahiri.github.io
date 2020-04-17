@@ -135,6 +135,7 @@ Project.worksMap = {
  * @param {string} listClass - CSS class for UList
  * @param {string} paraClass - CSS class for paragraph before list
  * @param {string} textField - Project field for paragraph contents, if present
+ * @returns {projectLoopJSON} function to loop over projects in JSON data
  */
 function makeProjectLoop(listClass, paraClass, textField) {
     /**
@@ -142,8 +143,13 @@ function makeProjectLoop(listClass, paraClass, textField) {
      * @param {Object.<string,Project>} worksJSON - json dict: id -> project
      */
     function projectLoopJSON(worksJSON) {
+        var project;
         for (const projectID in worksJSON) {
-            const project = new Project(worksJSON[projectID]);
+            if (worksJSON[projectID] instanceof Project) {
+                project = worksJSON[projectID];
+            } else {
+                project = new Project(worksJSON[projectID]);
+            }
             let paragraph = document.getElementById(projectID);
             if (paragraph && project.hasWorks()) {
                 let list = document.createElement("ul");
@@ -159,5 +165,11 @@ function makeProjectLoop(listClass, paraClass, textField) {
     }
     return projectLoopJSON
 }
+
+/**
+ * Function to process JSON data to add work list to each project id'd paragraph
+ * @callback projectLoopJSON
+ * @param {Object.<string,Project>} worksJSON - json dict: id -> project
+ */
 
 export { makeProjectLoop, Project, Paper, Work }
