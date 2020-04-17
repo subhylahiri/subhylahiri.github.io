@@ -1,5 +1,5 @@
 /**
- * Get URL of current page
+ * Get path of current page
  */
 function getDir() {
     const loc = window.location.pathname;

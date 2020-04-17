@@ -170,8 +170,8 @@ function collectPapers(worksJSON) {
  * @returns {Object.<string,Publication>}
  */
 function objectify(workArray) {
-    let workObject = {}
-    workArray.forEach(entry => { workObject[entry.id] = entry; });
+    let workObject = {};
+    workArray.forEach(entry => workObject[entry.id] = entry);
     return workObject
 }
 
