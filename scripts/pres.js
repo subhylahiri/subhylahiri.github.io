@@ -23,36 +23,36 @@ function presentationJSON(worksData, baseURL) {
         if ((projectData.slides || projectData.poster) && paragraph) {
             paragraph.className = "presentation";
             paragraph.textContent = projectData.title;
-            paragraph.after(projectPresentations(projectData, baseURL));
+            projectPresentations(paragraph, projectData, baseURL);
         }
     }
 }
 
 /**
  * Create UList of presentations for one project
+ * @param {HTMLParagraphElement} paragraph - paragraph before UList of works for project
  * @param {Object} projectData - dict: work types -> array of works
  * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLUListElement} list of presentations
  */
-function projectPresentations(projectData, baseURL) {
-    let listEntries = document.createElement("ul");
-    listEntries.className = "materials";
-    ["slides", "poster"].forEach(type => {
+function projectPresentations(paragraph, projectData, baseURL) {
+    let list = document.createElement("ul");
+    list.className = "materials";
+    for (const type of ["slides", "poster"]) {
         projectData[type].forEach(entry => {
-            listEntries.appendChild(presentationMaterials(entry, type, baseURL));
+            presentationMaterials(list, entry, type, baseURL);
         });
-    });
-    return listEntries
+    }
+    paragraph.after(list);
 }
 
 /**
  * Create an li element for one presentation
+ * @param {HTMLUListElement} list - UList of works for one project
  * @param {Object} entry - one slide/poster entry from json
  * @param {string} type - type of presentation (slides | poster)
  * @param {string} baseURL - URL relative to which local urls are interpreted
- * @returns {HTMLLIElement} list entry for a presentation
  */
-function presentationMaterials(entry, type, baseURL) {
+function presentationMaterials(list, entry, type, baseURL) {
     let listItem = document.createElement("li");
     let link = document.createElement("a");
 
@@ -61,7 +61,7 @@ function presentationMaterials(entry, type, baseURL) {
     listItem.className = type;
     listItem.appendChild(link);
     listItem.appendChild(document.createTextNode("."));
-    return listItem
+    list.appendChild(listItem);
 }
 
 export { presentationLinks };
