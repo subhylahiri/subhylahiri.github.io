@@ -18,19 +18,19 @@ p.project {
     color: var(--minor-fg-color);
 }
 
-.article {
+.article a {
     background-image: url(../icons/article.svg);
     --icon-label: "Article";
 }
-.preprint {
+.preprint a {
     background-image: url(../icons/preprint.svg);
     --icon-label: "Preprint";
 }
-.slides {
+.slides a {
     background-image: url(../icons/slides.svg);
     --icon-label: "Slides";
 }
-.poster {
+.poster a {
     background-image: url(../icons/poster.svg);
     --icon-label: "Poster";
 }

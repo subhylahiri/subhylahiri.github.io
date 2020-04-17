@@ -54,9 +54,10 @@ function projectEntry(entry, type, baseURL) {
     let listItem = document.createElement("li");
     let link = document.createElement("a");
 
-    link.className = "icon " + type;
+    link.className = "icon";
     link.title = description;
     link.href = makeURL(entry, type, baseURL);
+    listItem.className = type;
     listItem.appendChild(link);
     return listItem
 }
