@@ -38,8 +38,8 @@ function collectPapers(worksData) {
 }
 /**
  * Comparer to sort list of papers in reverse chronological order
- * @param {Object[]} paperA - first paper object
- * @param {Object[]} paperB - second paper object
+ * @param {Object} paperA - first paper object
+ * @param {Object} paperB - second paper object
  * @returns {number} positive if paperA goes after paperB
  */
 function reverseChronology(paperA, paperB) {
