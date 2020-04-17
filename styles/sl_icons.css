@@ -13,6 +13,7 @@ p.project {
     border-radius: 10%;
     padding: 3px;
     margin-right: 0.5em;
+    margin-bottom: 0.5em;
     background-color: var(--minor-bg-color);
     color: var(--minor-fg-color);
 }
