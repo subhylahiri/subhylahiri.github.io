@@ -81,6 +81,12 @@ class Paper extends Work {
     }
 }
 
+/** @classdesc A conference abstract */
+class Abstract extends Paper {
+    /** URL of a copy of this work */
+    getURL() { return Work.baseURL + this.url; }
+}
+
 /** @classdesc All of the works associated with a project */
 class Project {
     /**

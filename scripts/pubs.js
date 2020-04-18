@@ -9,7 +9,7 @@ class Publication extends Paper {
      */
     constructor(type, entry) {
         super(type, entry);
-        /** field -> function to post-process spans for given field */
+        /** parameters of function to post-process spans for given field */
         this.spanMap = {"author": ["", "self", Publication.myName]};
     }
     /**
@@ -63,7 +63,7 @@ class Article extends Publication {
      */
     constructor(type, entry) {
         super(type, entry);
-        /** function to post-process ref span */
+        /** parameters of function to post-process ref span */
         this.spanMap.ref = ["journal", "volume", /([^\d]+)(\d+)([^\d].*)/];
     }
     /**
@@ -92,7 +92,7 @@ class Preprint extends Publication {
      */
     constructor(type, entry) {
         super(type, entry);
-        /** function to post-process ref span */
+        /** parameters of function to post-process ref span */
         this.spanMap.ref = ["eprint"];
     }
     /**
@@ -102,6 +102,21 @@ class Preprint extends Publication {
     cite() {
         return this.sameAs ? [] : super.cite()
     }
+}
+
+/** @classdesc A conference abstract */
+class Abstract extends Publication {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
+    constructor(type, entry) {
+        super(type, entry);
+        /** parameters of function to post-process ref span */
+        this.spanMap.ref = ["venue"];
+    }
+    /** URL of a copy of this work */
+    getURL() { return Work.baseURL + this.url; }
 }
 
 /**

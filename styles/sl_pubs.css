@@ -34,8 +34,12 @@ ul.papers {
     background-image: url(../icons/preprint.svg);
     content: 'Preprint:';
 }
+.papers li.abstract::before {
+    background-image: url(../icons/abstract.svg);
+    content: 'Abstract:';
+}
 
-.author, .title, .journal, .volume, .year, .eprint {
+.author, .title, .journal, .volume, .year, .eprint, .venue {
     font-size: inherit;
 }
 .author::after {
