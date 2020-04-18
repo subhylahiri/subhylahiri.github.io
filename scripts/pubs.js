@@ -130,6 +130,12 @@ Project.worksMap = {
     "article": Article,
     "preprint": Preprint,
 }
+/** Titles of sections for each paper type */
+const typeTitles = {
+    "article": "Journal and conference papers",
+    "preprint": "Preprints",
+    "abstract": "Conference abstracts",
+};
 
 /** Pattern to match for my name */
 Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
@@ -150,19 +156,35 @@ function publicationLinks(baseURL = '') {
  * @returns {Object.<string,Project>} dict: type -> all works of that type
  */
 function collectPapers(worksJSON) {
-    let papers = {"articles": new Project(), "preprints": new Project()}
-    papers.articles.title = "Journal and conference papers";
-    papers.preprints.title = "Preprints";
+    let papers = {};
+    typesLoop(papers, (_proj, type) => papers[type + "s"] = new Project());
+    typesLoop(papers, (proj, type) => proj.title = typeTitles[type]);
     for (const projectID in worksJSON) {
         const project = new Project(worksJSON[projectID]);
-        papers.articles.article.push(...project.article);
-        papers.preprints.preprint.push(...project.preprint);
+        typesLoop(papers, (proj, type) => proj[type].push(...project[type]));
     }
-    papers.articles.article.sort(Publication.compare);
-    papers.preprints.preprint.sort(Publication.compare);
+    typesLoop(papers, (proj, type) => proj[type].sort(Publication.compare));
     Article.eprints = objectify(papers.preprints.preprint);
     return papers;
 }
+
+/**
+ * Loop over paper types to update project for that paper type
+ * @param {Object.<string,Project>} papers - dict: type -> all works of that type
+ * @param {typeFunc} callback - Function to update project for one paper type
+ */
+function typesLoop(papers, callback) {
+    for (const type in Project.worksMap) {
+        callback(papers[type + "s"], type);
+    }
+}
+
+/**
+ * Function to update project for one paper type
+ * @callback typeFunc
+ * @param {Project} proj - project with all papers of one type
+ * @param {string} type - name of paper type
+ */
 
 /**
  * Convert array of works to object indexed by id's
