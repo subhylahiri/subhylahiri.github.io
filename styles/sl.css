@@ -16,12 +16,9 @@
         --major-bg-color: #353b44;
         --major-fg-color: #a0b4d1;
         --links-fg-color: #7f90b3;
-        /* --minor-bg-color: #4b4f58;
-        --minor-fg-color: #d7ccf3;
-        --inert-bg-color: #4e5561;
-        --title-bg-color: #1e3041;
-        --title-fg-color: #e7d2b6; */
-        /* --footer-fg-color: #999999; */
+    }
+    img.dark {
+        filter: invert(100%) hue-rotate(180deg);
     }
 }
 
