@@ -1,10 +1,10 @@
 ﻿/* Subhaneil Lahiri CSS */
 :root {
-    --major-bg-color: #e4e4e6;
+    --major-bg-color: #e7e7e9;
     --major-fg-color: #000000;
-    --links-fg-color: #51517c;
-    --minor-bg-color: #626c72;
-    --minor-fg-color: #efeafd;
+    --links-fg-color: #293e81;
+    --minor-bg-color: #a2acb3;
+    --minor-fg-color: #3d384b;
     --inert-bg-color: #4e5561;
     --title-bg-color: #1e3041;
     --title-fg-color: #c0ecf7;
@@ -16,7 +16,9 @@
         --major-bg-color: #353b44;
         --major-fg-color: #a0b4d1;
         --links-fg-color: #7f90b3;
-    }
+        --minor-bg-color: #626c72;
+        --minor-fg-color: #efeafd;
+        }
     img.dark {
         filter: invert(100%) hue-rotate(180deg);
     }
