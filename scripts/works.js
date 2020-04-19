@@ -103,6 +103,8 @@ class Project {
         this.slides = [];
         /** @type {Work[]} - List of posters for this project */
         this.poster = [];
+        /** @type {Abstract[]} - List of abstracts for this project */
+        this.abstract = [];
         if (projectJSON instanceof Project) {
             Object.assign(this, projectJSON);
         } else if (projectJSON) {
@@ -134,6 +136,7 @@ Project.worksMap = {
     "preprint": Paper,
     "slides": Work,
     "poster": Work,
+    // "abstract": Abstract,
 }
 
 /**

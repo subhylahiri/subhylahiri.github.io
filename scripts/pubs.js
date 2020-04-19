@@ -27,7 +27,7 @@ class Publication extends Paper {
         return span
     }
     /**
-     * Produce List of elements to put in citation
+     * Produce list of elements to put in citation
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
@@ -64,7 +64,7 @@ class Article extends Publication {
     constructor(type, entry) {
         super(type, entry);
         /** parameters of function to post-process ref span */
-        this.spanMap.ref = ["journal", "volume", /([^\d]+)(\d+)([^\d].*)/];
+        this.spanMap.ref = ["journal", "volume", Article.volRef];
     }
     /**
      * Produce list of elements to put in citation
@@ -144,6 +144,7 @@ function spanMapper(span, spanClass, partClass, pattern) {
 Project.worksMap = {
     "article": Article,
     "preprint": Preprint,
+    // "abstract": Abstract,
 }
 /** Titles of sections for each paper type */
 const typeTitles = {
@@ -151,7 +152,8 @@ const typeTitles = {
     "preprint": "Preprints",
     "abstract": "Conference abstracts",
 };
-
+/** Pattern for volume in journal ref */
+Article.volRef = /([^\d]+)(\d+)([^\d].*)/;
 /** Pattern to match for my name */
 Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
@@ -204,7 +206,7 @@ function typesLoop(papers, callback) {
 /**
  * Convert array of works to object indexed by id's
  * @param {Publication[]} workArray - array of Work objects
- * @returns {Object.<string,Publication>}
+ * @returns {Object.<string,Publication>} dict of work objects
  */
 function objectify(workArray) {
     let workObject = {};
