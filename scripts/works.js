@@ -136,7 +136,7 @@ Project.worksMap = {
     "preprint": Paper,
     "slides": Work,
     "poster": Work,
-    // "abstract": Abstract,
+    "abstract": Abstract,
 }
 
 /**
@@ -181,4 +181,4 @@ function makeProjectLoop(listClass, paraClass, textField) {
  * @param {Object.<string,Project>} worksJSON - json dict: id -> project
  */
 
-export { makeProjectLoop, Project, Paper, Work }
+export { makeProjectLoop, Project, Paper, Abstract, Work }

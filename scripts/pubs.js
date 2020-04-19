@@ -1,5 +1,5 @@
 import { getJSON, insertThings } from "./getJSON.js";
-import { Project, Paper, makeProjectLoop } from "./works.js";
+import { Project, Paper, Work, makeProjectLoop } from "./works.js";
 
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
@@ -144,7 +144,7 @@ function spanMapper(span, spanClass, partClass, pattern) {
 Project.worksMap = {
     "article": Article,
     "preprint": Preprint,
-    // "abstract": Abstract,
+    "abstract": Abstract,
 }
 /** Titles of sections for each paper type */
 const typeTitles = {

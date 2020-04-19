@@ -37,6 +37,28 @@
                 "url": "presentations/SynapsePoster_maths.pdf",
                 "title": "NeurIPS 2013"
             }
+        ],
+        "abstract": [
+            {
+                "id": "Lahiri2013learn",
+                "url": "files/13.Cosyne.LearningMemory.pdf",
+                "title": "A general theory of learning and memory with complex synapses",
+                "author": "S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2013,
+                "month": 3,
+                "sameAs": false
+            },
+            {
+                "id": "Lahiri2016timescales",
+                "url": "files/16.Cosyne.Timecales.pdf",
+                "title": "Optimal synaptic strategies for different timescales of memory",
+                "author": "S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2016,
+                "month": 3,
+                "sameAs": false
+            }
         ]
     },
     "mhc-learn": {
@@ -66,7 +88,19 @@
                 "title": "Cosyne 2014"
             }
         ],
-        "poster": []
+        "poster": [],
+        "abstract": [
+            {
+                "id": "Lahiri2014cosyne",
+                "url": "files/14.Cosyne.MHC.pdf",
+                "title": "Modeling enhanced and impaired learning with enhanced plasticity",
+                "author": "TDB Nguyen-Vu, GQ Zhao, S Lahiri, A Suvrathan, H Lee, S Ganguli, CJ Shatz, JL Raymond",
+                "ref": "Cosyne",
+                "year": 2014,
+                "month": 3,
+                "sameAs": false
+            }
+        ]
     },
     "pps": {
         "title": "A universal trade-off between power, precision and speed in physical communication",
@@ -98,6 +132,18 @@
                 "url": "presentations/pps_poster.pdf",
                 "title": "Cosyne 2016"
             }
+        ],
+        "abstract": [
+            {
+                "id": "Lahiri2016pps",
+                "url": "files/16.Cosyne.PPS.pdf",
+                "title": "A universal tradeoff between energy, speed and precision in neural communication",
+                "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2016,
+                "month": 3,
+                "sameAs": false
+            }
         ]
     },
     "cell-sense": {
@@ -117,7 +163,39 @@
 
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": [
+            {
+                "id": "Harvey2017cellsense",
+                "url": "files/17.Cosyne.CellSense.pdf",
+                "title": "An energy-accuracy tradeo↵ in subneuronal molecular sensing",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2017,
+                "month": 3,
+                "sameAs": false
+            },
+            {
+                "id": "Harvey2017cosyne",
+                "url": "files/17.APS.CellSense.pdf",
+                "title": "A energy-accuracy tradeoff in the physics of cellular sensing",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2017,
+                "month": 3,
+                "sameAs": false
+            },
+            {
+                "id": "Harvey2020aps",
+                "url": "files/20.APS.web.CellSense.pdf",
+                "title": "An energy-accuracy tradeoff for nonequilibrium receptors",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "APS March Meeting",
+                "year": 2020,
+                "month": 3,
+                "sameAs": false
+            }
+        ]
     },
     "illusions": {
         "title": "Statistical mechanics of complex neural systems and high dimensional data",
@@ -147,7 +225,8 @@
 
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "rand-proj": {
         "title": "Random projections of random manifolds",
@@ -165,7 +244,8 @@
             }
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "sort-free": {
         "title": "Accurate estimation of neural population dynamics without spike sorting",
@@ -200,6 +280,18 @@
                 "url": "presentations/sortfree_poster.pdf",
                 "title": "Cosyne 2019"
             }
+        ],
+        "abstract": [
+            {
+                "id": "Lahiri2019cosyne",
+                "url": "files/19.Cosyne.Sortfree.pdf",
+                "title": "Accurate estimation of neural population dynamics without spike sorting",
+                "author": "S Lahiri, EM Trautmann, SD Stavisky, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
+                "ref": "Cosyne",
+                "year": 2019,
+                "month": 3,
+                "sameAs": false
+            }
         ]
     },
     "deep-chaos": {
@@ -229,7 +321,28 @@
             }
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": []
+    },
+    "fsm-rnn": {
+        "title": "Exactly solvable nonlinear recurrent networks for context-dependent information processing",
+        "article": [],
+        "preprint": [],
+        "slides": [],
+        "poster": [],
+        "abstract": [
+            {
+                "id": "stock2017fsm-rnn",
+                "url": "files/17.Cosyne.fsm-rnns.pdf",
+                "title": "Exactly solvable nonlinear recurrent networks for context-dependent information processing",
+                "author": "CH Stock, S Lahiri, AH Williams, S Ganguli",
+                "ref": "Cosyne",
+                "year": 2017,
+                "month": 3,
+                "sameAs": false
+            }
+
+        ]
     },
     "larva-crawl": {
         "title": "The motor programs underlying navigation in Drosophila larva",
@@ -253,7 +366,8 @@
                 "title": "Seminar at Stanford, 2011"
             }
         ],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "plasmaring": {
         "title": "Black rings from fluid mechanics",
@@ -333,7 +447,8 @@
                 "title": "HETG family meeting, 2009"
             }
         ],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "giant-graviton": {
         "title": "Giant gravitons and the supersymmetric states of N=4 Yang-Mills",
@@ -374,6 +489,7 @@
             }
 
         ],
-        "poster": []
+        "poster": [],
+        "abstract": []
     }
 }
