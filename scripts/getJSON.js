@@ -8,8 +8,8 @@ function getDir() {
 }
 
 /**
- * Load data from a JSON file
- * @param {string} dataURL - URL relative to which local urls are interpreted
+ * Read data from a JSON file
+ * @param {string} dataURL - URL of JSON file
  */
 async function getJSON(dataURL) {
     const response = await fetch(getDir() + dataURL);

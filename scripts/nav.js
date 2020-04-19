@@ -1,28 +1,93 @@
 import { getJSON, insertThings } from "./getJSON.js";
+
+/** @classdesc A tab in the navigation bar */
+class Tab {
+    /**
+     * @param {Object} entry - a JSON object containing properties
+     */
+    constructor(entry) {
+        /** identifier of list item */
+        this.id = "";
+        /** display name of tab */
+        this.name = "";
+        /** URL of page to link to */
+        this.url = "";
+        /** is the URL local? */
+        this.internal = true;
+        if (entry) {
+            Object.assign(this, entry);
+        }
+    }
+    /**
+     * Append Tab to UList
+     * @param {HTMLUListElement} parent - UList to append entry to
+     */
+    appendTab(parent) {
+        let listItem = document.createElement("li");
+        listItem.id = this.id;
+        let link = document.createElement("a");
+        link.textContent = this.name;
+        link.href = (this.internal ? Tab.baseURL : "") + this.url;
+        listItem.appendChild(link);
+        parent.appendChild(listItem);
+    }
+}
+/** URL relative to which local urls are interpreted */
+Tab.baseURL = "";
+
 /**
- *  Create and insert nav-bar and footer
- * @param {string} activeID  - id of current nav-bar tab
+ * Convert JSON array of objects to Tab objects
+ * @param {Object[]} navData - JSON array of tabs
+ * @returns {Tab[]} - corresponding array of Tab objects
+ */
+function readTabData(navData) {
+    return navData.map(entry => new Tab(entry))
+}
+
+/**
+ * Read JSON file and pass to insertNav
+ * @param {string} activeID - id of current page's nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function buildPage(activeID, baseURL) {
-    buildNav(activeID, baseURL);
-    buildFoot();
+function buildNav(activeID, baseURL = '') {
+    Tab.baseURL = baseURL;
+    getJSON(`${baseURL}data/nav.json`)
+        .then(readTabData)
+        .then(navData => insertNav(navData, activeID));
+}
+
+/**
+ * Create and insert list of nav-bar tabs
+ * @param {Tab[]} navData - array of nav-bar entries from JSON
+ * @param {string} activeID - id of current  nav-bar tab
+ */
+function insertNav(navData, activeID) {
+    const body = document.getElementsByTagName("body");
+    let headDiv = document.getElementsByClassName("header");
+    let navDiv = document.createElement("div");
+    navDiv.className = "nav";
+    let navList = document.createElement("ul");
+    navData.forEach(entry => entry.appendTab(navList));
+    navDiv.appendChild(navList);
+    body[0].insertBefore(navDiv, headDiv[0])
+    headDiv[0].style.paddingTop = "0em";
+    let activeObj = document.getElementById(activeID);
+    activeObj.className = "active";
 }
 
 /** Create and insert footer */
 function buildFoot() {
-    let body = document.getElementsByTagName("body");
+    const body = document.getElementsByTagName("body");
     let foot = document.createElement("div");
-    foot.className = "footer";
-
     let address = document.createElement("address");
     let email = document.createElement("code");
-    let source = document.createElement('a');
+    let source = document.createElement("a");
 
+    foot.className = "footer";
     email.textContent = "sulahiri at stanford dot edu";
     source.textContent = "[Source]";
     source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
-    source.title = "Source code on GitHub";
+    source.title = "Source code for this website on GitHub";
 
     insertThings(address, "Subhaneil Lahiri: ", email, ". ", source, ".");
     foot.appendChild(address);
@@ -30,60 +95,13 @@ function buildFoot() {
 }
 
 /**
- * Read JSON file and pass to insertNav
- * @param {string} activeID - id of current  nav-bar tab
+ *  Create and insert nav-bar and footer
+ * @param {string} activeID  - id of current nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function buildNav(activeID, baseURL = '') {
-    getJSON(`${baseURL}data/nav.json`)
-        .then(navData => insertNav(navData, activeID, baseURL));
-}
-
-/**
- * A tab in the navigation bar
- * @typedef {Object} Tab
- * @property {string} id - identifier of list item
- * @property {string} name - display name of tab
- * @property {string} url - URL of page to link to
- * @property {boolean} internal - is the URL local?
- */
-
-/**
- * Create and insert list of nav-bar tabs
- * @param {Tab[]} navData - array of nav-bar entries from JSON
- * @param {string} activeID - id of current  nav-bar tab
- * @param {string} baseURL - URL relative to which local urls are interpreted
- */
-function insertNav(navData, activeID, baseURL) {
-    let body = document.getElementsByTagName("body");
-    let headDiv = document.getElementsByClassName("header");
-    let navDiv = document.createElement("div");
-    navDiv.className = "nav";
-    let navList = document.createElement("ul");
-    navData.forEach(entry => entryNav(navList, entry, baseURL));
-    navDiv.appendChild(navList);
-    body[0].insertBefore(navDiv, headDiv[0])
-    headDiv[0].style.paddingTop = "0em";
-    let activeObj = document.getElementById(activeID);
-    activeObj.className = "active";
-}
-/**
- * Create a list entry for nav-bar tab
- * @param {HTMLUListElement} navList - list of nav-bar tabs
- * @param {Tab} entry - dict with id, name and url
- * @param {string} baseURL - URL relative to which local urls are interpreted
- */
-function entryNav(navList, entry, baseURL) {
-    let listItem = document.createElement("li");
-    let link = document.createElement("a");
-    link.textContent = entry.name;
-    link.href = entry.url;
-    if (entry.internal) {
-        link.href = baseURL + link.href;
-    }
-    listItem.id = entry.id;
-    listItem.appendChild(link);
-    navList.appendChild(listItem);
+function buildPage(activeID, baseURL = '') {
+    buildNav(activeID, baseURL);
+    buildFoot();
 }
 
 export { buildPage };

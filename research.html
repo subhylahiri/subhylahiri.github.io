@@ -4,6 +4,7 @@
   <link rel="stylesheet" type="text/css" href="styles/sl.css" />
   <link rel="stylesheet" type="text/css" href="styles/sl_icons.css" />
   <link rel="preload" href="scripts/getJSON.js" as="script" crossorigin="anonymous" />
+  <link rel="preload" href="scripts/works.js" as="script" crossorigin="anonymous" />
   <title>Subhaneil Lahiri: Research topics</title>
   <meta name="keywords" content="Subhaneil Lahiri research theoretical computational neuroscience biophysics" />
   <meta name="description" content="Subhaneil Lahiri's research topics" />
@@ -118,7 +119,7 @@
       processes can observe the receptor.
     </p>
 
-  <h3 id="hid-stats">High dimensional statistics</h3>
+  <h3 id="hid-stats">High-dimensional statistics</h3>
 
     <p id="illusions">
       One of the perils of high-dimensional data analysis is creating illusions
@@ -129,7 +130,7 @@
 
     <p id="rand-proj">
       One way of alleviating the “curse of dimensionality” is dimensionality reduction.
-      As  demonstrated in the field of compressed sensing, random dimensionality reduction
+      As demonstrated in the field of compressed sensing, random dimensionality reduction
       can be equally effective, without the risk of generating illusions of structure.
       Previous theoretical work on random projections has produced very loose bounds
       on their efficacy, possibly because they demand that they apply to arbitrarily
@@ -150,7 +151,7 @@
   </div>
 
   <script type="module">
-    import {projectLinks} from "./scripts/works.js"
+    import {projectLinks} from "./scripts/icons.js"
     projectLinks();
     import {buildPage} from "./scripts/nav.js"
     buildPage("subj");
