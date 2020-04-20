@@ -24,6 +24,23 @@
     }
 }
 
+@media print {
+    :root {
+        --major-bg-color: #ffffff;
+        --major-fg-color: #000000;
+        --links-fg-color: #353550;
+        --minor-bg-color: #ffffff;
+        --minor-fg-color: #43414b;
+        --inert-bg-color: #ffffff;
+        --title-bg-color: #ffffff;
+        --title-fg-color: #44676e;
+        /* --footer-fg-color: #999999; */
+    }
+    div.nav {
+        display: none;
+    }
+}
+
 body {
     margin: 0em;
     padding: 0;
