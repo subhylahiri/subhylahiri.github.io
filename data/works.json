@@ -46,7 +46,7 @@
                 "author": "S Lahiri and S Ganguli",
                 "ref": "Cosyne",
                 "year": 2013,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             },
             {
@@ -56,7 +56,7 @@
                 "author": "S Lahiri and S Ganguli",
                 "ref": "Cosyne",
                 "year": 2016,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             }
         ]
@@ -97,7 +97,7 @@
                 "author": "TDB Nguyen-Vu, GQ Zhao, S Lahiri, A Suvrathan, H Lee, S Ganguli, CJ Shatz, JL Raymond",
                 "ref": "Cosyne",
                 "year": 2014,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             }
         ]
@@ -113,7 +113,7 @@
                 "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
                 "ref": "arXiv:1603.07758 [cond-mat.stat-mech]",
                 "year": 2016,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             }
 
@@ -141,7 +141,7 @@
                 "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
                 "ref": "Cosyne",
                 "year": 2016,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             }
         ]
@@ -166,21 +166,21 @@
         "poster": [],
         "abstract": [
             {
-                "id": "Harvey2017cellsense",
+                "id": "Harvey2017cosyne",
                 "url": "files/17.Cosyne.CellSense.pdf",
-                "title": "An energy-accuracy tradeo↵ in subneuronal molecular sensing",
+                "title": "An energy-accuracy tradeoff in subneuronal molecular sensing",
                 "author": "SE Harvey, S Lahiri and S Ganguli",
                 "ref": "Cosyne",
                 "year": 2017,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             },
             {
-                "id": "Harvey2017cosyne",
+                "id": "Harvey2017aps",
                 "url": "files/17.APS.CellSense.pdf",
                 "title": "A energy-accuracy tradeoff in the physics of cellular sensing",
                 "author": "SE Harvey, S Lahiri and S Ganguli",
-                "ref": "Cosyne",
+                "ref": "APS March Meeting",
                 "year": 2017,
                 "month": 3,
                 "sameAs": false
@@ -289,7 +289,7 @@
                 "author": "S Lahiri, EM Trautmann, SD Stavisky, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
                 "ref": "Cosyne",
                 "year": 2019,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             }
         ]
@@ -338,7 +338,7 @@
                 "author": "CH Stock, S Lahiri, AH Williams, S Ganguli",
                 "ref": "Cosyne",
                 "year": 2017,
-                "month": 3,
+                "month": 2,
                 "sameAs": false
             }
 

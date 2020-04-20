@@ -1,5 +1,5 @@
 import { getJSON, insertThings } from "./getJSON.js";
-import { Project, Paper, Work, makeProjectLoop } from "./works.js";
+import { Project, Paper, makeProjectLoop } from "./works.js";
 
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
@@ -116,7 +116,7 @@ class Abstract extends Publication {
         this.spanMap.ref = ["venue"];
     }
     /** URL of a copy of this work */
-    getURL() { return Work.baseURL + this.url; }
+    getURL() { return Abstract.baseURL + this.url; }
 }
 
 /**
@@ -162,6 +162,7 @@ Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function publicationLinks(baseURL = '') {
+    Publication.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
         .then(collectPapers)
         .then(makeProjectLoop("papers", "", "title"));
