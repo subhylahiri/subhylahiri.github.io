@@ -10,7 +10,7 @@ class Publication extends Paper {
     constructor(type, entry) {
         super(type, entry);
         /** parameters of function to post-process spans for given field */
-        this.spanMap = {"author": ["", "self", Publication.myName]};
+        this.spanMap = {"author": ["author", "self", Publication.myName]};
     }
     /**
      * Put an object property in a span of that class
@@ -127,9 +127,7 @@ class Abstract extends Publication {
  * @param {RegExp} pattern - pattern of part to pick out, with 3 capturing groups
  */
 function spanMapper(span, spanClass, partClass, pattern) {
-    if (spanClass) {
-        span.className = spanClass;
-    }
+    span.className = spanClass;
     if (partClass && pattern.test(span.textContent)) {
         const items = span.textContent.match(pattern);
         let part = document.createElement("span");

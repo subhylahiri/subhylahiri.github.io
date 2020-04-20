@@ -77,6 +77,7 @@ div.main {
     padding: 0.625em 0.625em 1.625em 0.625em;
     background-color: var(--major-bg-color);
     color: var(--major-fg-color);
+    border-radius: 0% 0% 5px 5px;
 }
 
 /* General  formatting */
@@ -103,7 +104,7 @@ code {
 
 /* titles */
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
     font-weight: bold;
     color: inherit;
     font-family: Helvetica, Arial, sans-serif;
@@ -127,23 +128,6 @@ h3 {
     text-align: left;
     font-size: 1.6em;
 }
-
-/* h4 {
-    text-align: left;
-    font-size: 1em;
-}
-
-h5 {
-    text-align: left;
-    font-size: 1em;
-    font-style: italic;
-}
-
-h6 {
-    display: inline;
-    text-align: left;
-    font-size: 1em;
-} */
 
 /* Basic links */
 
@@ -227,7 +211,7 @@ img.frontright {
     margin-top: 0.625em;
     margin-bottom: 0.625em;
     border: none;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 @media (min-width: 600px) {
