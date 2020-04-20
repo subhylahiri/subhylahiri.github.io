@@ -45,8 +45,8 @@ class Publication extends Paper {
     }
     /**
      * Compare two papers for sorting with reverse chronology
-     * @param {Paper} paperA - first paper to compare
-     * @param {Paper} paperB - second paper to compare
+     * @param {Publication} paperA - first paper to compare
+     * @param {Publication} paperB - second paper to compare
      * @returns {number} positive if paperA goes after paperB
      */
     static compare(paperA, paperB) {
@@ -116,7 +116,7 @@ class Abstract extends Publication {
         this.spanMap.ref = ["venue"];
     }
     /** URL of a copy of this work */
-    getURL() { return Work.baseURL + this.url; }
+    getURL() { return Abstract.baseURL + this.url; }
 }
 
 /**
@@ -162,6 +162,7 @@ Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function publicationLinks(baseURL = '') {
+    Publication.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
         .then(collectPapers)
         .then(makeProjectLoop("papers", "", "title"));

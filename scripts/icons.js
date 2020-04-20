@@ -1,5 +1,5 @@
 import { getJSON } from "./getJSON.js";
-import { Work, makeProjectLoop } from "./works.js";
+import { Work, makeProjectLoop, readProjectsJSON } from "./works.js";
 
 /**
  * Append icon to list of project's works
@@ -18,6 +18,7 @@ Work.prototype.appendList = function appendList(parent) {
 function projectLinks(baseURL = '') {
     Work.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
+        .then(readProjectsJSON)
         .then(makeProjectLoop("project_links", "project"));
 }
 
