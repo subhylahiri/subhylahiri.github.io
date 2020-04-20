@@ -84,7 +84,7 @@ class Paper extends Work {
 /** @classdesc A conference abstract */
 class Abstract extends Paper {
     /** URL of a copy of this work */
-    getURL() { return Work.baseURL + this.url; }
+    getURL() { return Abstract.baseURL + this.url; }
 }
 
 /** @classdesc All of the works associated with a project */
@@ -140,6 +140,19 @@ Project.worksMap = {
 }
 
 /**
+ * Process JSON data into dict of id -> project object
+ * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
+ * @returns {Object.<string,Project>} dict: id -> project object
+ */
+function readProjectsJSON(worksJSON) {
+    let projects = {};
+    for (const projectID in worksJSON) {
+        projects[projectID] = new Project(worksJSON[projectID]);
+    }
+    return projects
+}
+
+/**
  * Make a function to loop over projects in JSON data
  * @param {string} listClass - CSS class for UList
  * @param {string} paraClass - CSS class for paragraph before list
@@ -149,16 +162,11 @@ Project.worksMap = {
 function makeProjectLoop(listClass, paraClass, textField) {
     /**
      * Process JSON data to add work list to each project id'd paragraph
-     * @param {Object.<string,Project>} worksJSON - json dict: id -> project
+     * @param {Object.<string,Project>} projectsData - json dict: id -> project
      */
-    function projectLoopJSON(worksJSON) {
-        var project;
-        for (const projectID in worksJSON) {
-            if (worksJSON[projectID] instanceof Project) {
-                project = worksJSON[projectID];
-            } else {
-                project = new Project(worksJSON[projectID]);
-            }
+    function projectLoopJSON(projectsData) {
+        for (const projectID in projectsData) {
+            const project = projectsData[projectID];
             let paragraph = document.getElementById(projectID);
             if (paragraph && project.hasWorks()) {
                 let list = document.createElement("ul");
@@ -181,4 +189,4 @@ function makeProjectLoop(listClass, paraClass, textField) {
  * @param {Object.<string,Project>} worksJSON - json dict: id -> project
  */
 
-export { makeProjectLoop, Project, Paper, Abstract, Work }
+export { readProjectsJSON, makeProjectLoop, Project, Abstract, Paper, Work }

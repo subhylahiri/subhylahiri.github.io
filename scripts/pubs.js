@@ -45,8 +45,8 @@ class Publication extends Paper {
     }
     /**
      * Compare two papers for sorting with reverse chronology
-     * @param {Paper} paperA - first paper to compare
-     * @param {Paper} paperB - second paper to compare
+     * @param {Publication} paperA - first paper to compare
+     * @param {Publication} paperB - second paper to compare
      * @returns {number} positive if paperA goes after paperB
      */
     static compare(paperA, paperB) {

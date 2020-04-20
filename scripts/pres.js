@@ -1,5 +1,5 @@
 import { getJSON } from "./getJSON.js";
-import { Project, Work, makeProjectLoop } from "./works.js";
+import { Project, Work, makeProjectLoop, readProjectsJSON } from "./works.js";
 
 /**
  * Append presentation to list of project's materials
@@ -22,6 +22,7 @@ Project.worksMap = {
 function presentationLinks(baseURL = '') {
     Work.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
+        .then(readProjectsJSON)
         .then(makeProjectLoop("materials", "presentation", "title"));
 }
 
