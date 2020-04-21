@@ -23,8 +23,7 @@ class Work {
     getURL() { return Work.baseURL + this.url; }
     /** Description of work for tool-tips */
     description() { return this.title; }
-    /**
-     * Create a link element to this work
+    /** Create a link element to this work
      * @param  {...(HTMLElement|string|number)} elements - things to put in link
      * @returns {HTMLAnchorElement} the link element
      */
@@ -35,8 +34,7 @@ class Work {
         insertThings(link, ...elements);
         return link
     }
-    /**
-     * Create a list item for this work
+    /** Create a list item for this work
      * @param  {...(HTMLElement|string|number)} elements - things to put in li
      * @returns {HTMLAnchorElement} the link element
      */
@@ -114,15 +112,13 @@ class Project {
             }
         }
     }
-    /**
-     * Does the project have any works of the relevant types
+    /** Does the project have any works of the relevant types
      * @returns {Boolean} - are any relevant work arrays non-empty?
      */
     hasWorks() {
         return Object.keys(Project.worksMap).some(type => this[type])
     }
-    /**
-     * Create a function to convert JSON object to Work object
+    /** Create a function to convert JSON object to Work object
      * @param {string} type - type of work to create
      * @returns {Function} converter function
      */
@@ -139,8 +135,7 @@ Project.worksMap = {
     "abstract": Abstract,
 }
 
-/**
- * Process JSON data into dict of id -> project object
+/** Process JSON data into dict of id -> project object
  * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
  * @returns {Object.<string,Project>} dict: id -> project object
  */
@@ -152,14 +147,12 @@ function readProjectsJSON(worksJSON) {
     return projects
 }
 
-/**
- * Make a function to loop over projects in JSON data
+/** Make a function to loop over projects in JSON data
  * @param {string} listClass - CSS class for UList
- * @param {string} paraClass - CSS class for paragraph before list
  * @param {string} textField - Project field for paragraph contents, if present
  * @returns {projectLoopJSON} function to loop over projects in JSON data
  */
-function makeProjectLoop(listClass, paraClass, textField) {
+function makeProjectLoop(listClass, textField) {
     /**
      * Process JSON data to add work list to each project id'd paragraph
      * @param {Object.<string,Project>} projectsData - json dict: id -> project
@@ -174,7 +167,6 @@ function makeProjectLoop(listClass, paraClass, textField) {
                     project[type].forEach(entry => entry.appendList(list));
                 }
                 if (listClass) { list.className = listClass; }
-                if (paraClass) { paragraph.className = paraClass; }
                 if (textField) { paragraph.textContent = project[textField]; }
                 paragraph.after(list);
             }
@@ -182,9 +174,7 @@ function makeProjectLoop(listClass, paraClass, textField) {
     }
     return projectLoopJSON
 }
-
-/**
- * Function to process JSON data to add work list to each project id'd paragraph
+/** Function to process JSON data to add work list to each project id'd paragraph
  * @callback projectLoopJSON
  * @param {Object.<string,Project>} worksJSON - json dict: id -> project
  */

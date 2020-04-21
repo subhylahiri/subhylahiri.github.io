@@ -12,8 +12,7 @@ class Publication extends Paper {
         /** parameters of function to post-process spans for given field */
         this.spanMap = {"author": ["author", "self", Publication.myName]};
     }
-    /**
-     * Put an object property in a span of that class
+    /** Put an object property in a span of that class
      * @param {string} field - name of field to put in span
      * @returns {HTMLSpanElement} span element containing field
      */
@@ -26,8 +25,7 @@ class Publication extends Paper {
         }
         return span
     }
-    /**
-     * Produce list of elements to put in citation
+    /** Produce list of elements to put in citation
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
@@ -43,8 +41,7 @@ class Publication extends Paper {
             parent.appendChild(this.listItem(...citation));
         }
     }
-    /**
-     * Compare two papers for sorting with reverse chronology
+    /** Compare two papers for sorting with reverse chronology
      * @param {Publication} paperA - first paper to compare
      * @param {Publication} paperB - second paper to compare
      * @returns {number} positive if paperA goes after paperB
@@ -66,8 +63,7 @@ class Article extends Publication {
         /** parameters of function to post-process ref span */
         this.spanMap.ref = ["journal", "volume", Article.volRef];
     }
-    /**
-     * Produce list of elements to put in citation
+    /** Produce list of elements to put in citation
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
@@ -95,8 +91,7 @@ class Preprint extends Publication {
         /** parameters of function to post-process ref span */
         this.spanMap.ref = ["eprint"];
     }
-    /**
-     * Produce list of elements to put in citation
+    /** Produce list of elements to put in citation
      * @returns {HTMLElement[]} list of elements to put in citation
      */
     cite() {
@@ -119,8 +114,7 @@ class Abstract extends Publication {
     getURL() { return Abstract.baseURL + this.url; }
 }
 
-/**
- * Callback to pick out a part of a span's contents and put in a child span
+/** Callback to pick out a part of a span's contents and put in a child span
  * @param {HTMLSpanElement} span - containing span
  * @param {string} spanClass - CSS class to use for span, "" to leave it as is
  * @param {string} partClass - CSS class of central part's span
@@ -144,37 +138,43 @@ Project.worksMap = {
     "preprint": Preprint,
     "abstract": Abstract,
 }
-/** Titles of sections for each paper type */
-const typeTitles = {
-    "article": "Journal and conference papers",
-    "preprint": "Preprints",
-    "abstract": "Conference abstracts",
-};
 /** Pattern for volume in journal ref */
 Article.volRef = /([^\d]+)(\d+)([^\d].*)/;
 /** Pattern to match for my name */
 Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
-/**
- * Read JSON file and pass to presentationJSON
- * @param {string} baseURL - URL relative to which local urls are interpreted
+/** Convert array of works to object indexed by id's
+ * @param {Publication[]} workArray - array of Work objects
+ * @returns {Object.<string,Publication>} dict of work objects
  */
-function publicationLinks(baseURL = '') {
-    Publication.baseURL = baseURL;
-    getJSON(`${baseURL}data/works.json`)
-        .then(collectPapers)
-        .then(makeProjectLoop("papers", "", "title"));
+function objectify(workArray) {
+    let workObject = {};
+    workArray.forEach(entry => workObject[entry.id] = entry);
+    return workObject
 }
 
-/**
- * Process JSON data to collect paper lists as type id'd projects
+/** Loop over paper types to update project for that paper type
+ * @param {Object.<string,Project>} papers - dict: type -> all works of that type
+ * @param {typeFunc} callback - Function to update project for one paper type
+ */
+function typesLoop(papers, callback) {
+    for (const type in Project.worksMap) {
+        callback(papers[type + "s"], type);
+    }
+}
+/** Function to update project for one paper type
+ * @callback typeFunc
+ * @param {Project} proj - project with all papers of one type
+ * @param {string} type - name of paper type
+ */
+
+/** Process JSON data to collect paper lists as type id'd projects
  * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
  * @returns {Object.<string,Project>} dict: type -> all works of that type
  */
-function collectPapers(worksJSON) {
+function collectByType(worksJSON) {
     let papers = {};
     typesLoop(papers, (_proj, type) => papers[type + "s"] = new Project());
-    typesLoop(papers, (proj, type) => proj.title = typeTitles[type]);
     for (const projectID in worksJSON) {
         const project = new Project(worksJSON[projectID]);
         typesLoop(papers, (proj, type) => proj[type].push(...project[type]));
@@ -184,33 +184,14 @@ function collectPapers(worksJSON) {
     return papers;
 }
 
-/**
- * Loop over paper types to update project for that paper type
- * @param {Object.<string,Project>} papers - dict: type -> all works of that type
- * @param {typeFunc} callback - Function to update project for one paper type
+/** Read JSON file and pass to presentationJSON
+ * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function typesLoop(papers, callback) {
-    for (const type in Project.worksMap) {
-        callback(papers[type + "s"], type);
-    }
-}
-
-/**
- * Function to update project for one paper type
- * @callback typeFunc
- * @param {Project} proj - project with all papers of one type
- * @param {string} type - name of paper type
- */
-
-/**
- * Convert array of works to object indexed by id's
- * @param {Publication[]} workArray - array of Work objects
- * @returns {Object.<string,Publication>} dict of work objects
- */
-function objectify(workArray) {
-    let workObject = {};
-    workArray.forEach(entry => workObject[entry.id] = entry);
-    return workObject
+function publicationLinks(baseURL = '') {
+    Publication.baseURL = baseURL;
+    getJSON(`${baseURL}data/works.json`)
+        .then(collectByType)
+        .then(makeProjectLoop("papers"));
 }
 
 export { publicationLinks };

@@ -18,8 +18,7 @@ class Tab {
             Object.assign(this, entry);
         }
     }
-    /**
-     * Append Tab to UList
+    /** Append Tab to UList
      * @param {HTMLUListElement} parent - UList to append entry to
      */
     appendTab(parent) {
@@ -35,8 +34,7 @@ class Tab {
 /** URL relative to which local urls are interpreted */
 Tab.baseURL = "";
 
-/**
- * Convert JSON array of objects to Tab objects
+/** Convert JSON array of objects to Tab objects
  * @param {Object[]} navData - JSON array of tabs
  * @returns {Tab[]} - corresponding array of Tab objects
  */
@@ -44,20 +42,7 @@ function readTabData(navData) {
     return navData.map(entry => new Tab(entry))
 }
 
-/**
- * Read JSON file and pass to insertNav
- * @param {string} activeID - id of current page's nav-bar tab
- * @param {string} baseURL - URL relative to which local urls are interpreted
- */
-function buildNav(activeID, baseURL = '') {
-    Tab.baseURL = baseURL;
-    getJSON(`${baseURL}data/nav.json`)
-        .then(readTabData)
-        .then(navData => insertNav(navData, activeID));
-}
-
-/**
- * Create and insert list of nav-bar tabs
+/** Create and insert list of nav-bar tabs
  * @param {Tab[]} navData - array of nav-bar entries from JSON
  * @param {string} activeID - id of current  nav-bar tab
  */
@@ -73,6 +58,17 @@ function insertNav(navData, activeID) {
     headDiv[0].style.paddingTop = "0em";
     let activeObj = document.getElementById(activeID);
     activeObj.className = "active";
+}
+
+/** Read JSON file and pass to insertNav
+ * @param {string} activeID - id of current page's nav-bar tab
+ * @param {string} baseURL - URL relative to which local urls are interpreted
+ */
+function buildNav(activeID, baseURL = '') {
+    Tab.baseURL = baseURL;
+    getJSON(`${baseURL}data/nav.json`)
+        .then(readTabData)
+        .then(navData => insertNav(navData, activeID));
 }
 
 /** Create and insert footer */
@@ -94,8 +90,7 @@ function buildFoot() {
     body[0].appendChild(foot);
 }
 
-/**
- *  Create and insert nav-bar and footer
+/**  Create and insert nav-bar and footer
  * @param {string} activeID  - id of current nav-bar tab
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */

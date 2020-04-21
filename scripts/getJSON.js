@@ -1,14 +1,11 @@
-/**
- * Get path of current page
- */
+/** Get path of current page */
 function getDir() {
     const loc = window.location.pathname;
     const dir = loc.substring(0, loc.lastIndexOf('/'));
     return `${dir}/`
 }
 
-/**
- * Read data from a JSON file
+/** Read data from a JSON file
  * @param {string} dataURL - URL of JSON file
  */
 async function getJSON(dataURL) {
@@ -16,8 +13,7 @@ async function getJSON(dataURL) {
     return await response.json();
 }
 
-/**
- * Insert some element(s) into another
+/** Insert some element(s) into another
  * @param {HTMLElement} parent - element to insert things into
  * @param {...(HTMLElement|string|number)} elements - things to insert into parent
  */
