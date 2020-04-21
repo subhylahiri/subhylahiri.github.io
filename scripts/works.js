@@ -134,6 +134,17 @@ Project.worksMap = {
     "poster": Work,
     "abstract": Abstract,
 }
+/**
+ * Choose which types of work will be included
+ * @param {string[]} types - array of names of work types to include
+ */
+function chooseWorkTypes(types) {
+    for (const type in Project.worksMap) {
+        if (!types.includes(type)) {
+            delete Project.worksMap[type];
+        }
+    }
+}
 
 /** Process JSON data into dict of id -> project object
  * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
@@ -179,4 +190,4 @@ function makeProjectLoop(listClass, textField) {
  * @param {Object.<string,Project>} worksJSON - json dict: id -> project
  */
 
-export { readProjectsJSON, makeProjectLoop, Project, Abstract, Paper, Work }
+export { readProjectsJSON, makeProjectLoop, chooseWorkTypes, Project, Abstract, Paper, Work }

@@ -33,12 +33,12 @@ class Publication extends Paper {
         return [this.span("author"), " ", this.span("title"), " ", link, "."]
     }
     /** Append citation to list of papers
-     * @param {HTMLUListElement} parent UList to append item to
+     * @param {HTMLUListElement} list - UList to append item to
      */
-    appendList(parent) {
+    appendList(list) {
         const citation = this.cite();
         if (citation.length) {
-            parent.appendChild(this.listItem(...citation));
+            list.appendChild(this.listItem(...citation));
         }
     }
     /** Compare two papers for sorting with reverse chronology
@@ -51,6 +51,8 @@ class Publication extends Paper {
         return yearDiff ? yearDiff : paperB.month - paperA.month
     }
 }
+/** Pattern to match for my name */
+Publication.myName = /(.*)([\w\W])(.*)/;
 
 /** @classdesc Citation info for a journal article */
 class Article extends Publication {
@@ -79,6 +81,8 @@ class Article extends Publication {
  * @type {Object.<string,Preprint>}
  */
 Article.eprints = {};
+/** Pattern for volume in journal ref */
+Article.volRef = /([^\d]+)(\d+)([^\d].*)/;
 
 /** @classdesc Citation info for a preprpint */
 class Preprint extends Publication {
@@ -114,6 +118,13 @@ class Abstract extends Publication {
     getURL() { return Abstract.baseURL + this.url; }
 }
 
+/** Class to use for each entry type */
+Project.worksMap = {
+    "article": Article,
+    "preprint": Preprint,
+    "abstract": Abstract,
+}
+
 /** Callback to pick out a part of a span's contents and put in a child span
  * @param {HTMLSpanElement} span - containing span
  * @param {string} spanClass - CSS class to use for span, "" to leave it as is
@@ -123,25 +134,14 @@ class Abstract extends Publication {
 function spanMapper(span, spanClass, partClass, pattern) {
     span.className = spanClass;
     if (partClass && pattern.test(span.textContent)) {
-        const items = span.textContent.match(pattern);
-        let part = document.createElement("span");
-        part.className = partClass;
-        part.textContent = items[2];
+        let items = span.textContent.match(pattern).slice(1);
+        items.splice(1, 0, document.createElement("span"));
+        items[1].className = partClass;
+        items[1].textContent = items.splice(2, 1)[0];
         span.textContent = "";
-        insertThings(span, items[1], part, items[3]);
+        insertThings(span, ...items);
     }
 }
-
-/** Class to use for each entry type */
-Project.worksMap = {
-    "article": Article,
-    "preprint": Preprint,
-    "abstract": Abstract,
-}
-/** Pattern for volume in journal ref */
-Article.volRef = /([^\d]+)(\d+)([^\d].*)/;
-/** Pattern to match for my name */
-Publication.myName = /(.*)(S[\w.]* Lahiri)(.*)/;
 
 /** Convert array of works to object indexed by id's
  * @param {Publication[]} workArray - array of Work objects
@@ -185,9 +185,11 @@ function collectByType(worksJSON) {
 }
 
 /** Read JSON file and pass to presentationJSON
+ * @param {string} myName - Pattern for my name: "{given initials} {family name}""
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function publicationLinks(baseURL = '') {
+function publicationLinks(myName="[\\w\\W]", baseURL = "") {
+    Publication.myName = new RegExp(`(.*)(${myName.replace(/ /g, "[\\w.]* ")})(.*)`);
     Publication.baseURL = baseURL;
     getJSON(`${baseURL}data/works.json`)
         .then(collectByType)
