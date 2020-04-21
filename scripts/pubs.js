@@ -1,6 +1,9 @@
 import { getJSON, insertThings } from "./getJSON.js";
 
+/** Pattern for my name in Paper.authors */
 const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
+/** Pattern for volume number in Article.ref */
+const volRef = /([^\d]+)(\d+)([^\d].*)/;
 
 /**
  * Read JSON file and pass to presentationJSON
@@ -19,6 +22,7 @@ function papersJSON(worksData) {
     let {articles, preprints} = collectPapers(worksData);
     listPapers(articles, "articles", citeArticle, objectify(preprints));
     listPapers(preprints, "preprints", citePreprint);
+    // listPapers(abstracts, "abstracts", citeAbstract);
 }
 
 /**
@@ -31,9 +35,11 @@ function collectPapers(worksData) {
         const entry = worksData[project];
         articles.push(...entry.article);
         preprints.push(...entry.preprint);
+        // abstracts.push(...entry.abstract);
     }
     articles.sort(reverseChronology);
     preprints.sort(reverseChronology);
+    // abstracts.sort(reverseChronology);
     return {articles, preprints}
 }
 /**
@@ -79,7 +85,7 @@ function citeArticle(parent, entry, preprints) {
 }
 
 /**
- * Create a new list item ffor a preprint citation
+ * Create a new list item for a preprint citation
  * @param {HTMLUListElement} parent - UList to add list item to
  * @param {Object} entry - preprint object with details
  */
@@ -87,6 +93,18 @@ function citePreprint(parent, entry) {
     if (!entry.pub) {
         const citation = makeCitation(entry, formatEprint);
         makeListItem(parent, "preprint", citation);
+    }
+}
+
+/**
+ * Create a new list item for an abstract citation
+ * @param {HTMLUListElement} parent - UList to add list item to
+ * @param {Object} entry - abstract object with details
+ */
+function citeAbstract(parent, entry) {
+    if (!entry.pub) {
+        const citation = makeCitation(entry, formatVenue);
+        makeListItem(parent, "abstract", citation);
     }
 }
 
@@ -135,7 +153,7 @@ function formatAuthor(entry) {
 /**
  * Create the span element for title
  * @param {Object} entry - paper object with details
- * @param {string} entry.author - the title
+ * @param {string} entry.title - the title
  * @returns {HTMLSpanElement} span element
  */
 function formatTitle(entry) {
@@ -144,21 +162,30 @@ function formatTitle(entry) {
 /**
  * Create the span element for journal reference
  * @param {Object} entry - paper object with details
- * @param {string} entry.author - the journal reference
+ * @param {string} entry.ref - the journal reference
  * @returns {HTMLSpanElement} span element
  */
 function formatJournal(entry) {
-    const items = pickPart(entry.ref, "volume", /([^\d]+)(\d+)([^\d].*)/);
+    const items = pickPart(entry.ref, "volume", volRef);
     return putInSpan("journal", ...items)
 }
 /**
  * Create the span element for eprint reference
  * @param {Object} entry - paper object with details
- * @param {string} entry.author - the eprint reference
+ * @param {string} entry.ref - the eprint reference
  * @returns {HTMLSpanElement} span element
  */
 function formatEprint(entry) {
     return putInSpan("eprint", entry.ref)
+}
+/**
+ * Create the span element for conference abstract's venue
+ * @param {Object} entry - paper object with details
+ * @param {string} entry.ref - the conference venue
+ * @returns {HTMLSpanElement} span element
+ */
+function formatVenue(entry) {
+    return putInSpan("venue", entry.ref)
 }
 /**
  * Create the span element for publication year

@@ -8,7 +8,8 @@
     --inert-bg-color: #4e5561;
     --title-bg-color: #1e3041;
     --title-fg-color: #c0ecf7;
-    /* --footer-fg-color: #999999; */
+    --footer-bg-color: var(--minor-bg-color);
+    --footer-fg-color: var(--minor-fg-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,8 +69,8 @@ div.footer {
     text-align: center;
     margin: 0;
     padding: 0.625em;
-    background-color: var(--minor-bg-color);
-    color: var(--minor-fg-color);
+    background-color: var(--footer-bg-color);
+    color: var(--footer-fg-color);
 }
 
 div.main {
