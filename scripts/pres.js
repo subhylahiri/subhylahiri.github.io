@@ -12,6 +12,8 @@ Work.prototype.appendList = function appendList(list) {
 /** Read JSON file and pass to presentationJSON
  * @param {string[]} types - array of names of work types to include
  * @param {string} baseURL - URL relative to which local urls are interpreted
+ *
+ * Select projects by including/excluding headings with id's in HTML file
  */
 function presentationLinks(types=["slides", "poster"], baseURL = "") {
     Work.baseURL = baseURL;

@@ -13,8 +13,10 @@ Work.prototype.appendList = function appendList(list) {
 /** Read JSON file and pass to projectJSON
  * @param {string[]} types - array of names of work types to include
  * @param {string} baseURL - URL relative to which local urls are interpreted
+ *
+ * Select projects by including/excluding headings with id's in HTML file
  */
-function projectLinks(types=["article", "preprint", "slides", "poster"], baseURL = "") {
+function projectLinks(types=["article", "preprint", "slides", "poster", "abstract"], baseURL = "") {
     Work.baseURL = baseURL;
     chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)

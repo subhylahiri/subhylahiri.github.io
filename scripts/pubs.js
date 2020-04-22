@@ -181,6 +181,8 @@ function collectByType(worksJSON) {
 /** Read JSON file and pass to presentationJSON
  * @param {string} myName - My name: "{given initials} {family name}" space separated
  * @param {string} baseURL - URL relative to which local urls are interpreted
+ *
+ * Select types by including/excluding headings with id's in HTML file
  */
 function publicationLinks(myName="[\\w\\W]", baseURL = "") {
     Publication.myName = new RegExp(`(.*)(${myName.replace(/ /g, "[\\w.]* ")})(.*)`);
