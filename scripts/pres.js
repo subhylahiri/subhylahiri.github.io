@@ -20,7 +20,7 @@ function presentationLinks(types=["slides", "poster"], baseURL = "") {
     chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
         .then(readProjectsJSON)
-        .then(makeProjectLoop("materials", "title"));
+        .then(makeProjectLoop("materials", true));
 }
 
 export { presentationLinks };

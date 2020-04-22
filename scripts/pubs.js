@@ -10,9 +10,10 @@ class Publication extends Paper {
     constructor(type, entry) {
         super(type, entry);
         /** parameters of function to post-process spans for given field
-         * @type {Object.<string,(string|RegExp)[]>}
+         * @type {Object.<string,string[]>
+         * values: span's class, part's class, regex's static name
          */
-        this.spanMap = {"author": ["author", "self", Publication.myName]};
+        this.spanMap = {"author": ["author", "self", "myName"]};
     }
     /** Put an object property in a span of that class
      * @param {string} field - name of field to put in span
@@ -22,7 +23,18 @@ class Publication extends Paper {
         span.className = field;
         span.textContent = this[field];
         if (field in this.spanMap) {
-            spanMapper(span, ...this.spanMap[field]);
+            let partClass, patternName, pattern;
+            [span.className, partClass, patternName] = this.spanMap[field];
+            pattern = this.constructor[patternName];
+            if (partClass === field) {
+                throw `Recursive field/part name: ${field}`;
+            }
+            if (partClass && pattern.test(this[field])) {
+                let pref, suff;
+                [, pref, this[partClass], suff] = this[field].match(pattern);
+                span.textContent = "";
+                insertThings(span, pref, this.span(partClass), suff);
+            }
         }
         return span
     }
@@ -61,7 +73,7 @@ class Article extends Publication {
     constructor(type, entry) {
         super(type, entry);
         /** parameters of function to post-process ref span */
-        this.spanMap.ref = ["journal", "volume", Article.volRef];
+        this.spanMap.ref = ["journal", "volume", "volRef"];
     }
     /** Produce list of elements to put in citation */
     cite() {
@@ -119,62 +131,44 @@ Project.worksMap = {
     "abstract": Abstract,
 }
 
-/** Callback to pick out a part of a span's contents and put in a child span
- * @param {HTMLSpanElement} span - containing span
- * @param {string} spanClass - CSS class to use for span, "" to leave it as is
- * @param {string} partClass - CSS class of central part's span
- * @param {RegExp} pattern - pattern of part to pick out, with 3 capturing groups
+/** Object carrying project objects
+ * @typedef {import("./works.js").ProjectJSON} ProjectJSON
+ * @typedef {import("./works.js").ProjectHolder} ProjectHolder
  */
-function spanMapper(span, spanClass, partClass, pattern) {
-    span.className = spanClass;
-    if (partClass && pattern.test(span.textContent)) {
-        let items = span.textContent.match(pattern).slice(1);
-        items.splice(1, 0, document.createElement("span"));
-        items[1].className = partClass;
-        items[1].textContent = items.splice(2, 1)[0];
-        span.textContent = "";
-        insertThings(span, ...items);
+
+/** Loop over paper types to update/create project for that paper type
+ * @param {ProjectHolder} papers - dict: type -> Project(all works of that type)
+ * @param {Function} callback - Function to do something for one paper type
+ * @param {Boolean} create - Create project for that paper type? Or update it?
+ */
+function typesLoop(papers, callback, create=false) {
+    let typeFunc;
+    if (create) {
+        typeFunc = (type) => papers[type + "s"] = callback(type);
+    } else {
+        typeFunc = (type) => callback(papers[type + "s"][type], type);
     }
-}
-
-/** Convert array of works to object indexed by id's
- * @param {Publication[]} workArray - array of Work objects
- * @returns {Object.<string,Publication>} dict of work objects
- */
-function objectify(workArray) {
-    let workObject = {};
-    workArray.forEach(entry => workObject[entry.id] = entry);
-    return workObject
-}
-
-/** Loop over paper types to update project for that paper type
- * @param {Object.<string,Project>} papers - dict: type -> all works of that type
- * @param {typeFunc} callback - Function to update project for one paper type
- */
-function typesLoop(papers, callback) {
     for (const type in Project.worksMap) {
-        callback(papers[type + "s"], type);
+        typeFunc(type);
     }
 }
-/** Function to update project for one paper type
- * @callback typeFunc
- * @param {Project} proj - project with all papers of one type
- * @param {string} type - name of paper type
- */
 
 /** Process JSON data to collect paper lists as type id'd projects
- * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
- * @returns {Object.<string,Project>} dict: type -> all works of that type
+ * @param {ProjectJSON} worksJSON - json dict: id -> project data
+ * @returns {ProjectHolder} dict: type -> Project(all works of that type)
  */
 function collectByType(worksJSON) {
     let papers = {};
-    typesLoop(papers, (_proj, type) => papers[type + "s"] = new Project());
+    typesLoop(papers, () => new Project(), true);
     for (const projectID in worksJSON) {
         const project = new Project(worksJSON[projectID]);
-        typesLoop(papers, (proj, type) => proj[type].push(...project[type]));
+        typesLoop(papers, (list, type) => list.push(...project[type]));
     }
-    typesLoop(papers, (proj, type) => proj[type].sort(Publication.compare));
-    Article.eprints = objectify(papers.preprints.preprint);
+    typesLoop(papers, (list) => list.sort(Publication.compare));
+    Article.eprints = {};
+    for (const entry of papers.preprints.preprint) {
+        Article.eprints[entry.id] = entry;
+    }
     return papers;
 }
 

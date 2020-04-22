@@ -119,7 +119,7 @@ class Project {
      * @returns {Function} converter function
      */
     static workMaker(type) {
-        return entry => new Project.worksMap[type](type, entry)
+        return (entry) => new Project.worksMap[type](type, entry)
     }
 }
 /** Class to use for each entry type */
@@ -142,9 +142,16 @@ function chooseWorkTypes(included) {
     }
 }
 
+/** JSON data for project objects
+ * @typedef {Object.<string,Object>} ProjectJSON
+ */
+/** Object carrying project objects
+ * @typedef {Object.<string,Project>} ProjectHolder
+ */
+
 /** Process JSON data into dict of id -> project object
- * @param {Object.<string,Object>} worksJSON - json dict: id -> project data
- * @returns {Object.<string,Project>} dict: id -> project object
+ * @param {ProjectJSON} worksJSON - json dict: id -> project data
+ * @returns {ProjectHolder} dict: id -> project object
  */
 function readProjectsJSON(worksJSON) {
     let projects = {};
@@ -156,13 +163,13 @@ function readProjectsJSON(worksJSON) {
 
 /** Make a function to loop over projects in JSON data
  * @param {string} listClass - CSS class for UList
- * @param {string} textField - Project field for paragraph contents, if present
- * @returns {projectLoopJSON} function to loop over projects in JSON data
+ * @param {Boolean} titleText - Use project title for paragraph contents?
+ * @returns {Function} function to loop over projects in JSON data
  */
-function makeProjectLoop(listClass, textField) {
+function makeProjectLoop(listClass, titleText=false) {
     /**
      * Process JSON data to add work list to each project id'd paragraph
-     * @param {Object.<string,Project>} projectsData - json dict: id -> project
+     * @param {ProjectHolder} projectsData - json dict: id -> project
      */
     function projectLoopJSON(projectsData) {
         for (const projectID in projectsData) {
@@ -170,20 +177,18 @@ function makeProjectLoop(listClass, textField) {
             let paragraph = document.getElementById(projectID);
             if (paragraph && project.hasWorks()) {
                 let list = document.createElement("ul");
+                list.className = listClass;
                 for (const type in Project.worksMap) {
                     project[type].forEach(entry => entry.appendList(list));
                 }
-                if (listClass) { list.className = listClass; }
-                if (textField) { paragraph.textContent = project[textField]; }
+                if (titleText) {
+                    paragraph.textContent = project.title;
+                }
                 paragraph.after(list);
             }
         }
     }
     return projectLoopJSON
 }
-/** Function to process JSON data to add work list to each project id'd paragraph
- * @callback projectLoopJSON
- * @param {Object.<string,Project>} worksJSON - json dict: id -> project
- */
 
 export { readProjectsJSON, makeProjectLoop, chooseWorkTypes, Project, Abstract, Paper, Work }
