@@ -26,14 +26,13 @@ class Publication extends Paper {
             let partClass, patternName, pattern;
             [span.className, partClass, patternName] = this.spanMap[field];
             pattern = this.constructor[patternName];
-            if (partClass === field) {
-                throw `Recursive field/part name: ${field}`;
-            }
             if (partClass && pattern.test(this[field])) {
+                Publication.checkRecursion(field);
                 let pref, suff;
                 [, pref, this[partClass], suff] = this[field].match(pattern);
                 span.textContent = "";
                 insertThings(span, pref, this.span(partClass), suff);
+                Publication.checkRecursion();
             }
         }
         return span
@@ -60,9 +59,24 @@ class Publication extends Paper {
         const yearDiff = paperB.year - paperA.year;
         return yearDiff ? yearDiff : paperB.month - paperA.month
     }
+    /** Check for long recursion
+     * @param {...string} name - context for error message
+     */
+    static checkRecursion(name) {
+        if (name) {
+            Publication.recursion.push(name);
+            if (Publication.recursion.length > 10) {
+                throw `Recursive field/part names: ${Publication.recursion}`;
+            }
+        } else {
+            Publication.recursion.pop();
+        }
+    }
 }
 /** Pattern to match for my name */
 Publication.myName = /(.*)([\w\W])(.*)/;
+/** @type {string[]} watch out for infinite loops */
+Publication.recursion = [];
 
 /** @classdesc Citation info for a journal article */
 class Article extends Publication {
