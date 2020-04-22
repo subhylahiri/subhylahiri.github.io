@@ -10,8 +10,9 @@ class Publication extends Paper {
     constructor(type, entry) {
         super(type, entry);
         /** parameters of function to post-process spans for given field
-         * @type {Object.<string,string[]>
-         * values: span's class, part's class, regex's static name
+         * @type {Object.<string,string[]>} - key = field name  
+         * values: spanClass, partClass, patternName.  
+         * Important!: no cycles when key -> partClass -> new key -> ...
          */
         this.spanMap = {"author": ["author", "self", "myName"]};
     }
@@ -26,9 +27,6 @@ class Publication extends Paper {
             let partClass, patternName, pattern;
             [span.className, partClass, patternName] = this.spanMap[field];
             pattern = this.constructor[patternName];
-            if (partClass === field) {
-                throw `Recursive field/part name: ${field}`;
-            }
             if (partClass && pattern.test(this[field])) {
                 let pref, suff;
                 [, pref, this[partClass], suff] = this[field].match(pattern);
@@ -138,7 +136,10 @@ Project.worksMap = {
 
 /** Loop over paper types to update/create project for that paper type
  * @param {ProjectHolder} papers - dict: type -> Project(all works of that type)
- * @param {Function} callback - Function to do something for one paper type
+ * @param {Function} callback - Function to do something for one paper type.
+ * Signature:  
+ * if create:- callback(type: string): Project  
+ * else:- callback(list: Publication[], type: string): void
  * @param {Boolean} create - Create project for that paper type? Or update it?
  */
 function typesLoop(papers, callback, create=false) {
@@ -148,9 +149,7 @@ function typesLoop(papers, callback, create=false) {
     } else {
         typeFunc = (type) => callback(papers[type + "s"][type], type);
     }
-    for (const type in Project.worksMap) {
-        typeFunc(type);
-    }
+    Object.keys(Project.worksMap).forEach(typeFunc);
 }
 
 /** Process JSON data to collect paper lists as type id'd projects
