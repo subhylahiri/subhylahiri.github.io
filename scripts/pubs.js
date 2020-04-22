@@ -9,12 +9,13 @@ class Publication extends Paper {
      */
     constructor(type, entry) {
         super(type, entry);
-        /** parameters of function to post-process spans for given field */
+        /** parameters of function to post-process spans for given field
+         * @type {Object.<string,(string|RegExp)[]>}
+         */
         this.spanMap = {"author": ["author", "self", Publication.myName]};
     }
     /** Put an object property in a span of that class
      * @param {string} field - name of field to put in span
-     * @returns {HTMLSpanElement} span element containing field
      */
     span(field) {
         let span = document.createElement("span");
@@ -25,9 +26,7 @@ class Publication extends Paper {
         }
         return span
     }
-    /** Produce list of elements to put in citation
-     * @returns {HTMLElement[]} list of elements to put in citation
-     */
+    /** Produce list of elements to put in citation */
     cite() {
         const link = this.link(this.span("ref"), " ", this.span("year"));
         return [this.span("author"), " ", this.span("title"), " ", link, "."]
@@ -44,7 +43,6 @@ class Publication extends Paper {
     /** Compare two papers for sorting with reverse chronology
      * @param {Publication} paperA - first paper to compare
      * @param {Publication} paperB - second paper to compare
-     * @returns {number} positive if paperA goes after paperB
      */
     static compare(paperA, paperB) {
         const yearDiff = paperB.year - paperA.year;
@@ -65,9 +63,7 @@ class Article extends Publication {
         /** parameters of function to post-process ref span */
         this.spanMap.ref = ["journal", "volume", Article.volRef];
     }
-    /** Produce list of elements to put in citation
-     * @returns {HTMLElement[]} list of elements to put in citation
-     */
+    /** Produce list of elements to put in citation */
     cite() {
         let citation = super.cite()
         if (this.sameAs) {
@@ -95,9 +91,7 @@ class Preprint extends Publication {
         /** parameters of function to post-process ref span */
         this.spanMap.ref = ["eprint"];
     }
-    /** Produce list of elements to put in citation
-     * @returns {HTMLElement[]} list of elements to put in citation
-     */
+    /** Produce list of elements to put in citation */
     cite() {
         return this.sameAs ? [] : super.cite()
     }
@@ -185,7 +179,7 @@ function collectByType(worksJSON) {
 }
 
 /** Read JSON file and pass to presentationJSON
- * @param {string} myName - Pattern for my name: "{given initials} {family name}""
+ * @param {string} myName - My name: "{given initials} {family name}" space separated
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function publicationLinks(myName="[\\w\\W]", baseURL = "") {

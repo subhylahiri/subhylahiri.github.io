@@ -25,7 +25,6 @@ class Work {
     description() { return this.title; }
     /** Create a link element to this work
      * @param  {...(HTMLElement|string|number)} elements - things to put in link
-     * @returns {HTMLAnchorElement} the link element
      */
     link(...elements) {
         let link = document.createElement("a");
@@ -36,7 +35,6 @@ class Work {
     }
     /** Create a list item for this work
      * @param  {...(HTMLElement|string|number)} elements - things to put in li
-     * @returns {HTMLAnchorElement} the link element
      */
     listItem(...elements) {
         let item = document.createElement("li");
@@ -103,9 +101,7 @@ class Project {
         this.poster = [];
         /** @type {Abstract[]} - List of abstracts for this project */
         this.abstract = [];
-        if (projectJSON instanceof Project) {
-            Object.assign(this, projectJSON);
-        } else if (projectJSON) {
+        if (projectJSON) {
             this.title = projectJSON.title;
             for (const type in Project.worksMap) {
                 this[type] = projectJSON[type].map(Project.workMaker(type));
@@ -136,11 +132,11 @@ Project.worksMap = {
 }
 /**
  * Choose which types of work will be included
- * @param {string[]} types - array of names of work types to include
+ * @param {string[]} included - array of names of work types to include
  */
-function chooseWorkTypes(types) {
+function chooseWorkTypes(included) {
     for (const type in Project.worksMap) {
-        if (!types.includes(type)) {
+        if (!included.includes(type)) {
             delete Project.worksMap[type];
         }
     }

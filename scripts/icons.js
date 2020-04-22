@@ -14,7 +14,7 @@ Work.prototype.appendList = function appendList(list) {
  * @param {string[]} types - array of names of work types to include
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
-function projectLinks(types=["article", "preprint", "slides", "poster"], baseURL = '') {
+function projectLinks(types=["article", "preprint", "slides", "poster"], baseURL = "") {
     Work.baseURL = baseURL;
     chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
