@@ -1,5 +1,8 @@
 import { getJSON } from "./getJSON.js";
 
+const externals = ["article", "preprint"];
+const internals = ["slides", "poster"];
+
 /**
  * Read JSON file and pass to projectJSON
  * @param {string} baseURL - URL relative to which local urls are interpreted
@@ -35,7 +38,7 @@ function projectJSON(worksData, baseURL) {
 function projectWorks(paragraph, projectData, baseURL) {
     let list = document.createElement("ul");
     list.className = "project_links";
-    for ( const type of ["article", "preprint", "slides", "poster"]) {
+    for (const type of externals.concat(internals)) {
         projectData[type].forEach(entry => {
             projectEntry(list, entry, type, baseURL);
         });
@@ -51,12 +54,11 @@ function projectWorks(paragraph, projectData, baseURL) {
  * @param {string} baseURL - URL relative to which local urls are interpreted
  */
 function projectEntry(list, entry, type, baseURL) {
-    const description = makeDescription(entry, type);
     let listItem = document.createElement("li");
     let link = document.createElement("a");
 
     link.className = "icon";
-    link.title = description;
+    link.title = makeDescription(entry);
     link.href = makeURL(entry, type, baseURL);
     listItem.className = type;
     listItem.appendChild(link);
@@ -66,11 +68,10 @@ function projectEntry(list, entry, type, baseURL) {
 /**
  * Make description of work for paper/presentation work types
  * @param {Object} entry - dict of info about work
- * @param {string} type - type of work
  * @returns {string} - description of work
  */
-function makeDescription(entry, type) {
-    if (isInternal(type)) {
+function makeDescription(entry) {
+    if ("description" in entry) {
         return entry.description
     }
     return `“${entry.title}”, ${entry.ref} (${entry.year})`;
@@ -95,9 +96,9 @@ function makeURL(entry, type, baseURL) {
  * @returns {boolean} - does it have a local URL?
  */
 function isInternal(type) {
-    if (type === "slides" || type === "poster") {
+    if (internals.includes(type)) {
         return true
-    } else if (type === "article" || type === "preprint") {
+    } else if (externals.includes(type)) {
         return false
     } else {
         throw `Unknown work type: ${type}`
