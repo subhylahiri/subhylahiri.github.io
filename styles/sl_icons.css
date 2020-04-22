@@ -9,9 +9,11 @@ p.project {
 /* List of works under projects */
 
 .project_links li {
+    --icon-size: 2em;
+    --icon-pad: 0.2em;
     display: inline-block;
-    border-radius: 0.3em;
-    padding: 3px;
+    border-radius: calc(var(--icon-pad) * 2);
+    padding: var(--icon-pad);
     margin-right: 0.5em;
     margin-bottom: 0.5em;
     background-color: var(--minor-bg-color);
@@ -41,19 +43,18 @@ p.project {
 
 /* Mobile */
 .icon {
-    --icon-size: 2em;
     display: block;
-    border-radius: inherit;
+    border-radius: var(--icon-pad);
     width: 3.7em;
     height: 1em;
     line-height: 1em;
-    padding-top: calc(var(--icon-size) + 0.2em);
+    padding-top: calc(var(--icon-size) + var(--icon-pad));
     background-size: var(--icon-size);
     background-repeat: no-repeat;
     background-position: center top;
     text-align: center;
     text-indent: 0%;
-    background-color: var(--minor-bg-color);
+    background-color: inherit;
     color: inherit;
 }
 .icon::after {
