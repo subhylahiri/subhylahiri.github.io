@@ -145,9 +145,9 @@ Project.worksMap = {
 function typesLoop(papers, callback, create=false) {
     let typeFunc;
     if (create) {
-        typeFunc = (type) => papers[type + "s"] = callback(type);
+        typeFunc = (type) => papers[`${type}s`] = callback(type);
     } else {
-        typeFunc = (type) => callback(papers[type + "s"][type], type);
+        typeFunc = (type) => callback(papers[`${type}s`][type], type);
     }
     Object.keys(Project.worksMap).forEach(typeFunc);
 }
@@ -158,9 +158,9 @@ function typesLoop(papers, callback, create=false) {
  */
 function collectByType(worksJSON) {
     let papers = {};
-    typesLoop(papers, () => new Project(), true);
+    typesLoop(papers, (type) => new Project(`${type}s`), true);
     for (const projectID in worksJSON) {
-        const project = new Project(worksJSON[projectID]);
+        const project = new Project(projectID, worksJSON);
         typesLoop(papers, (list, type) => list.push(...project[type]));
     }
     typesLoop(papers, (list) => list.sort(Publication.compare));
@@ -171,7 +171,7 @@ function collectByType(worksJSON) {
     return papers;
 }
 
-/** Read JSON file and pass to presentationJSON
+/** Read JSON file and pass to ProjectLoop callback
  * @param {string} myName - My name: "{given initials} {family name}" space separated
  * @param {string} baseURL - URL relative to which local urls are interpreted
  *
