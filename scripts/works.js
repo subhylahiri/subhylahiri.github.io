@@ -90,7 +90,7 @@ class Project {
      * @param {ProjectJSON} worksJSON - JSON object containing project data
      */
     constructor(id, worksJSON) {
-        /** The title of the project */
+        /** The id of the project */
         this.id = id;
         /** The title of the project */
         this.title = "";
@@ -105,7 +105,7 @@ class Project {
         /** @type {Abstract[]} - List of abstracts for this project */
         this.abstract = [];
         if (worksJSON) {
-            projectJSON = worksJSON[id];
+            const projectJSON = worksJSON[id];
             this.title = projectJSON.title;
             for (const type in Project.worksMap) {
                 this[type] = projectJSON[type].map(Project.workMaker(type));
