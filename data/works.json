@@ -273,7 +273,13 @@
                 "sameAs": "Trautmann2019sortfree"
             }
         ],
-        "slides": [],
+        "slides": [
+            {
+                "id": "Lahiri2021scgb",
+                "url": "presentations/sortfree_slides_30min.pdf",
+                "title": "SCGB West Coast Postdoc/Student Meeting"
+            }
+        ],
         "poster": [
             {
                 "id": "Lahiri2019sortfree",
