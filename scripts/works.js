@@ -86,9 +86,12 @@ class Abstract extends Paper {
 /** @classdesc All of the works associated with a project */
 class Project {
     /**
-     * @param {Object} projectJSON - JSON object containing works data
+     * @param {string} id - identifier of project
+     * @param {ProjectJSON} worksJSON - JSON object containing project data
      */
-    constructor(projectJSON) {
+    constructor(id, worksJSON) {
+        /** The id of the project */
+        this.id = id;
         /** The title of the project */
         this.title = "";
         /** @type {Paper[]} - List of articles for this project */
@@ -101,7 +104,8 @@ class Project {
         this.poster = [];
         /** @type {Abstract[]} - List of abstracts for this project */
         this.abstract = [];
-        if (projectJSON) {
+        if (worksJSON) {
+            const projectJSON = worksJSON[id];
             this.title = projectJSON.title;
             for (const type in Project.worksMap) {
                 this[type] = projectJSON[type].map(Project.workMaker(type));
@@ -156,7 +160,7 @@ function chooseWorkTypes(included) {
 function readProjectsJSON(worksJSON) {
     let projects = {};
     for (const projectID in worksJSON) {
-        projects[projectID] = new Project(worksJSON[projectID]);
+        projects[projectID] = new Project(projectID, worksJSON);
     }
     return projects
 }
