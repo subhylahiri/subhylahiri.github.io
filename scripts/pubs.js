@@ -1,5 +1,5 @@
 import { getJSON, insertThings } from "./getJSON.js";
-import { Project, Paper, makeProjectLoop } from "./works.js";
+import { Project, Paper, makeProjectLoop, chooseWorkTypes } from "./works.js";
 
 /** @classdesc Citation info for a paper */
 class Publication extends Paper {
@@ -177,9 +177,10 @@ function collectByType(worksJSON) {
  *
  * Select types by including/excluding headings with id's in HTML file
  */
-function publicationLinks(myName="[\\w\\W]", baseURL = "") {
+function publicationLinks(myName="[\\w\\W]", types=["article", "preprint", "abstract"],baseURL = "") {
     Publication.myName = new RegExp(`(.*)(${myName.replace(/ /g, "[\\w.]* ")})(.*)`);
     Publication.baseURL = baseURL;
+    chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
         .then(collectByType)
         .then(makeProjectLoop("papers"));
