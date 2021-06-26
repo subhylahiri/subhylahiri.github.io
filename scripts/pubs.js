@@ -173,17 +173,19 @@ function collectByType(worksJSON) {
 
 /** Read JSON file and pass to ProjectLoop callback
  * @param {string} myName - My name: "{given initials} {family name}" space separated
+ * @param {string[]} types - array of names of work types to include
  * @param {string} baseURL - URL relative to which local urls are interpreted
  *
- * Select types by including/excluding headings with id's in HTML file
+ * You can also select types by including/excluding headings with id's in HTML file
  */
-function publicationLinks(myName="[\\w\\W]", types=["article", "preprint", "abstract"],baseURL = "") {
+function publicationLinks(myName="[\\w\\W]", types=["article", "preprint", "abstract"], baseURL = "") {
     Publication.myName = new RegExp(`(.*)(${myName.replace(/ /g, "[\\w.]* ")})(.*)`);
     Publication.baseURL = baseURL;
-    chooseWorkTypes(types);
+    const restorer = chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
         .then(collectByType)
-        .then(makeProjectLoop("papers"));
+        .then(makeProjectLoop("papers"))
+        .then(restorer());
 }
 
 export { publicationLinks };

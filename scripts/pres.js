@@ -17,10 +17,11 @@ Work.prototype.appendList = function appendList(list) {
  */
 function presentationLinks(types=["slides", "poster"], baseURL = "") {
     Work.baseURL = baseURL;
-    chooseWorkTypes(types);
+    const restorer = chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
         .then(readProjectsJSON)
-        .then(makeProjectLoop("materials", true));
+        .then(makeProjectLoop("materials", true))
+        .then(restorer());
 }
 
 export { presentationLinks };

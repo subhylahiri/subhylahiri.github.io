@@ -137,13 +137,16 @@ Project.worksMap = {
 /**
  * Choose which types of work will be included
  * @param {string[]} included - array of names of work types to include
+ * @returns {Function} callback to retore old work types
  */
 function chooseWorkTypes(included) {
+    const oldWorksMap = Project.worksMap;
     for (const type in Project.worksMap) {
         if (!included.includes(type)) {
             delete Project.worksMap[type];
         }
     }
+    return function() { Project.worksMap = oldWorksMap; }
 }
 
 /** JSON data for project objects

@@ -18,10 +18,11 @@ Work.prototype.appendList = function appendList(list) {
  */
 function projectLinks(types=["article", "preprint", "slides", "poster", "abstract"], baseURL = "") {
     Work.baseURL = baseURL;
-    chooseWorkTypes(types);
+    const restorer = chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
         .then(readProjectsJSON)
-        .then(makeProjectLoop("project_links"));
+        .then(makeProjectLoop("project_links"))
+        .then(restorer());
 }
 
 export { projectLinks };
