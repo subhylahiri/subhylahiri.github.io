@@ -14,6 +14,10 @@ class Tab {
         this.url = "";
         /** is the URL local? */
         this.internal = true;
+        /** class for list item */
+        this.className = "";
+        /** identifier of link */
+        this.linkId = "";
         if (entry) {
             Object.assign(this, entry);
         }
@@ -24,9 +28,15 @@ class Tab {
     appendTab(parent) {
         let listItem = document.createElement("li");
         listItem.id = this.id;
+        if (this.className) {
+            listItem.className = this.className;
+        }
         let link = document.createElement("a");
         link.textContent = this.name;
         link.href = (this.internal ? Tab.baseURL : "") + this.url;
+        if (this.linkId) {
+            link.id = this.linkId;
+        }
         listItem.appendChild(link);
         parent.appendChild(listItem);
     }

@@ -189,6 +189,7 @@ p.profiles {
 .nav li {
     display: inline-block;
     margin: 0;
+    /* margin-right: 3px; */
     background-color: var(--inert-bg-color);
     color: inherit;
 }
@@ -197,10 +198,37 @@ p.profiles {
     background-color: inherit;
 }
 
+.nav .skip {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.nav .skip:focus-within {
+    overflow: hidden;
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
 .nav a {
     padding: 0.5em;
     color: inherit;
     line-height: 2em;
+}
+
+.nav a:focus {
+    outline-offset: -2px;
 }
 
 /* special image styles */
