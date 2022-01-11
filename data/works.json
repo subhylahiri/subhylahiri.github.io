@@ -10,7 +10,7 @@
                 "ref": "Adv. Neural Inf. Process. Syst. 26:1034–1042",
                 "year": 2013,
                 "month": 12,
-                "eprint": false
+                "sameAs": false
             }
         ],
         "preprint": [],
@@ -18,24 +18,46 @@
             {
                 "id": "Lahiri2016timescales",
                 "url": "presentations/SynapseTalk_10min.pdf",
-                "description": "Cosyne 2016"
+                "title": "Cosyne 2016"
             },
             {
                 "id": "synapse_all",
                 "url": "presentations/SynapseTalk.pdf",
-                "description": "Complete slide deck"
+                "title": "Complete slide deck"
             }
         ],
         "poster": [
             {
                 "id": "Lahiri2013frontier_bio",
                 "url": "presentations/SynapsePoster_bio.pdf",
-                "description": "SNI symposium 2015"
+                "title": "SNI symposium 2015"
             },
             {
                 "id": "Lahiri2013frontier_maths",
                 "url": "presentations/SynapsePoster_maths.pdf",
-                "description": "NeurIPS 2013"
+                "title": "NeurIPS 2013"
+            }
+        ],
+        "abstract": [
+            {
+                "id": "Lahiri2013learn",
+                "url": "files/13.Cosyne.LearningMemory.pdf",
+                "title": "A general theory of learning and memory with complex synapses",
+                "author": "S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2013,
+                "month": 2,
+                "sameAs": false
+            },
+            {
+                "id": "Lahiri2016timescales",
+                "url": "files/16.Cosyne.Timecales.pdf",
+                "title": "Optimal synaptic strategies for different timescales of memory",
+                "author": "S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2016,
+                "month": 2,
+                "sameAs": false
             }
         ]
     },
@@ -50,7 +72,7 @@
                 "ref": "eLife 6:e20147",
                 "year": 2017,
                 "month": 2,
-                "eprint": false
+                "sameAs": false
             }
         ],
         "preprint": [],
@@ -58,15 +80,27 @@
             {
                 "id": "Ganguli2014mhc",
                 "url": "presentations/MHCslides_20min.pdf",
-                "description": "Ganguli lab evening, 2014"
+                "title": "Ganguli lab evening, 2014"
             },
             {
                 "id": "Lahiri2014mhc",
                 "url": "presentations/MHCslides_10min.pdf",
-                "description": "Cosyne 2014"
+                "title": "Cosyne 2014"
             }
         ],
-        "poster": []
+        "poster": [],
+        "abstract": [
+            {
+                "id": "Lahiri2014cosyne",
+                "url": "files/14.Cosyne.MHC.pdf",
+                "title": "Modeling enhanced and impaired learning with enhanced plasticity",
+                "author": "TDB Nguyen-Vu, GQ Zhao, S Lahiri, A Suvrathan, H Lee, S Ganguli, CJ Shatz, JL Raymond",
+                "ref": "Cosyne",
+                "year": 2014,
+                "month": 2,
+                "sameAs": false
+            }
+        ]
     },
     "pps": {
         "title": "A universal trade-off between power, precision and speed in physical communication",
@@ -79,8 +113,8 @@
                 "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
                 "ref": "arXiv:1603.07758 [cond-mat.stat-mech]",
                 "year": 2016,
-                "month": 3,
-                "pub": false
+                "month": 2,
+                "sameAs": false
             }
 
         ],
@@ -88,7 +122,7 @@
             {
                 "id": "lahiri2016lineq",
                 "url": "presentations/pps_slides.pdf",
-                "description": "Lineq meeting, 2016"
+                "title": "Lineq meeting, 2016"
             }
 
         ],
@@ -96,7 +130,19 @@
             {
                 "id": "Lahiri2016pps",
                 "url": "presentations/pps_poster.pdf",
-                "description": "Cosyne 2016"
+                "title": "Cosyne 2016"
+            }
+        ],
+        "abstract": [
+            {
+                "id": "Lahiri2016pps",
+                "url": "files/16.Cosyne.PPS.pdf",
+                "title": "A universal tradeoff between energy, speed and precision in neural communication",
+                "author": "S Lahiri, J Sohl-Dickstein and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2016,
+                "month": 2,
+                "sameAs": false
             }
         ]
     },
@@ -112,12 +158,44 @@
                 "ref": "arXiv:2002.10567 [physics.bio-ph]",
                 "year": 2020,
                 "month": 1,
-                "pub": false
+                "sameAs": false
             }
 
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": [
+            {
+                "id": "Harvey2017cosyne",
+                "url": "files/17.Cosyne.CellSense.pdf",
+                "title": "An energy-accuracy tradeoff in subneuronal molecular sensing",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "Cosyne",
+                "year": 2017,
+                "month": 2,
+                "sameAs": false
+            },
+            {
+                "id": "Harvey2017aps",
+                "url": "files/17.APS.CellSense.pdf",
+                "title": "A energy-accuracy tradeoff in the physics of cellular sensing",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "APS March Meeting",
+                "year": 2017,
+                "month": 3,
+                "sameAs": false
+            },
+            {
+                "id": "Harvey2020aps",
+                "url": "files/20.APS.web.CellSense.pdf",
+                "title": "An energy-accuracy tradeoff for nonequilibrium receptors",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "APS March Meeting",
+                "year": 2020,
+                "month": 3,
+                "sameAs": false
+            }
+        ]
     },
     "illusions": {
         "title": "Statistical mechanics of complex neural systems and high dimensional data",
@@ -130,7 +208,7 @@
                 "ref": "J. Stat. Mech. 2013.03:P03014",
                 "year": 2013,
                 "month": 1,
-                "eprint": "advani2013review"
+                "sameAs": "advani2013review"
             }
         ],
         "preprint": [
@@ -142,12 +220,13 @@
                 "ref": "arXiv:1301.7115 [q-bio.NC]",
                 "year": 2013,
                 "month": 1,
-                "pub": "advani2013statistical"
+                "sameAs": "advani2013statistical"
             }
 
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "rand-proj": {
         "title": "Random projections of random manifolds",
@@ -161,11 +240,12 @@
                 "ref": "arXiv:1607.04331 [stat.ML]",
                 "year": 2016,
                 "month": 7,
-                "pub": false
+                "sameAs": false
             }
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "sort-free": {
         "title": "Accurate estimation of neural population dynamics without spike sorting",
@@ -178,7 +258,7 @@
                 "ref": " Neuron 103.2:292–308.e4",
                 "year": 2019,
                 "month": 6,
-                "eprint": "Trautmann2017sortfree"
+                "sameAs": "Trautmann2017sortfree"
             }
         ],
         "preprint": [
@@ -190,15 +270,33 @@
                 "ref": "bioRxiv:229252",
                 "year": 2017,
                 "month": 12,
-                "pub": "Trautmann2019sortfree"
+                "sameAs": "Trautmann2019sortfree"
             }
         ],
-        "slides": [],
+        "slides": [
+            {
+                "id": "Lahiri2021scgb",
+                "url": "presentations/sortfree_slides_30min.pdf",
+                "title": "SCGB West Coast Postdoc/Student Meeting"
+            }
+        ],
         "poster": [
             {
                 "id": "Lahiri2019sortfree",
                 "url": "presentations/sortfree_poster.pdf",
-                "description": "Cosyne 2019"
+                "title": "Cosyne 2019"
+            }
+        ],
+        "abstract": [
+            {
+                "id": "Lahiri2019cosyne",
+                "url": "files/19.Cosyne.Sortfree.pdf",
+                "title": "Accurate estimation of neural population dynamics without spike sorting",
+                "author": "S Lahiri, EM Trautmann, SD Stavisky, KC Ames, MT Kaufman, DJ O’Shea, S Vyas, X Sun, SI Ryu, S Ganguli and KV Shenoy",
+                "ref": "Cosyne",
+                "year": 2019,
+                "month": 2,
+                "sameAs": false
             }
         ]
     },
@@ -213,7 +311,7 @@
                 "ref": "Adv. Neural Inf. Process. Syst. 29:3360-3368",
                 "year": 2016,
                 "month": 12,
-                "eprint": "poole2016expressivity"
+                "sameAs": "poole2016expressivity"
             }
         ],
         "preprint": [
@@ -225,11 +323,32 @@
                 "ref": "arXiv:1606.05340 [stat.ML]",
                 "year": 2016,
                 "month": 6,
-                "pub": "poole2016deepchaos"
+                "sameAs": "poole2016deepchaos"
             }
         ],
         "slides": [],
-        "poster": []
+        "poster": [],
+        "abstract": []
+    },
+    "fsm-rnn": {
+        "title": "Exactly solvable nonlinear recurrent networks for context-dependent information processing",
+        "article": [],
+        "preprint": [],
+        "slides": [],
+        "poster": [],
+        "abstract": [
+            {
+                "id": "stock2017fsm-rnn",
+                "url": "files/17.Cosyne.fsm-rnns.pdf",
+                "title": "Exactly solvable nonlinear recurrent networks for context-dependent information processing",
+                "author": "CH Stock, S Lahiri, AH Williams, S Ganguli",
+                "ref": "Cosyne",
+                "year": 2017,
+                "month": 2,
+                "sameAs": false
+            }
+
+        ]
     },
     "larva-crawl": {
         "title": "The motor programs underlying navigation in Drosophila larva",
@@ -242,7 +361,7 @@
                 "ref": "PLoS ONE 6:e23180",
                 "year": 2011,
                 "month": 8,
-                "eprint": false
+                "sameAs": false
             }
         ],
         "preprint": [],
@@ -250,10 +369,11 @@
             {
                 "id": "Lahiri2011job",
                 "url": "presentations/GFP-Headsweep.pdf",
-                "description": "Seminar at Stanford, 2011"
+                "title": "Seminar at Stanford, 2011"
             }
         ],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "plasmaring": {
         "title": "Black rings from fluid mechanics",
@@ -266,7 +386,7 @@
                 "ref": "JHEP 2010.08:073",
                 "year": 2010,
                 "month": 8,
-                "eprint": "Bhattacharya2009gm"
+                "sameAs": "Bhattacharya2009gm"
             },
             {
                 "id": "Bhattacharyya2008vs",
@@ -276,7 +396,7 @@
                 "ref": "JHEP 2008.09:054",
                 "year": 2008,
                 "month": 9,
-                "eprint": "Bhattacharyya2007vs"
+                "sameAs": "Bhattacharyya2007vs"
             },
             {
                 "id": "Lahiri2008ae",
@@ -286,7 +406,7 @@
                 "ref": "JHEP 2008.05:001",
                 "year": 2008,
                 "month": 5,
-                "eprint": "Lahiri2007ae"
+                "sameAs": "Lahiri2007ae"
             }
         ],
         "preprint": [
@@ -298,7 +418,7 @@
                 "ref": "arXiv:0903.4734 [hep-th]",
                 "year": 2009,
                 "month": 3,
-                "pub": "Bhattacharya2010gm"
+                "sameAs": "Bhattacharya2010gm"
             },
             {
                 "id": "Bhattacharyya2007vs",
@@ -308,7 +428,7 @@
                 "ref": "arXiv:0708.1770 [hep-th]",
                 "year": 2007,
                 "month": 8,
-                "pub": "Bhattacharyya2008vs"
+                "sameAs": "Bhattacharyya2008vs"
             },
             {
                 "id": "Lahiri2007ae",
@@ -318,22 +438,23 @@
                 "ref": "arXiv:0705.3404 [hep-th]",
                 "year": 2007,
                 "month": 5,
-                "pub": "Lahiri2008ae"
+                "sameAs": "Lahiri2008ae"
             }
         ],
         "slides": [
             {
                 "id": "Lahiri2009defence",
                 "url": "presentations/plasmaring_defence.pdf",
-                "description": "PhD defence, 2009"
+                "title": "PhD defence, 2009"
             },
             {
                 "id": "Lahiri2009family",
                 "url": "presentations/plasmaring_talk.pdf",
-                "description": "HETG family meeting, 2009"
+                "title": "HETG family meeting, 2009"
             }
         ],
-        "poster": []
+        "poster": [],
+        "abstract": []
     },
     "giant-graviton": {
         "title": "Giant gravitons and the supersymmetric states of N=4 Yang-Mills",
@@ -346,7 +467,7 @@
                 "ref": "JHEP 2007.12:006",
                 "year": 2007,
                 "month": 12,
-                "eprint": "Biswas2006tj"
+                "sameAs": "Biswas2006tj"
             }
         ],
         "preprint": [
@@ -358,22 +479,23 @@
                 "ref": "arXiv:hep-th/0606087",
                 "year": 2006,
                 "month": 8,
-                "pub": "Biswas2007tj"
+                "sameAs": "Biswas2007tj"
             }
         ],
         "slides": [
             {
                 "id": "Lahiri2007korea",
                 "url": "presentations/gg_korea.pdf",
-                "description": "The 1st Asian Winter School on String Theory, 2007"
+                "title": "The 1st Asian Winter School on String Theory, 2007"
             },
             {
                 "id": "Lahiri2006qual",
                 "url": "presentations/gg_oral.pdf",
-                "description": "Oral qualifying exam, 2006"
+                "title": "Oral qualifying exam, 2006"
             }
 
         ],
-        "poster": []
+        "poster": [],
+        "abstract": []
     }
 }

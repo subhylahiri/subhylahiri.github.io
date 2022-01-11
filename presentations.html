@@ -3,9 +3,12 @@
 <head>
   <link rel="stylesheet" type="text/css" href="styles/sl.css" />
   <link rel="stylesheet" type="text/css" href="styles/sl_pres.css" />
-  <link rel="preload" href="scripts/getJSON.js" as="script" crossorigin="anonymous" />
+  <link rel="modulepreload" href="scripts/getJSON.js" as="script" crossorigin="anonymous" />
+  <link rel="modulepreload" href="scripts/works.js" as="script" crossorigin="anonymous" />
+  <link rel="preload" href="data/nav.json" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="data/works.json" as="fetch" crossorigin="anonymous" />
   <title>Subhaneil Lahiri: Presentations</title>
-  <meta name="keywords" content="Subhaneil Lahiri slides posters presentations" />
+  <meta name="keywords" content="Subhaneil Lahiri slides poster presentation" />
   <meta name="description" content="Slides and posters from Subhaneil Lahiri's presentations" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="referrer" content="no-referrer" />
@@ -21,15 +24,15 @@
   <div class="main">
     <p>The slides and posters for some of my presentations can be found here.</p>
 
-    <p id="sort-free"></p>
+    <p id="sort-free" class="presentation"></p>
 
-    <p id="pps"></p>
+    <p id="pps" class="presentation"></p>
 
-    <p id="memory-frontier"></p>
+    <p id="memory-frontier" class="presentation"></p>
 
-    <p id="mhc-learn"></p>
+    <p id="mhc-learn" class="presentation"></p>
 
-    <p id="larva-crawl"></p>
+    <p id="larva-crawl" class="presentation"></p>
     <ul class="materials">
       <li>Downloads:
         <a href="presentations/vids.zip">videos</a>,
@@ -41,14 +44,14 @@
       </li>
     </ul>
 
-    <p id="plasmaring"></p>
+    <p id="plasmaring" class="presentation"></p>
 
-    <p id="giant-graviton"></p>
+    <p id="giant-graviton" class="presentation"></p>
   </div>
 
   <script type="module">
     import {presentationLinks} from "./scripts/pres.js"
-    presentationLinks();
+    presentationLinks(["slides", "poster"]);
     import {buildPage} from "./scripts/nav.js"
     buildPage("pres");
   </script>

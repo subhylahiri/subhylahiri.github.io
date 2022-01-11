@@ -1,223 +1,191 @@
 import { getJSON, insertThings } from "./getJSON.js";
+import { Project, Paper, makeProjectLoop, chooseWorkTypes } from "./works.js";
 
-const myName = /(.*)(S[\w.]* Lahiri)(.*)/;
+/** @classdesc Citation info for a paper */
+class Publication extends Paper {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
+    constructor(type, entry) {
+        super(type, entry);
+        /** parameters of function to post-process spans for given field
+         * @type {Object.<string,string[]>} - key = field name  
+         * values: spanClass, partClass, patternName.  
+         * Important!: no cycles when key -> partClass -> new key -> ...
+         */
+        this.spanMap = {"author": ["author", "self", "myName"]};
+    }
+    /** Put an object property in a span of that class
+     * @param {string} field - name of field to put in span
+     */
+    span(field) {
+        let span = document.createElement("span");
+        span.className = field;
+        span.textContent = this[field];
+        if (field in this.spanMap) {
+            let partClass, patternName, pattern;
+            [span.className, partClass, patternName] = this.spanMap[field];
+            pattern = this.constructor[patternName];
+            if (partClass && pattern.test(this[field])) {
+                let pref, suff;
+                [, pref, this[partClass], suff] = this[field].match(pattern);
+                span.textContent = "";
+                insertThings(span, pref, this.span(partClass), suff);
+            }
+        }
+        return span
+    }
+    /** Produce list of elements to put in citation */
+    cite() {
+        const link = this.link(this.span("ref"), " ", this.span("year"));
+        return [this.span("author"), " ", this.span("title"), " ", link, "."]
+    }
+    /** Append citation to list of papers
+     * @param {HTMLUListElement} list - UList to append item to
+     */
+    appendList(list) {
+        const citation = this.cite();
+        if (citation.length) {
+            list.appendChild(this.listItem(...citation));
+        }
+    }
+    /** Compare two papers for sorting with reverse chronology
+     * @param {Publication} paperA - first paper to compare
+     * @param {Publication} paperB - second paper to compare
+     */
+    static compare(paperA, paperB) {
+        const yearDiff = paperB.year - paperA.year;
+        return yearDiff ? yearDiff : paperB.month - paperA.month
+    }
+}
+/** Pattern to match for my name */
+Publication.myName = /(.*)([\w\W])(.*)/;
 
-/**
- * Read JSON file and pass to presentationJSON
+/** @classdesc Citation info for a journal article */
+class Article extends Publication {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
+    constructor(type, entry) {
+        super(type, entry);
+        /** parameters of function to post-process ref span */
+        this.spanMap.ref = ["journal", "volume", "volRef"];
+    }
+    /** Produce list of elements to put in citation */
+    cite() {
+        let citation = super.cite()
+        if (this.sameAs) {
+            const preprint = Article.eprints[this.sameAs];
+            citation.splice(-1, 0, ", ", preprint.link(preprint.span("ref")));
+        }
+        return citation
+    }
+}
+/** Maps eprint ids to Preprint object
+ * @type {Object.<string,Preprint>}
+ */
+Article.eprints = {};
+/** Pattern for volume in journal ref */
+Article.volRef = /([^\d]+)(\d+)([^\d].*)/;
+
+/** @classdesc Citation info for a preprpint */
+class Preprint extends Publication {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
+    constructor(type, entry) {
+        super(type, entry);
+        /** parameters of function to post-process ref span */
+        this.spanMap.ref = ["eprint"];
+    }
+    /** Produce list of elements to put in citation */
+    cite() {
+        return this.sameAs ? [] : super.cite()
+    }
+}
+
+/** @classdesc A conference abstract */
+class Abstract extends Publication {
+    /**
+     * @param {string} type - type of work
+     * @param {Object} entry - a JSON object containing properties
+     */
+    constructor(type, entry) {
+        super(type, entry);
+        /** parameters of function to post-process ref span */
+        this.spanMap.ref = ["venue"];
+    }
+    /** URL of a copy of this work */
+    getURL() { return Abstract.baseURL + this.url; }
+}
+
+/** Class to use for each entry type */
+Project.worksMap = {
+    "article": Article,
+    "preprint": Preprint,
+    "abstract": Abstract,
+}
+
+/** Object carrying project objects
+ * @typedef {import("./works.js").ProjectJSON} ProjectJSON
+ * @typedef {import("./works.js").ProjectHolder} ProjectHolder
+ */
+
+/** Loop over paper types to update/create project for that paper type
+ * @param {ProjectHolder} papers - dict: type -> Project(all works of that type)
+ * @param {Function} callback - Function to do something for one paper type.
+ * Signature:  
+ * if create:- callback(type: string): Project  
+ * else:- callback(list: Publication[], type: string): void
+ * @param {Boolean} create - Create project for that paper type? Or update it?
+ */
+function typesLoop(papers, callback, create=false) {
+    let typeFunc;
+    if (create) {
+        typeFunc = (type) => papers[`${type}s`] = callback(type);
+    } else {
+        typeFunc = (type) => callback(papers[`${type}s`][type], type);
+    }
+    Object.keys(Project.worksMap).forEach(typeFunc);
+}
+
+/** Process JSON data to collect paper lists as type id'd projects
+ * @param {ProjectJSON} worksJSON - json dict: id -> project data
+ * @returns {ProjectHolder} dict: type -> Project(all works of that type)
+ */
+function collectByType(worksJSON) {
+    let papers = {};
+    typesLoop(papers, (type) => new Project(`${type}s`), true);
+    for (const projectID in worksJSON) {
+        const project = new Project(projectID, worksJSON);
+        typesLoop(papers, (list, type) => list.push(...project[type]));
+    }
+    typesLoop(papers, (list) => list.sort(Publication.compare));
+    Article.eprints = {};
+    for (const entry of papers.preprints.preprint) {
+        Article.eprints[entry.id] = entry;
+    }
+    return papers;
+}
+
+/** Read JSON file and pass to ProjectLoop callback
+ * @param {string} myName - My name: "{given initials} {family name}" space separated
+ * @param {string[]} types - array of names of work types to include
  * @param {string} baseURL - URL relative to which local urls are interpreted
+ *
+ * You can also select types by including/excluding headings with id's in HTML file
  */
-function publicationLinks(baseURL = '') {
+function publicationLinks(myName="[\\w\\W]", types=["article", "preprint", "abstract"], baseURL = "") {
+    Publication.myName = new RegExp(`(.*)(${myName.replace(/ /g, "[\\w.]* ")})(.*)`);
+    Publication.baseURL = baseURL;
+    const restorer = chooseWorkTypes(types);
     getJSON(`${baseURL}data/works.json`)
-        .then(papersJSON);
-}
-
-/**
- * Process JSON data to add paper list to each type id'd paragraph
- * @param {Object} worksData - json dict: project id -> title, work types
- */
-function papersJSON(worksData) {
-    let {articles, preprints} = collectPapers(worksData);
-    listPapers(articles, "articles", citeArticle, objectify(preprints));
-    listPapers(preprints, "preprints", citePreprint);
-}
-
-/**
- * Process JSON data to create paper lists
- * @param {Object} worksData - json dict: project id -> title, work types
- */
-function collectPapers(worksData) {
-    let [articles, preprints] = [[], []];
-    for (const project in worksData) {
-        const entry = worksData[project];
-        articles.push(...entry.article);
-        preprints.push(...entry.preprint);
-    }
-    articles.sort(reverseChronology);
-    preprints.sort(reverseChronology);
-    return {articles, preprints}
-}
-/**
- * Comparer to sort list of papers in reverse chronological order
- * @param {Object} paperA - first paper object
- * @param {Object} paperB - second paper object
- * @returns {number} positive if paperA goes after paperB
- */
-function reverseChronology(paperA, paperB) {
-    const yearDiff = paperB.year - paperA.year;
-    return yearDiff ? yearDiff : paperB.month - paperA.month
-}
-
-/**
- * Insert a UList of paper citations after an id'd element
- * @param {Object[]} papers - list of paper objects
- * @param {string} anchorID - id of element the list will appear after
- * @param {Function} citeFunc - function that appends a citation list item
- * @param  {...any} extra - additional parameters for citeFunc
- */
-function listPapers(papers, anchorID, citeFunc, ...extra) {
-    let anchor = document.getElementById(anchorID);
-    if (anchor) {
-        let paperList = document.createElement("ul");
-        paperList.className = "papers";
-        papers.forEach(entry => citeFunc(paperList, entry, ...extra));
-        anchor.after(paperList);
-    }
-}
-
-/**
- * Create a new list item for an article citation
- * @param {HTMLUListElement} parent - UList to add list item to
- * @param {Object} entry - article object with details
- * @param {Object.<string,Object>} preprints - dict of preprint objects
- */
-function citeArticle(parent, entry, preprints) {
-    let citation = makeCitation(entry, formatJournal);
-    if (entry.eprint) {
-        appendEprint(citation, preprints[entry.eprint]);
-    }
-    makeListItem(parent, "article", citation);
-}
-
-/**
- * Create a new list item ffor a preprint citation
- * @param {HTMLUListElement} parent - UList to add list item to
- * @param {Object} entry - preprint object with details
- */
-function citePreprint(parent, entry) {
-    if (!entry.pub) {
-        const citation = makeCitation(entry, formatEprint);
-        makeListItem(parent, "preprint", citation);
-    }
-}
-
-/**
- * Put list of citation elements in a new list item
- * @param {HTMLUListElement} parent - UList to add list item to
- * @param {string} cssClass - name of list item's class
- * @param {HTMLElement[]} citation - array of paper's citation elements
- */
-function makeListItem(parent, cssClass, citation) {
-    let listItem = document.createElement("li");
-    listItem.className = cssClass;
-    insertThings(listItem, ...citation);
-    parent.appendChild(listItem);
-}
-/**
- * Creat list of citation elements for paper
- * @param {Object} entry - paper object with details
- * @param {Function} refFunc - function to process entry.ref
- * @returns {HTMLElement[]} array of paper's citation elements
- */
-function makeCitation(entry, refFunc) {
-    const ref = [refFunc(entry), " ", formatYear(entry)];
-    return [formatAuthor(entry), " ", formatTitle(entry), " ", putInURL(entry, ...ref), "."]
-}
-
-/**
- * Append preprint link to list of citation elements for article
- * @param {HTMLElement[]} citation - array of article's citation elements
- * @param {Object} preprint - preprint object
- */
-function appendEprint(citation, preprint) {
-    citation.splice(-1, 0, ", ", putInURL(preprint, formatEprint(preprint)));
-}
-
-/**
- * Create the span element for authors
- * @param {Object} entry - paper object with details
- * @param {string} entry.author - the list of authors
- * @returns {HTMLSpanElement} span element
- */
-function formatAuthor(entry) {
-    const items = pickPart(entry.author, "self", myName);
-    return putInSpan("author", ...items)
-}
-/**
- * Create the span element for title
- * @param {Object} entry - paper object with details
- * @param {string} entry.author - the title
- * @returns {HTMLSpanElement} span element
- */
-function formatTitle(entry) {
-    return putInSpan("title", entry.title)
-}
-/**
- * Create the span element for journal reference
- * @param {Object} entry - paper object with details
- * @param {string} entry.author - the journal reference
- * @returns {HTMLSpanElement} span element
- */
-function formatJournal(entry) {
-    const items = pickPart(entry.ref, "volume", /([^\d]+)(\d+)([^\d].*)/);
-    return putInSpan("journal", ...items)
-}
-/**
- * Create the span element for eprint reference
- * @param {Object} entry - paper object with details
- * @param {string} entry.author - the eprint reference
- * @returns {HTMLSpanElement} span element
- */
-function formatEprint(entry) {
-    return putInSpan("eprint", entry.ref)
-}
-/**
- * Create the span element for publication year
- * @param {Object} entry - paper object with details
- * @param {string} entry.year - the publication year
- * @returns {HTMLSpanElement} span element
- */
-function formatYear(entry) {
-    return putInSpan("year", entry.year)
-}
-
-/**
- * Search text for pattern and put central group in a span
- * @param {string} text - text to search for match
- * @param {string} cssClass - class of span to put central match in
- * @param {RegExp} pattern - regex with three groups to match
- * @returns {(string|HTMLElement)[]} [before text, central span, after text]
- */
-function pickPart(text, cssClass, pattern) {
-    if (pattern.test(text)) {
-        const items = text.match(pattern);
-        return [items[1], putInSpan(cssClass, items[2]), items[3]]
-    }
-    return [text]
-}
-/**
- * Create a span element, with contents and class
- * @param {string} cssClass - class of span element
- * @param {...(HTMLElement|string|number)} elements - elements to put in span
- * @returns {HTMLSpanElement} span element
- */
-function putInSpan(cssClass, ...elements) {
-    let span = document.createElement("span");
-    span.className = cssClass;
-    insertThings(span, ...elements);
-    return span
-}
-/**
- * Create a link element, with contents and url
- * @param {Object} entry - paper object with details
- * @param {string} entry.url - url where paper can be found
- * @param {...(HTMLElement|string|number)} elements - elements to put in link
- * @returns {HTMLAnchorElement} link element
- */
-function putInURL(entry, ...elements) {
-    let link = document.createElement("a");
-    link.href = entry.url;
-    insertThings(link, ...elements);
-    return link
-}
-/**
- * Convert array of works to object indexed by id's
- * @param {Object[]} workArray - array of Work objects
- * @returns {Object.<string,Object>} - dict of work objects
- */
-function objectify(workArray) {
-    let workObject = {};
-    workArray.forEach(entry => workObject[entry.id] = entry);
-    return workObject
+        .then(collectByType)
+        .then(makeProjectLoop("papers"))
+        .then(restorer());
 }
 
 export { publicationLinks };

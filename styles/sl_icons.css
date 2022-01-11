@@ -9,9 +9,11 @@ p.project {
 /* List of works under projects */
 
 .project_links li {
+    --icon-size: 2em;
+    --icon-pad: 0.2em;
     display: inline-block;
-    border-radius: 10%;
-    padding: 3px;
+    border-radius: calc(var(--icon-pad) * 2);
+    padding: var(--icon-pad);
     margin-right: 0.5em;
     margin-bottom: 0.5em;
     background-color: var(--minor-bg-color);
@@ -34,21 +36,25 @@ p.project {
     background-image: url(../icons/poster.svg);
     --icon-label: "Poster";
 }
+.abstract a {
+    background-image: url(../icons/abstract.svg);
+    --icon-label: "Abstract";
+}
 
 /* Mobile */
 .icon {
     display: block;
-    border-radius: 10%;
+    border-radius: var(--icon-pad);
     width: 3.7em;
     height: 1em;
     line-height: 1em;
-    padding-top: 3.9em;
-    background-size: contain;
+    padding-top: calc(var(--icon-size) + var(--icon-pad));
+    background-size: var(--icon-size);
     background-repeat: no-repeat;
     background-position: center top;
     text-align: center;
     text-indent: 0%;
-    background-color: var(--minor-bg-color);
+    background-color: inherit;
     color: inherit;
 }
 .icon::after {
@@ -60,8 +66,8 @@ p.project {
         background-color: var(--major-bg-color);
     } */
     .icon {
-        height: 3em;
-        line-height: 3em;
+        height: var(--icon-size);
+        line-height: var(--icon-size);
         padding-top: 0em;
         text-indent: 100%;
         white-space: nowrap;

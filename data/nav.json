@@ -1,5 +1,12 @@
 [
     {
+        "id": "skip",
+        "name": "Skip Navigation",
+        "url": "#skipped",
+        "internal": true,
+        "className": "skip"
+    },
+    {
         "id": "home",
         "name": "Home",
         "url": "index.html",
@@ -22,5 +29,13 @@
         "name": "Presentations",
         "url": "presentations.html",
         "internal": true
+    },
+    {
+        "id": "skipper",
+        "name": "",
+        "url": "#skipped",
+        "internal": true,
+        "className": "skip",
+        "linkId": "skipped"
     }
 ]
