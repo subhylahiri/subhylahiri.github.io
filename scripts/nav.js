@@ -16,8 +16,6 @@ class Tab {
         this.internal = true;
         /** class for list item */
         this.className = "";
-        /** identifier of link */
-        this.linkId = "";
         if (entry) {
             Object.assign(this, entry);
         }
@@ -34,9 +32,6 @@ class Tab {
         let link = document.createElement("a");
         link.textContent = this.name;
         link.href = (this.internal ? Tab.baseURL : "") + this.url;
-        if (this.linkId) {
-            link.id = this.linkId;
-        }
         listItem.appendChild(link);
         parent.appendChild(listItem);
     }
