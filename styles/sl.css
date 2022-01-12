@@ -37,7 +37,7 @@
         --title-fg-color: #44676e;
         /* --footer-fg-color: #999999; */
     }
-    div.nav {
+    nav {
         display: none;
     }
 }
@@ -52,7 +52,7 @@ body {
 
 /* Sections */
 
-div.header, div.nav {
+header, nav {
     clear: both;
     margin: 0;
     padding: 0.625em;
@@ -60,11 +60,11 @@ div.header, div.nav {
     color: var(--title-fg-color);
 }
 
-div.nav {
+nav {
     padding: 0em;
 }
 
-div.footer {
+footer {
     clear: both;
     text-align: center;
     margin: 0;
@@ -73,7 +73,7 @@ div.footer {
     color: var(--footer-fg-color);
 }
 
-div.main {
+main {
     margin: 0 5% 0 5%;
     padding: 0.625em 0.625em 1.625em 0.625em;
     background-color: var(--major-bg-color);
@@ -139,7 +139,7 @@ h2 {
 /* a:visited { color: var(--links-fg-color); text-decoration: none; } */
 /* a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; } */
 /* a:active { color: #0000EE; text-decoration: underline; } */
-.footer a {
+footer a {
     color: inherit;
 }
 
@@ -184,12 +184,12 @@ p.profiles {
 
 /* Navigation bar */
 
-.nav ul {
+nav ul {
     padding: 0;
     border-style: hidden;
 }
 
-.nav li {
+nav li {
     display: inline-block;
     margin: 0;
     /* margin-right: 3px; */
@@ -197,11 +197,11 @@ p.profiles {
     color: inherit;
 }
 
-.nav li:hover, .nav .active {
+nav li:hover, nav .active {
     background-color: inherit;
 }
 
-.nav .skip {
+nav .skip {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: rect(1px, 1px, 1px, 1px);
@@ -213,7 +213,7 @@ p.profiles {
     width: 1px;
 }
 
-.nav .skip:focus-within {
+nav .skip:focus-within {
     overflow: hidden;
     clip: auto;
     clip-path: none;
@@ -224,13 +224,13 @@ p.profiles {
     width: auto;
 }
 
-.nav a {
+nav a {
     padding: 0.5em;
     color: inherit;
     line-height: 2em;
 }
 
-.nav a:focus {
+nav a:focus {
     outline-offset: -2px;
 }
 

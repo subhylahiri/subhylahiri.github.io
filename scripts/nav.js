@@ -58,9 +58,9 @@ function readTabData(navData) {
  */
 function insertNav(navData, activeID) {
     const body = document.getElementsByTagName("body");
-    let headDiv = document.getElementsByClassName("header");
-    let navDiv = document.createElement("div");
-    navDiv.className = "nav";
+    let headDiv = document.getElementsByTagName("header");
+    let navDiv = document.createElement("nav");
+    // navDiv.className = "nav";
     let navList = document.createElement("ul");
     navData.forEach(entry => entry.appendTab(navList));
     navDiv.appendChild(navList);
@@ -84,12 +84,12 @@ function buildNav(activeID, baseURL = '') {
 /** Create and insert footer */
 function buildFoot() {
     const body = document.getElementsByTagName("body");
-    let foot = document.createElement("div");
+    let foot = document.createElement("footer");
     let address = document.createElement("address");
     let email = document.createElement("code");
     let source = document.createElement("a");
 
-    foot.className = "footer";
+    // foot.className = "footer";
     email.textContent = "sulahiri at stanford dot edu";
     source.textContent = "[Source]";
     source.href = "https://github.com/subhylahiri/subhylahiri.github.io";
