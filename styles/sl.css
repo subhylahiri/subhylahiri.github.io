@@ -105,7 +105,7 @@ code {
 
 /* titles */
 
-h1, h2, h3 {
+h1, h2 {
     font-weight: bold;
     color: inherit;
     font-family: Helvetica, Arial, sans-serif;
@@ -115,20 +115,23 @@ h1, h2, h3 {
 
 h1 {
     text-align: center;
-    font-size: 3.5em;
+    font-size: 2.5em;
     padding: 0.625em;
 }
 
-h2 {
-	text-align: center;
-	font-size: 2.5em;
-	padding: 0.625em;
+h1.frontpage {
+    font-size: 3.5em;
 }
 
-h3 {
+h2 {
     text-align: left;
     font-size: 1.6em;
 }
+
+/* h3 {
+    text-align: left;
+    font-size: 1.6em;
+} */
 
 /* Basic links */
 

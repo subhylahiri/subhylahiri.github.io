@@ -1,11 +1,12 @@
 /* Before list */
 
-p.presentation {
+.presentation {
     padding-left: 1.25em;
     padding-bottom: 0em;
     padding-top: 1em;
     font-style: italic;
     font-weight: bolder;
+    font-size: 1em;
 }
 
 /* List of slides/poster for each presentation */
