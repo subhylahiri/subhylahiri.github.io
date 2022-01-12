@@ -1,6 +1,6 @@
 /* Before list */
 
-.presentation {
+h2.presentation {
     padding-left: 1.25em;
     padding-bottom: 0em;
     padding-top: 1em;
@@ -17,11 +17,11 @@ ul.materials {
     color: var(--minor-fg-color);
 }
 
-.materials li {
+ul.materials li {
     background-image: none;
     line-height: 1.5em;
 }
-.materials li::before {
+ul.materials li::before {
     display: inline-block;
     line-height: 1em;
     height: 1em;
@@ -35,20 +35,20 @@ ul.materials {
     color: var(--minor-fg-color);
 }
 
-.materials li.slides::before {
+ul.materials li.slides::before {
     background-image: url(../icons/slides.svg);
     content: 'Slides:';
 }
-.materials li.poster::before {
+ul.materials li.poster::before {
     background-image: url(../icons/poster.svg);
     content: 'Poster:';
 }
 
-/* .materials li.slides:hover::before {
+/* ul.materials li.slides:hover::before {
     background-image: none;
     content: 'Slides: ';
 }
-.materials li.poster:hover::before {
+ul.materials li.poster:hover::before {
     background-image: none;
     content: 'Poster: ';
 } */

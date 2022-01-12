@@ -85,6 +85,7 @@ function buildFoot() {
     let source = document.createElement("a");
 
     // foot.className = "footer";
+    foot.id = "foot-area";
     email.textContent = "sulahiri at stanford dot edu";
     source.textContent = "[Source]";
     source.href = "https://github.com/subhylahiri/subhylahiri.github.io";

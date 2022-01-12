@@ -8,7 +8,7 @@ p.project {
 
 /* List of works under projects */
 
-.project_links li {
+ul.project_links li {
     --icon-size: 2em;
     --icon-pad: 0.2em;
     display: inline-block;
@@ -20,29 +20,29 @@ p.project {
     color: var(--minor-fg-color);
 }
 
-.article a {
+li.article a {
     background-image: url(../icons/article.svg);
     --icon-label: "Article";
 }
-.preprint a {
+li.preprint a {
     background-image: url(../icons/preprint.svg);
     --icon-label: "Preprint";
 }
-.slides a {
+li.slides a {
     background-image: url(../icons/slides.svg);
     --icon-label: "Slides";
 }
-.poster a {
+li.poster a {
     background-image: url(../icons/poster.svg);
     --icon-label: "Poster";
 }
-.abstract a {
+li.abstract a {
     background-image: url(../icons/abstract.svg);
     --icon-label: "Abstract";
 }
 
 /* Mobile */
-.icon {
+a.icon {
     display: block;
     border-radius: var(--icon-pad);
     width: 3.7em;
@@ -57,7 +57,7 @@ p.project {
     background-color: inherit;
     color: inherit;
 }
-.icon::after {
+a.icon::after {
     content: var(--icon-label);
 }
 /* Desktop */
@@ -65,7 +65,7 @@ p.project {
     /* .project_links li:hover {
         background-color: var(--major-bg-color);
     } */
-    .icon {
+    a.icon {
         height: var(--icon-size);
         line-height: var(--icon-size);
         padding-top: 0em;
@@ -73,7 +73,7 @@ p.project {
         white-space: nowrap;
         overflow: hidden;
     }
-    .icon:hover {
+    a.icon:hover {
         text-indent: 0%;
         background-color: inherit;
         background-image: none;
