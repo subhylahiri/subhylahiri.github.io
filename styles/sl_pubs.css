@@ -5,13 +5,13 @@ ul.papers {
     padding-top: 1em;
 }
 
-.papers li {
+ul.papers li {
     padding-top: 0.7em;
     line-height: 1.4em;
     background-image: none;
 }
 
-.papers li::before {
+ul.papers li::before {
     display: inline-block;
     line-height: 1em;
     height: 1em;
@@ -26,51 +26,51 @@ ul.papers {
     background-size: contain;
 }
 
-.papers li.article::before {
+ul.papers li.article::before {
     background-image: url(../icons/article.svg);
     content: 'Article:';
 }
-.papers li.preprint::before {
+ul.papers li.preprint::before {
     background-image: url(../icons/preprint.svg);
     content: 'Preprint:';
 }
-.papers li.abstract::before {
+ul.papers li.abstract::before {
     background-image: url(../icons/abstract.svg);
     content: 'Abstract:';
 }
 
-.author, .title, .journal, .volume, .year, .eprint, .venue {
+ul.papers li span {
     font-size: inherit;
 }
-.author::after {
+span.author::after {
     content: ",";
 }
-.self {
+span.self {
     font-weight: inherit;
 }
 
-.title {
+span.title {
     font-style: italic;
     display: block;
 }
-.title::before {
+span.title::before {
     content: "“";
 }
-.title::after {
+span.title::after {
     content: "”,";
 }
 
-.volume {
+span.volume {
     font-weight: bold;
 }
 
-.year::before {
+span.year::before {
     content: "(";
 }
-.year::after {
+span.year::after {
     content: ")";
 }
 
-.eprint {
+span.eprint {
     font-family: "Fira Code", "Cascadia Code", "Consolas", "Courier New", "Lucida Console", Courier, monospace;
 }

@@ -206,11 +206,11 @@ nav li {
     color: inherit;
 }
 
-nav li:hover, nav .active {
+nav li:hover, nav li.active {
     background-color: inherit;
 }
 
-nav .skip {
+nav li.skip {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: rect(1px, 1px, 1px, 1px);
@@ -220,9 +220,10 @@ nav .skip {
     padding: 0;
     position: absolute;
     width: 1px;
+    transition: width 0.5s;
 }
 
-nav .skip:focus-within {
+nav li.skip:focus-within {
     overflow: hidden;
     clip: auto;
     clip-path: none;
@@ -231,6 +232,7 @@ nav .skip:focus-within {
     overflow: visible;
     position: static;
     width: auto;
+    transition: width 0.5s;
 }
 
 nav a {
