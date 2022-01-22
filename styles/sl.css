@@ -1,5 +1,9 @@
 ﻿/* Subhaneil Lahiri CSS */
 :root {
+    /* defaults, for IE */
+    background-color: #ebebee;
+    color: #000000;
+    /* For everything else */
     --major-bg-color: #ebebee;
     --major-fg-color: #000000;
     --links-fg-color: #2a48aa;
@@ -158,6 +162,11 @@ p {
     max-width: 50em;
     font-family: inherit;
     color: inherit;
+}
+
+p.ie {
+    font-style: italic;
+    display: none;
 }
 
 /* Lists */

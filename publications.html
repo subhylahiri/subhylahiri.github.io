@@ -22,6 +22,9 @@
   </header>
 
   <main id="main-content">
+    <p class="ie">The publication list will not appear in Internet Explorer.
+      Try any other browser, or look at my Google Scholar profile.</p>
+
     <p itemscope itemtype="https://schema.org/Person">
         A fully up-to-date list of my publications can be found on
         <a itemprop="sameAs" href="https://scholar.google.com/citations?user=2nEwLGcAAAAJ">
@@ -42,5 +45,6 @@
     import {buildPage} from "./scripts/nav.js"
     buildPage("pubs");
   </script>
+  <script nomodule src="./scripts/ie.js"></script>
 </body>
 </html>
