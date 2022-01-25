@@ -7,6 +7,7 @@
     --major-bg-color: #ebebee;
     --major-fg-color: #000000;
     --links-fg-color: #2a48aa;
+    --visit-fg-color: #3d2aaa;
     --minor-bg-color: #a2acb3;
     --minor-fg-color: #3d384b;
     --inert-bg-color: #4e5561;
@@ -21,7 +22,8 @@
         --major-bg-color: #31373f;
         --major-fg-color: #a7abd1;
         --links-fg-color: #94b0da;
-        --minor-bg-color: #626c72;
+        --visit-fg-color: #a794da;
+        --minor-bg-color: #656272;
         --minor-fg-color: #efeafd;
         }
     img.dark {
@@ -34,6 +36,7 @@
         --major-bg-color: #ffffff;
         --major-fg-color: #000000;
         --links-fg-color: #353550;
+        --visit-fg-color: var(--links-fg-color);
         --minor-bg-color: #ffffff;
         --minor-fg-color: #43414b;
         --inert-bg-color: #ffffff;
@@ -96,14 +99,29 @@ em {
     font-style: italic
 }
 
+code {
+    font-family: "Fira Code", "Cascadia Code", "Consolas", "Courier New", "Lucida Console", Courier, monospace;
+    color: inherit;
+}
+
+/* Basic links */
+
+/* a:link, a:visited { color: var(--links-fg-color); text-decoration: none;} */
+/* a:visited { color: var(--links-fg-color); text-decoration: none; } */
+/* a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; } */
+/* a:active { color: #0000EE; text-decoration: underline; } */
+
 a {
     font-weight: normal;
     color: var(--links-fg-color);
     text-decoration: none;
 }
 
-code {
-    font-family: "Fira Code", "Cascadia Code", "Consolas", "Courier New", "Lucida Console", Courier, monospace;
+a:visited {
+    color: var(--visit-fg-color);
+}
+
+footer a {
     color: inherit;
 }
 
@@ -136,16 +154,6 @@ h2 {
     text-align: left;
     font-size: 1.6em;
 } */
-
-/* Basic links */
-
-/* a:link, a:visited { color: var(--links-fg-color); text-decoration: none;} */
-/* a:visited { color: var(--links-fg-color); text-decoration: none; } */
-/* a:hover { color: #1111FF; text-decoration: none; background-color: #F8F8F8; } */
-/* a:active { color: #0000EE; text-decoration: underline; } */
-footer a {
-    color: inherit;
-}
 
 /* text */
 
@@ -235,7 +243,7 @@ nav li.skip:focus-within {
     transition: width 0.5s;
 }
 
-nav a {
+nav a, nav a:visited {
     padding: 0.5em;
     color: inherit;
     line-height: 2em;
