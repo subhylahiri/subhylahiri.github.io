@@ -148,7 +148,18 @@
     },
     "cell-sense": {
         "title": "A universal energy accuracy tradeoff in nonequilibrium cellular sensing",
-        "article": [],
+        "article": [
+            {
+                "id": "Harvey2023cellsense",
+                "url": "https://dx.doi.org/10.1103/PhysRevE.108.014403",
+                "title": "Universal energy-accuracy tradeoffs in nonequilibrium cellular sensing",
+                "author": "SE Harvey, S Lahiri and S Ganguli",
+                "ref": "Phys. Rev. E 108:014403",
+                "year": 2023,
+                "month": 7,
+                "sameAs": "Harvey2020cellsense"
+            }
+        ],
         "preprint": [
             {
                 "id": "Harvey2020cellsense",
@@ -158,7 +169,7 @@
                 "ref": "arXiv:2002.10567 [physics.bio-ph]",
                 "year": 2020,
                 "month": 1,
-                "sameAs": false
+                "sameAs": "Harvey2023cellsense"
             }
 
         ],
